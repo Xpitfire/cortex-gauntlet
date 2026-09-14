@@ -82,7 +82,61 @@ def test_changed_style_revokes_paper_downloads(tmp_path, monkeypatch):
         docs._paper_downloads(tmp_path / "docs.html")
 
 
-@pytest.mark.parametrize("setting", ["PAPER_URL", "REPOSITORY_URL"])
+def test_changed_exporter_revokes_paper_downloads(tmp_path, monkeypatch):
+    exporter = tmp_path / "paper.py"
+    exporter.write_bytes(paper.Path(paper.__file__).read_bytes())
+    monkeypatch.setattr(paper, "__file__", str(exporter))
+    _paper_assets(tmp_path / "paper")
+    exporter.write_text(exporter.read_text() + "\n# digest probe\n")
+
+    with pytest.raises(ValueError, match="stale"):
+        docs._paper_downloads(tmp_path / "docs.html")
+
+
+@pytest.mark.parametrize(("caption", "anchor"), [
+    ("Table 2.", "tbl-1"),
+    ("Table 1.", "tbl-9"),
+    ("Diagnostics.", "tbl-1"),
+])
+def test_paper_export_rejects_inconsistent_table_numbering(tmp_path, monkeypatch, caption, anchor):
+    source = f"""# Paper
+<span class="author">Author</span>
+<div class="affil">Lab</div>
+
+## Abstract
+Plain abstract.
+
+## Results
+<figure class="tbl" id="{anchor}">
+<table><tr><td>Observation</td></tr></table>
+<figcaption>{caption} Observed outcomes.</figcaption>
+</figure>
+"""
+    monkeypatch.setattr(paper, "_paper_md", lambda: source)
+    # Metadata text conversion is unrelated; malformed tables must not reach asset conversion.
+    monkeypatch.setattr(paper, "_inline_text", lambda text: text)
+    monkeypatch.setattr(paper, "_run", lambda *a, **kw: pytest.fail("Unexpected native converter"))
+
+    with pytest.raises(ValueError, match="^Table numbering and anchors"):
+        paper._prepare(tmp_path)
+
+
+@pytest.mark.parametrize(("number", "anchor"), [(2, "prop-2"), (1, "prop-1b")])
+def test_paper_export_rejects_inconsistent_statement_numbering(monkeypatch, number, anchor):
+    document = {"blocks": [{"t": "BlockQuote", "c": [{"t": "Para", "c": [
+        {"t": "Span", "c": [[anchor, [], []], []]},
+        {"t": "Strong", "c": [{"t": "Str", "c": f"Proposition {number}."}]},
+        {"t": "Space"},
+        {"t": "Str", "c": "Claim."},
+    ]}]}]}
+    # The heading is already one plain Str node; no Pandoc executable is needed.
+    monkeypatch.setattr(paper, "_render", lambda doc, writer: doc["blocks"][0]["c"][0]["c"])
+
+    with pytest.raises(ValueError, match="^Formal statement numbering is not consecutive"):
+        paper._typeset_formal_blocks(document)
+
+
+@pytest.mark.parametrize("setting", ["PAPER_URL", "CORTEX_URL", "REPOSITORY_URL"])
 def test_changed_publication_url_revokes_paper_downloads(tmp_path, monkeypatch, setting):
     _paper_assets(tmp_path / "paper")
     monkeypatch.setattr(paper, setting, getattr(paper, setting) + "/changed")

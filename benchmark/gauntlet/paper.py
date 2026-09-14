@@ -26,6 +26,7 @@ from .paths import ROOT
 from .report_common import REPORT_CSS
 
 PAPER_URL = "https://benchmark.cortex.a2olabs.com"
+CORTEX_URL = "https://cortex.a2olabs.com"
 REPOSITORY_URL = "https://github.com/Xpitfire/cortex-gauntlet"
 PDF_NAME = "cortex-gauntlet.pdf"
 SOURCE_NAME = "cortex-gauntlet-arxiv.zip"
@@ -42,9 +43,9 @@ def source_digest() -> str:
 
 def template_digest() -> str:
     digest = hashlib.sha256()
-    for path in (TEMPLATE, *STYLE_FILES):
+    for path in (Path(__file__), TEMPLATE, *STYLE_FILES):
         digest.update(path.name.encode() + b"\0" + path.read_bytes() + b"\0")
-    for url in (PAPER_URL, REPOSITORY_URL):
+    for url in (PAPER_URL, CORTEX_URL, REPOSITORY_URL):
         digest.update(url.encode() + b"\0")
     return digest.hexdigest()
 
@@ -100,6 +101,46 @@ def _ascii(text: str) -> str:
     return text
 
 
+def _typeset_formal_blocks(document: dict) -> None:
+    """Replace web blockquotes with numbered, flush-left amsthm statements."""
+    counters: Counter[str] = Counter()
+    blocks = []
+    for block in document["blocks"]:
+        if block["t"] == "BlockQuote":
+            paragraphs = block["c"]
+            inlines = paragraphs[0]["c"]
+            if (paragraphs[0]["t"] != "Para" or len(inlines) < 2
+                    or inlines[0]["t"] != "Span" or inlines[1]["t"] != "Strong"):
+                raise ValueError("Formal statement must start with an anchor and heading")
+            heading = _render({**document, "blocks": [{"t": "Plain", "c": inlines[1]["c"]}]},
+                              "plain").strip()
+            match = re.fullmatch(r"(Theorem|Proposition) (\d+)(?: \((.+)\))?\.", heading)
+            if match is None:
+                raise ValueError(f"Unsupported formal statement heading: {heading}")
+            kind, number, title = match.groups()
+            environment = kind.lower()
+            counters[kind] += 1
+            identifier = ("thm" if kind == "Theorem" else "prop") + "-" + number
+            if int(number) != counters[kind] or inlines[0]["c"][0][0] != identifier:
+                raise ValueError(f"Formal statement numbering is not consecutive: {heading}")
+            note = "[" + _render(_parse(title)).strip() + "]" if title else ""
+            blocks.append(_raw(r"\begin{" + environment + "}" + note + r"\label{" + identifier + "}"))
+            paragraphs[0]["c"] = inlines[2:]
+            blocks.extend(paragraphs)
+            blocks.append(_raw(r"\end{" + environment + "}"))
+        elif (block["t"] == "Para" and block["c"]
+              and block["c"][0] == {"t": "Emph", "c": [{"t": "Str", "c": "Proof."}]}):
+            inlines = block["c"][1:]
+            if (inlines and inlines[-1]["t"] == "Math"
+                    and inlines[-1]["c"][1] == r"\square"):
+                inlines.pop()  # amsthm places the proof-ending symbol.
+            inlines.append({"t": "RawInline", "c": ["latex", r"\qedhere"]})
+            blocks.extend([_raw(r"\begin{proof}"), {"t": "Para", "c": inlines}, _raw(r"\end{proof}")])
+        else:
+            blocks.append(block)
+    document["blocks"] = blocks
+
+
 def _prepare(work: Path) -> tuple[dict, dict]:
     source = re.sub(r"\n## Cite this work\n.*?(?=\n## |\Z)", "", _paper_md(),
                     count=1, flags=re.DOTALL)
@@ -115,15 +156,16 @@ def _prepare(work: Path) -> tuple[dict, dict]:
     # Title/authors become TeX metadata; social controls are web UI, not paper content.
     body = "## Abstract\n" + source.split("## Abstract\n", 1)[1]
     replacements: dict[str, list[dict]] = {}
+    table_count = 0
     figures = work / "figures"
     figures.mkdir()
     light = re.search(r":root\{(.*?)\}", REPORT_CSS, re.DOTALL)[1]
     palette = dict(re.findall(r"(--[\w-]+):([^;}]+)", light))
 
     def figure(match: re.Match) -> str:
+        nonlocal table_count
         identifier, content = match[1], match[2]
         caption = re.search(r"<figcaption>(.*?)</figcaption>", content, re.DOTALL)[1]
-        caption_blocks = _fragment(caption)
         token = "PAPERBLOCK" + identifier.replace("-", "").upper()
         if identifier.startswith("fig-"):
             svg = re.search(r"<svg\b.*?</svg>", content, re.DOTALL)[0]
@@ -139,10 +181,14 @@ def _prepare(work: Path) -> tuple[dict, dict]:
             replacements[token] = [{"t": "Figure", "c": [
                 [identifier, [], []], [None, caption_blocks], [{"t": "Plain", "c": [image]}]]}]
         else:
-            table = re.search(r"<table>.*?</table>", content, re.DOTALL)[0]
-            # Table 2 precedes Table 1 in the canonical paper; retain their explicit labels.
-            replacements[token] = [{"t": "Div", "c": [
-                [identifier, [], []], _fragment(table) + caption_blocks]}]
+            table_count += 1
+            label = re.match(r"^Table (\d+)\.\s*", caption)
+            if label is None or int(label[1]) != table_count or identifier != f"tbl-{table_count}":
+                raise ValueError(f"Table numbering and anchors must follow document order: {identifier}")
+            table = _fragment(re.search(r"<table>.*?</table>", content, re.DOTALL)[0])[0]
+            table["c"][0][0] = identifier
+            table["c"][1] = [None, _fragment(caption[label.end():])]
+            replacements[token] = [table]
         return "\n\n" + token + "\n\n"
 
     body = re.sub(r'<figure class="(?:fig|tbl)" id="((?:fig|tbl)-\d+)">(.*?)</figure>',
@@ -198,12 +244,12 @@ def _prepare(work: Path) -> tuple[dict, dict]:
             for column, width in zip(columns, widths, strict=True):
                 column[1] = {"t": "ColWidth", "c": width}
     expected_math = Counter(
-        re.sub(r"\s+", "", html.unescape(display or inline))
+        ("DisplayMath" if display else "InlineMath", re.sub(r"\s+", "", html.unescape(display or inline)))
         for display, inline in re.findall(
             r"\$\$(.*?)\$\$|(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)", source, re.DOTALL
         )
     )
-    actual_math = Counter(re.sub(r"\s+", "", node["c"][1])
+    actual_math = Counter((node["c"][0]["t"], re.sub(r"\s+", "", node["c"][1]))
                           for node in _nodes(document) if node["t"] == "Math")
     if expected_math != actual_math:
         raise ValueError("Paper export changed or omitted a canonical mathematical expression")
@@ -212,7 +258,7 @@ def _prepare(work: Path) -> tuple[dict, dict]:
     counts["display_math"] = sum(n["t"] == "Math" and n["c"][0]["t"] == "DisplayMath"
                                  for n in _nodes(document))
     counts["references"] = len(entries)
-    if (counts["Figure"], counts["Table"], counts["BlockQuote"], counts["display_math"]) != (4, 3, 6, 14):
+    if (counts["Figure"], counts["Table"], counts["BlockQuote"]) != (4, 3, 6):
         raise ValueError(f"Paper structure changed; review export coverage: {counts}")
     metadata["content_inventory"] = counts
     return document, metadata
@@ -228,6 +274,7 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
     with tempfile.TemporaryDirectory(prefix="gauntlet-paper-") as temporary:
         work = Path(temporary)
         document, metadata = _prepare(work)
+        _typeset_formal_blocks(document)
         # Use article-level headings and a semantic abstract. Reflow widely spaced
         # equation groups without changing their mathematical expressions.
         for node in _nodes(document):
@@ -253,6 +300,7 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
                .replace("__AUTHORS__", r" \& ".join(metadata["authors"]))
                .replace("__AFFILIATION__", metadata["affiliation"])
                .replace("__PAPER_URL__", PAPER_URL)
+               .replace("__CORTEX_URL__", CORTEX_URL)
                .replace("__REPOSITORY_URL__", REPOSITORY_URL)
                .replace("__DATE__", publication_date.strftime("%B %d, %Y").replace(" 0", " "))
                .replace("__BODY__", body))

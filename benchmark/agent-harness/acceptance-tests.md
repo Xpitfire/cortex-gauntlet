@@ -66,16 +66,16 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 ## Public paper and standalone snapshot (2026-09-14)
 
 - [x] Render the canonical paper through native LaTeX, preserving its complete mathematical
-  expression multiset: currently 379 expressions, 54 references, four figures, three
-  tables and six formal blocks.
+  expression multiset: currently 398 expressions (17 displays), 54 references,
+  four figures, three tables and six formal statements.
 - [x] Supply a self-contained arXiv ZIP with `main.tex`, the unmodified official ICLR 2027
   style files and included PDF figures; keep rendered PDF and submission metadata outside it.
 - [x] Use named-preprint formatting; keep Contributions after Introduction and exclude the
   website-only self-citation block from PDF/LaTeX.
 - [x] Reference the root benchmark website, public GitHub snapshot and Cortex CLI download site.
-- [x] Put the explicit canonical paper, latest-results and benchmark-source URLs
+- [x] Put the requested root benchmark, Cortex and public benchmark-source URLs
   in a clickable first-page PDF footnote; leave the title unchanged.
-- [x] Website download links require matching paper/template, publication-URL and artifact hashes.
+- [x] Website downloads require matching paper, exporter/template/style, URL and artifact hashes.
 - [x] Inspect the PDF and exercise desktop/mobile website downloads.
 - [x] Screen the clean-history public snapshot; exclude raw captures, private integrations,
   private Security scenarios and screenshot fixtures without established redistribution rights.
@@ -89,6 +89,18 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 - [x] Distinguish any-success `pass@k` from all-success `pass^k` in Appendix P5,
   including their opposite monotonicity and distinct independent-trial expectations.
 - [x] Repeated paper-copy clicks restore the original label and copy the complete text.
+- [x] Render formal statements and proofs without quote indentation, using native
+  theorem/proposition counters and QED placement; number propositions 1–5,
+  assumptions A1–A3 and tables 1–3 in reading order.
+- [x] Reject malformed or out-of-order table captions and mismatched table anchors
+  before replacing a published paper; introduce each table with an in-text reference.
+  Hermetic regressions cover three table and two formal-statement failures;
+  removing either guard in memory makes the corresponding cases fail.
+- [x] Render Figure 2's certified-set subscript without a missing-glyph box.
+- [x] Distinguish the product of equal-brief marginal averages from the mean of
+  jointly gated per-attempt scores, with explicit indices and rounding qualifications.
+- [x] Correct DTW caption wording, judge-bias claims, estimator assumptions,
+  historical percentage denominators and bibliographic inconsistencies.
 - [ ] Authors review arXiv metadata, category/license and arXiv's server-rendered PDF.
   Account submission, endorsement and acceptance are not claimed by local compilation.
   Local evidence: clean editable install and Security/Generative CLI smokes; the

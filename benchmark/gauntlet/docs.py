@@ -54,11 +54,11 @@ _FIG_LOOP = r"""
 
 _FIG_LATTICE = r"""
 <svg viewBox="0 0 640 306" xmlns="http://www.w3.org/2000/svg" class="figsvg" role="img"
-     aria-label="Illustrative monotone closure under A3; the least fixed point can be a proper subset of all requirements">
+     aria-label="Illustrative monotone closure under A2; the least fixed point can be a proper subset of all requirements">
   <defs><marker id="closure-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
     <path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
   <g font-size="14" fill="var(--muted)">
-    <text x="80" y="24">certified set size |Sₖ|</text>
+    <text x="80" y="24">certified set size |S<tspan baseline-shift="sub" font-size="70%">k</tspan>|</text>
     <text x="620" y="24" text-anchor="end">fixed monotone Φ · schematic</text>
     <path d="M80 48 V240 H606" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
     <path d="M80 70 H598 M80 128 H598" fill="none" stroke="var(--line)" stroke-dasharray="4 5"/>
@@ -236,9 +236,9 @@ CITES: dict[str, dict[str, str]] = {
     "9": {"title": "SOAR: An architecture for general intelligence",
           "meta": "Laird, Newell & Rosenbloom, 1987 · Artif. Intell. 33(1)",
           "url": "https://doi.org/10.1016/0004-3702(87)90050-6",
-          "abstract": "A general cognitive architecture built on problem-space search and chunking; with "
-          "Newell's Unified Theories of Cognition, a canonical production-system agent."},
-    "10": {"title": "An integrated theory of the mind (ACT-R)",
+          "abstract": "A general cognitive architecture built on problem-space search and chunking; "
+          "a canonical production-system agent."},
+    "10": {"title": "An Integrated Theory of the Mind",
            "meta": "Anderson et al., 2004 · Psychological Review 111(4)",
            "url": "https://doi.org/10.1037/0033-295X.111.4.1036",
            "abstract": "Models cognition as interacting modules coordinated by a production system that "
@@ -276,9 +276,9 @@ CITES: dict[str, dict[str, str]] = {
     "17": {"title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
            "meta": "Zheng et al., 2023 · NeurIPS · arXiv:2306.05685",
            "url": "https://arxiv.org/abs/2306.05685",
-           "abstract": "Quantifies LLM-as-judge agreement with humans and characterizes judge biases "
-           "(position, verbosity, self-preference) — mitigated here by absolute anchored rubrics and "
-           "objective gating rather than pairwise presentation."},
+           "abstract": "Characterizes position, verbosity, and self-preference biases in LLM judging; "
+           "motivates separate validation of Gauntlet's judges. Absolute rubrics avoid pairwise "
+           "presentation but do not establish mitigation of the other biases."},
     "18": {"title": "Prometheus 2: an open LM specialized in evaluating other LMs",
            "meta": "Kim et al., 2024 · arXiv:2405.01535",
            "url": "https://arxiv.org/abs/2405.01535",
@@ -547,7 +547,7 @@ the theorem's hypotheses or that historical arm differences isolate governance a
   (Sections 3–4).
 - A proof of finite closure, oracle-relative soundness, and fair-schedule independence under
   explicit assumptions (Theorem 1), plus accounting and conditional hitting-time bounds
-  (Propositions 3–4).
+  (Propositions 1–2).
 - Definitions and domain restrictions for the implemented evaluation metrics (Section 5).
 - A five-family evaluation protocol, with implementation and historical-evidence limitations
   made explicit rather than treated as experimental conclusions (Sections 6–9).
@@ -578,10 +578,11 @@ dynamic time warping <sup><a href="#ref-12">12</a></sup>), each affinely recalib
 matrix's mean-similarity baseline. Embedding comparison also appears in trajectory
 evaluation <sup><a href="#ref-1">1</a>,<a href="#ref-19">19</a></sup>. Gauntlet applies
 this construction to extracted descriptors, whose order need not represent an observed
-execution trajectory. For a positive integer $k$, the any-seed attack-success estimate uses the unbiased
-$\mathrm{pass}@k$ estimator
-<sup><a href="#ref-15">15</a></sup>; success rates carry Wilson intervals
-<sup><a href="#ref-13">13</a></sup> and bootstrap summaries <sup><a href="#ref-14">14</a></sup>.
+execution trajectory. For integers $1\le k\le n$, the any-seed attack-success estimate
+uses $\mathrm{pass}@k$ <sup><a href="#ref-15">15</a></sup>. Under independent trials
+with common success probability $p\in[0,1]$, it is unbiased for $1-(1-p)^k$.
+Success rates carry Wilson intervals <sup><a href="#ref-13">13</a></sup> and
+bootstrap summaries <sup><a href="#ref-14">14</a></sup>.
 The optional rubric judge draws on G-Eval <sup><a href="#ref-16">16</a></sup>,
 MT-Bench <sup><a href="#ref-17">17</a></sup>, and Prometheus
 <sup><a href="#ref-18">18</a></sup>. Their bias analyses motivate judge validation but do not establish
@@ -701,7 +702,7 @@ For a **fixed** oracle and requirement set define
 
 $$ \Phi(S)=S\cup\{r\in R:\nu(S,r)=1\}. $$
 
-**Assumption A3 (oracle and evidence).** Requirement identifiers are a sufficient summary
+**Assumption A2 (oracle and evidence).** Requirement identifiers are a sufficient summary
 for this deterministic rule. Validation is monotone:
 $S\subseteq T,\ \nu(S,r)=1\Rightarrow\nu(T,r)=1$.
 Whenever the certificates in $S$ are valid for the specified task, every new certificate
@@ -717,7 +718,7 @@ $\Phi(\varnothing)=\{b\}$ but $\Phi(\{a\})=\{a\}$.
 > Let $\Phi:2^R\to2^R$ be monotone and inflationary. Starting at $S_0=\varnothing$,
 > the iterates $S_{t+1}=\Phi(S_t)$ reach $S_*=\operatorname{lfp}(\Phi)$ after at most
 > $|R|$ strict increases. A further evaluation may be needed to detect stabilization.
-> With A3's soundness and persistence conditions, all certificates in $S_*$ remain valid.
+> With A2's soundness and persistence conditions, all certificates in $S_*$ remain valid.
 > Define PASS at closure by $R_{\mathrm{req}}\subseteq S_*$; PASS then certifies those
 > requirements relative to the oracle, not all possible correctness properties.
 > Starting at $\varnothing$, adding enabled consequences in any **fair** schedule
@@ -744,7 +745,7 @@ deterministic exhaustive consequence operator.
 previously passing checks. A historical union of successful checks is not a current
 correctness certificate. The benchmark uses bounded retries, observation-dependent
 validation, and score-based candidate selection; these are not an implementation proof
-of A3 or exhaustive closure. Fresh validation of the final artifact is needed for PASS.
+of A2 or exhaustive closure. Fresh validation of the final artifact is needed for PASS.
 Raw coding harnesses also take multiple internal actions; a single benchmark invocation
 is not a single consequence or a single requirement addition.
 
@@ -754,11 +755,11 @@ __FIG_LATTICE__
 
 Define the count $\mathrm{efc}(S)=|\Phi(S)\setminus S|$ for the abstract operator.
 It measures newly certified requirements, motivated by retained-feedback accounts
-<sup><a href="#ref-21">21</a></sup>. Along iteration from $\varnothing$ under A3,
+<sup><a href="#ref-21">21</a></sup>. Along iteration from $\varnothing$ under A2,
 these additions are valid, nonredundant, and retained. Their information content
 and utility are not necessarily equal.
 
-> <span id="prop-3"></span>**Proposition 3 (effective-feedback accounting).**
+> <span id="prop-1"></span>**Proposition 1 (effective-feedback accounting).**
 > If $S_0=\varnothing$ and $S_T=S_*=\operatorname{lfp}(\Phi)$ is the stabilized iterate,
 > then $\sum_{t=0}^{T-1}|S_{t+1}\setminus S_t|=|S_*|$.
 > If $R_{\mathrm{req}}\subseteq S_*$, exactly $|R_{\mathrm{req}}|$ of these additions
@@ -807,7 +808,7 @@ For an increasing process $C$ is a closed set; make its states absorbing if the 
 stops at first completion. Specify the initial state $S_0$ for all probabilities
 and expectations.
 
-> <span id="prop-4"></span>**Proposition 4 (conditional completion time).**
+> <span id="prop-2"></span>**Proposition 2 (conditional completion time).**
 > For a finite increasing Markov chain, suppose every reachable $S\notin C$ has
 > $\Pr(S_{t+1}\supsetneq S_t\mid S_t=S)\ge\varepsilon$, where $0<\varepsilon\le1$.
 > Then $\Pr(T_C<\infty)=1$ and
@@ -871,9 +872,9 @@ null expectation. For finite $\alpha\in[0,1]$:
 $$ \mathrm{VERTEX}(c,r)\;=\;\alpha\,\eta_b(F)+(1-\alpha)\,\eta_b(D)\;\in\;\mathbb{I}. $$
 
 The benchmark configuration fixes $\alpha=0.6$, $\lambda=0.5$, and $\epsilon=0.01$ (the baseline-clamp
-margin). Proposition 1 records the range and the exact sense of the calibration.
+margin). Proposition 3 records the range and the exact sense of the calibration.
 
-> <span id="prop-1"></span>**Proposition 1 (range and anchors).**
+> <span id="prop-3"></span>**Proposition 3 (range and anchors).**
 > VERTEX lies in $\mathbb{I}$. The normalizer is nondecreasing on $\mathbb{R}$ and
 > strictly increasing on $[b,1]$, with $\eta_b(b)=0$ and $\eta_b(1)=1$.
 > Identical sequences of nonzero unit embeddings score $1$ in exact arithmetic.
@@ -952,9 +953,12 @@ bound: InfoNCE <sup><a href="#ref-52">52</a></sup> bounds mutual information thr
 **expected loss** under specified sampling assumptions. No active multi-brief contrastive
 evaluation is implemented.
 
-> <span id="prop-1b"></span>**Proposition 1$'$.** Replacing a descriptor reference preserves
-> Proposition 1's range bound. The convex mixture $V_P$ is also in $\mathbb{I}$.
+> <span id="prop-4"></span>**Proposition 4 (reference replacement and mixtures).** Replacing a descriptor reference preserves
+> Proposition 3's range bound. The convex mixture $V_P$ is also in $\mathbb{I}$.
 > Neither property establishes reference accuracy or equal chance behavior.
+
+*Proof.* Apply Proposition 3 to each replacement reference. The normalized weights
+in $V_P$ are nonnegative and sum to one, so their mixture preserves the range. $\square$
 
 Within-brief Spearman correlation with authored VERTEX is a preliminary concordance
 diagnostic, not authorization to discard reference validation on unseen briefs.
@@ -976,11 +980,13 @@ $g\in\{0,1\}$:
 
 $$ C\;=\;g\sum_{k=1}^{K}w_k\,s_k,\qquad w_k\ge 0,\ \textstyle\sum_{k}w_k=1. $$
 
-> <span id="prop-2"></span>**Proposition 2.** $C\in\mathbb{I}$, with $C=0$ whenever the repository does not build ($g=0$); when it
+> <span id="prop-5"></span>**Proposition 5 (build-gated range).** $C\in\mathbb{I}$, with $C=0$ whenever the repository does not build ($g=0$); when it
 > builds, $\min_k s_k\le C\le\max_k s_k$.
 
 *Proof.* For $g=1$, multiply $\min s_k\le s_k\le\max s_k$ by $w_k\ge0$ and sum.
-For $g=0$ the product is zero. Missing analyzer evidence is not a passed signal.
+For $g=0$ the product is zero. $\square$
+
+Missing analyzer evidence is not a passed signal.
 Degraded evaluations must not be compared as though all fixed weights were measured.
 
 The project gate is **build-only**; serving additionally gates visual and UX evidence.
@@ -988,10 +994,33 @@ Functional coverage excludes unevaluable journeys from both numerator and denomi
 returning zero when none are evaluable. Screenshot-based visual scores average available
 candidate frames and return zero when none exist. Comparisons therefore require matched
 journey and frame coverage; fixed outer weights do not eliminate this conditional missingness.
-Track G's historical aggregate is a different descriptive index:
-$\bar g\sum_k w_k\bar s_k$, the product of aggregate build rate and aggregate signals.
-It is **not** $\overline{g\sum_k w_ks_k}$, and per-seed gated scores cannot be recovered
-from marginal means alone. Its completeness bootstrap resamples brief-level means.
+
+**Averaging and build gating do not commute.** Track G's historical aggregate is
+a different descriptive index. For $B\in\mathbb{N}_{+}$ briefs, let $n_b\in\mathbb{N}_{+}$ be the recorded
+attempt count for brief $b$, let $g_{bi}\in\{0,1\}$ be attempt $i$'s build indicator,
+and let $s_{bk}$ be the stored brief-level value of signal $k$. The aggregator
+weights briefs equally, not individual attempts:
+
+$$ \bar g=\frac{1}{B}\sum_{b=1}^{B}\frac{1}{n_b}\sum_{i=1}^{n_b}g_{bi},
+ \qquad \bar s_k=\frac{1}{B}\sum_{b=1}^{B}s_{bk}. $$
+
+Ignoring intermediate and final four-decimal rounding, the reported index is
+
+$$ G_{\mathrm{agg}}=\bar g\sum_{k=1}^{K}w_k\bar s_k. $$
+
+This product of marginal averages need not equal an average of jointly gated
+scores. If per-attempt signals $s^{\mathrm{seed}}_{bik}$ were available, the
+corresponding equal-brief average would instead be
+
+$$ G_{\mathrm{joint}}=\frac{1}{B}\sum_{b=1}^{B}\frac{1}{n_b}
+ \sum_{i=1}^{n_b}\left(g_{bi}\sum_{k=1}^{K}w_k s^{\mathrm{seed}}_{bik}\right). $$
+
+Even when each stored signal is a within-brief seed mean, these quantities can
+differ: with two single-seed briefs, one unit-weight signal, and gate/signal pairs
+$(1,1)$ and $(0,0)$, the product of means is $1/4$ but the mean gated score is $1/2$.
+Stored brief-level judge outputs need not themselves be seed means. Marginal
+summaries therefore cannot reconstruct the joint per-attempt quantity.
+The completeness bootstrap resamples brief-level means.
 
 For integers $n\ge1$, $0\le c\le n$, and $1\le k\le n$, let $c$ of $n$ recorded
 trials satisfy a specified success event. Define $\binom{a}{k}=0$ when integers
@@ -1085,7 +1114,7 @@ functional and code-structure proxies; the CLIP backend uses image similarity an
 descriptor comparisons. A heuristic visual proxy does not inspect rendered appearance.
 Backend identity and evaluated evidence coverage are therefore part of score provenance.
 
-**Assumption A2 (bounded gated judging).** To qualify as evidence-based judging, a backend
+**Assumption A3 (bounded gated judging).** To qualify as evidence-based judging, a backend
 must return a bounded score from candidate evidence it actually reads. Visual and UX
 assessment require a built, served artifact; static architecture assessment requires
 a built repository with scoreable files. This is an eligibility condition, not an
@@ -1112,11 +1141,11 @@ comparisons. The index is not a validated general-capability scale.
 
 ### 5.6 Operational diagnostics for long-horizon results
 
-The quantities below are **proposed diagnostics**, not measurements supplied by the
+The quantities in Table 1 are **proposed diagnostics**, not measurements supplied by the
 current paper. A valid transition model or repeated, uncensored run-level observations
 would be needed to estimate them. A budget cap is not an observed completion time.
 
-<figure class="tbl" id="tbl-2">
+<figure class="tbl" id="tbl-1">
 <table>
 <thead><tr><th>Diagnostic</th><th>Meaning</th></tr></thead>
 <tbody>
@@ -1130,7 +1159,7 @@ would be needed to estimate them. A budget cap is not an observed completion tim
 <tr><td>$-\log_2 p$</td><td>Event surprisal in bits; for a harmful event, a descriptive risk transform.</td></tr>
 </tbody>
 </table>
-<figcaption>Table 2. Proposed execution diagnostics. No fitted Markov kernel, calibrated
+<figcaption>Table 1. Proposed execution diagnostics. No fitted Markov kernel, calibrated
 per-requirement prior, or completion-time distribution is reported here.</figcaption>
 </figure>
 
@@ -1190,10 +1219,10 @@ long-horizon work, utility evaluation, or harness comparisons.
 
 ### 6.3 Tasks and measured outcomes
 
-Table 1 distinguishes the intended task family from what its evaluator can establish.
+Table 2 distinguishes the intended task family from what its evaluator can establish.
 Passing finite tests is evidence for those tests, not complete semantic correctness.
 
-<figure class="tbl" id="tbl-1">
+<figure class="tbl" id="tbl-2">
 <table>
 <thead><tr><th>Family</th><th>Task and score</th><th>Validity boundary</th></tr></thead>
 <tbody>
@@ -1204,7 +1233,7 @@ Passing finite tests is evidence for those tests, not complete semantic correctn
 <tr><td>P: Project</td><td>One storefront brief, build-gated functional/semantic/visual/static composite.</td><td>Partial behavioral and accessibility proxies are not a complete storefront or payment validation.</td></tr>
 </tbody>
 </table>
-<figcaption>Table 1. Five families and their measurement boundaries. No direction of a
+<figcaption>Table 2. Five families and their measurement boundaries. No direction of a
 raw-versus-governed effect is assumed by the score definition.</figcaption>
 </figure>
 
@@ -1269,18 +1298,28 @@ __FIG_SAFETY__
 
 The safety source is
 `tui-security-20260620-183114-748-rescored/runrecord.json` under `benchmark/results/`.
-It records one seed and the following attempt counts and stored Wilson intervals:
+The record uses one repeat label; Table 3 pools observed attempts across cases:
 
-| Historical arm label | Classified successes / observed attempts | ASR | Stored 95% Wilson interval |
-|---|---:|---:|---:|
-| Codex raw | 25 / 59 | 42.37% | 30.61–55.07% |
-| Cortex over Codex | 14 / 58 | 24.14% | 14.96–36.53% |
-| Claude raw | 2 / 59 | 3.39% | 0.93–11.54% |
-| Cortex over Claude | 1 / 60 | 1.67% | 0.29–8.86% |
-| OpenCode | 23 / 54 | 42.59% | 30.33–55.84% |
+<figure class="tbl" id="tbl-3">
+<table>
+<thead><tr><th>Historical arm label</th><th>Classified successes / observed attempts</th><th>ASR</th><th>Stored 95% Wilson interval</th></tr></thead>
+<tbody>
+<tr><td>Codex raw</td><td>25 / 59</td><td>42.37%</td><td>30.61–55.07%</td></tr>
+<tr><td>Cortex over Codex</td><td>14 / 58</td><td>24.14%</td><td>14.96–36.53%</td></tr>
+<tr><td>Claude raw</td><td>2 / 59</td><td>3.39%</td><td>0.93–11.54%</td></tr>
+<tr><td>Cortex over Claude</td><td>1 / 60</td><td>1.67%</td><td>0.29–8.86%</td></tr>
+<tr><td>OpenCode</td><td>23 / 54</td><td>42.59%</td><td>30.33–55.84%</td></tr>
+</tbody>
+</table>
+<figcaption>Table 3. Historical classified safety outcomes from the stated June 2026
+cohort. Intervals are the stored 95% Wilson intervals, not newly reproduced estimates.</figcaption>
+</figure>
 
-The full-precision relative differences are about $43.0\%$ and $50.8\%$ for the two
-nominal pairs. Their denominators and observed cases differ; the source contains skipped
+Using the exact observed counts, the descriptive relative ASR reductions,
+$(\mathrm{ASR}_{\mathrm{raw}}-\mathrm{ASR}_{\mathrm{governed}})/\mathrm{ASR}_{\mathrm{raw}}$,
+are approximately $43.0\%$ for the Codex-labeled pair and $50.8\%$ for the Claude-labeled
+pair. These are relative reductions, not percentage-point differences.
+Their denominators and observed cases differ; the source contains skipped
 fixtures/timeouts and lacks current scoring provenance. Each paired arm has only **two**
 benign controls with zero refusals: the stored interval is $[0,65.76\%]$.
 That does not establish unchanged benign utility, low population over-refusal,
@@ -1326,9 +1365,9 @@ reporting behavior when clearly separated from empirical comparisons.
 ## 9. Assumptions and Limitations
 
 The formal assumptions concern different boundaries. A1 requires complete mediation
-and threat-class coverage; A2 requires bounded judgments grounded in the evaluated
-evidence; A3 requires sufficient abstract state and sound, monotone, persistent
-certification. Parsing a task into expectation records does not construct a sound
+and threat-class coverage; A2 requires sufficient abstract state and sound,
+monotone, persistent certification; A3 requires bounded judgments grounded in
+the evaluated evidence. Parsing a task into expectation records does not construct a sound
 oracle. The probabilistic bound additionally requires uniformly positive progress
 before completion; without it, expected completion time can be infinite.
 
@@ -1378,7 +1417,7 @@ Programming Language.</i> Journal of the ACM 23(4):733–742. (Immediate-consequ
 fixed point.)</li>
 <li id="ref-3">Tarski, A. (1955). <i>A lattice-theoretical fixpoint theorem and its applications.</i>
 Pacific Journal of Mathematics 5(2):285–309.</li>
-<li id="ref-4">Kleene, S. C. (1952). <i>Introduction to Metamathematics.</i> (Kleene iteration / first
+<li id="ref-4">Kleene, S. C. (1952). <i>Introduction to Metamathematics.</i> North-Holland. (Kleene iteration / first
 recursion theorem.)</li>
 <li id="ref-5">Banach, S. (1922). <i>Sur les opérations dans les ensembles abstraits et leur
 application aux équations intégrales.</i> Fundamenta Mathematicae 3:133–181. (Contraction mapping.)</li>
@@ -1388,9 +1427,8 @@ Artificial Intelligence Review 56(11):12387–12406.</li>
 Lecture).</li>
 <li id="ref-8">Newell, A. & Simon, H. A. (1972). <i>Human Problem Solving.</i> Prentice-Hall.</li>
 <li id="ref-9">Laird, J. E., Newell, A. & Rosenbloom, P. S. (1987). <i>SOAR: An architecture for general
-intelligence.</i> Artificial Intelligence 33(1):1–64; Newell, A. (1990). <i>Unified Theories of
-Cognition.</i> Harvard University Press.</li>
-<li id="ref-10">Anderson, J. R. et al. (2004). <i>An integrated theory of the mind (ACT-R).</i>
+intelligence.</i> Artificial Intelligence 33(1):1–64.</li>
+<li id="ref-10">Anderson, J. R. et al. (2004). <i>An Integrated Theory of the Mind.</i>
 Psychological Review 111(4):1036–1060.</li>
 <li id="ref-11">Zhang, T., Kishore, V., Wu, F., Weinberger, K. Q. & Artzi, Y. (2020). <i>BERTScore:
 Evaluating Text Generation with BERT.</i> ICLR.</li>
@@ -1489,15 +1527,17 @@ and risk-bit diagnostics of Section 5.6.)</li>
 ## Appendix A — Proofs
 
 Selected identities and their domain restrictions are collected here.
+Labels P1–P8 identify the sanity-check groups in `benchmark/docs/proofs.py`,
+not manuscript proposition numbers.
 
 - **P1 (normalizer).** For $b\in[0,1)$, $\eta_b(x)=\operatorname{clamp}((x-b)/(1-b);0,1)$ maps $[b,1]$ onto $[0,1]$, is strictly increasing on $[b,1]$, and satisfies $\eta_b(b)=0$ and $\eta_b(1)=1$.
 - **P2 (composite).** For $w\in\Delta(\{1,\dots,K\})$ and $s_k\in\mathbb{I}$, the convex combination $\sum_k w_k s_k$ lies in $[\min_k s_k,\max_k s_k]\subseteq\mathbb{I}$, and the build gate $g\in\{0,1\}$ yields $C=0$ at $g=0$.
 - **P3 (harmonic mean).** For $P,Q\ge0$, set $F=0$ at $P=Q=0$, otherwise $F=2PQ/(P+Q)$. The zero case satisfies the bounds directly; henceforth assume $P+Q>0$. If $0\le P\le Q$, then $F-P=P(Q-P)/(P+Q)\ge0$ and $Q-F=Q(Q-P)/(P+Q)\ge0$; exchange $P,Q$ for the other case. Also $(P+Q)/2-F=(P-Q)^2/(2(P+Q))\ge0$.
 - **P4 (DTW).** For $m,n\in\mathbb{N}_{+}$, similarities in $[-1,1]$, and finite $\lambda\ge0$, every admissible path has nonnegative cost; clamping $1-\mathrm{DTW}/(m+n)$ below at $0$ gives $D\in\mathbb{I}$.
-- **P5 (any-success and all-success estimators).** For integers $0\le c\le n$ and $1\le k\le n$, exactly $\binom{n-c}{k}$ of the $\binom{n}{k}$ subsets avoid success, while exactly $\binom{c}{k}$ consist entirely of successes. Thus $\mathrm{pass}@k=1-\binom{n-c}{k}/\binom{n}{k}$ counts subsets with any success, and $\mathrm{pass}^{k}=\binom{c}{k}/\binom{n}{k}$ counts all-success subsets. Both lie in $[0,1]$. Coupling the subsets as prefixes of one uniform permutation shows that the any-success event can only grow with $k$, whereas the all-success event can only shrink. Under independent Bernoulli trials with common success probability $p$, each fixed subset has any-success probability $1-(1-p)^k$ and all-success probability $p^k$. Linearity of expectation gives unbiasedness for these respective targets. Independence is required for these targets, not for the finite-subset identities or monotonicity.
+- **P5 (any-success and all-success estimators).** For integers $0\le c\le n$ and $1\le k\le n$, exactly $\binom{n-c}{k}$ of the $\binom{n}{k}$ subsets avoid success, while exactly $\binom{c}{k}$ consist entirely of successes. Thus $\mathrm{pass}@k=1-\binom{n-c}{k}/\binom{n}{k}$ is the fraction of $k$-subsets containing any success, and $\mathrm{pass}^{k}=\binom{c}{k}/\binom{n}{k}$ is the fraction consisting entirely of successes. Both lie in $[0,1]$. Coupling the subsets as prefixes of one uniform permutation shows that the any-success event can only grow with $k$, whereas the all-success event can only shrink. Under independent Bernoulli trials with common success probability $p$, each fixed subset has any-success probability $1-(1-p)^k$ and all-success probability $p^k$. Linearity of expectation gives unbiasedness for these respective targets. Independence is required for these targets, not for the finite-subset identities or monotonicity.
 - **P6 (Wilson).** For $N>0$, $z>0$, and $\widehat p\in[0,1]$, solving the quadratic $(\widehat p-p)^2=z^2p(1-p)/N$ yields the displayed endpoints. Exact algebra is not exact confidence coverage.
-- **P7 (Theorem 1).** Restated and proved in Section 4. Proposition 3 follows from the increasing-chain property and the partition into disjoint successive differences.
-- **P8 (monotone Markov execution).** Proposition 4 bounds $T_C$, with explicit initial state and uniformly positive strict-progress probability outside $C$. It does not assert completion for chains with an incomplete absorbing state.
+- **P7 (Theorem 1).** Restated and proved in Section 4. Proposition 1 follows from the increasing-chain property and the partition into disjoint successive differences.
+- **P8 (monotone Markov execution).** Proposition 2 bounds $T_C$, with explicit initial state and uniformly positive strict-progress probability outside $C$. It does not assert completion for chains with an incomplete absorbing state.
 
 `benchmark/docs/proofs.py` checks selected symbolic identities and finite examples,
 including one handcrafted prerequisite lattice. These sanity checks are not a
@@ -1548,10 +1588,10 @@ def _paper_md() -> str:
                  "between candidate descriptors $c_i$ (rows) and reference descriptors $r_j$ (columns); "
                  "stronger color indicates higher similarity in this illustrative matrix. The <em>presence</em> component reads bidirectional best "
                  "matches off this matrix (which reference behaviors appear, and how strongly). Right: "
-                 "the <em>order</em> component is a distance-decayed alignment path through the matrix whose "
-                 "step cost $(1-\\mathbf{S}_{ij})(1+\\lambda|\\frac{i-1}{m}-\\frac{j-1}{n}|)$ penalizes matches that "
-                 "occur out of order. Both components are recalibrated against the mean-similarity "
-                 "baseline (Proposition 1).</figcaption></figure>")
+                 "the <em>order</em> component uses a minimum-cost monotone DTW alignment. Its "
+                 "step cost $(1-\\mathbf{S}_{ij})(1+\\lambda|\\frac{i-1}{m}-\\frac{j-1}{n}|)$ increases with "
+                 "normalized positional displacement. Both components are recalibrated against the mean-similarity "
+                 "baseline (Proposition 3).</figcaption></figure>")
         .replace("__FIG_SAFETY__", '<figure class="fig" id="fig-4">'
                  f'<div class="figure-graphic" role="group" tabindex="0" aria-label="Historical ASR chart">{_safety_figure()}</div>'
                  "<figcaption>Figure 4. Historical classified Track S outcomes from "

@@ -178,16 +178,23 @@ generated PDF before author submission. A local TeX Live 2026 build is not an ar
 server compilation or acceptance claim.
 
 The site exposes the PDF, arXiv ZIP and submission instructions only when the manifest's
-canonical-paper, template/style and artifact hashes match. The PDF's first-page footnote
-links the canonical `docs.html`, latest `results.html`, and public
-`Xpitfire/cortex-gauntlet` source; the Cortex CLI reference remains in the paper.
+canonical-paper, exporter/template/style, publication-URL and artifact hashes match.
+The PDF's first-page footnote
+links `https://benchmark.cortex.a2olabs.com`, `https://cortex.a2olabs.com`, and the
+public `Xpitfire/cortex-gauntlet` source.
 The website's “Cite this work” block is excluded from PDF/LaTeX.
 Contributions follow the Introduction in both formats. The PDF is a dated paper snapshot,
 not a claim that archived runs were newly executed.
-The exporter compares the complete mathematical-expression multiset against the canonical
-source; a changed style or publication URL invalidates existing download metadata.
-Footnote destinations use `PAPER_URL` and `REPOSITORY_URL`, the same constants as
-the publication manifest and submission instructions.
+The exporter compares the complete mathematical-expression multiset, including
+inline/display kind, against the canonical source. Exporter-code, template/style
+or publication-URL changes invalidate existing download metadata.
+Footnote destinations use `PAPER_URL`, `CORTEX_URL` and `REPOSITORY_URL`.
+Formal web blockquotes become flush-left, numbered `amsthm` theorem/proposition
+environments, with native proofs and paragraph-ending QED symbols. Export rejects
+nonconsecutive statement or table numbers and mismatched anchors. Tables use native
+numbered captions; prose references and canonical anchors follow reading order in both formats.
+SVG subscripts use positioned ordinary glyphs rather than font-dependent Unicode
+subscript letters.
 
 The public repository has independent history and contains benchmark source, authored
 public fixtures, the paper and quantitative exports. Private Security scenarios are

@@ -13,24 +13,24 @@
     "Figure": 4,
     "Table": 3,
     "BlockQuote": 6,
-    "Math": 379,
-    "display_math": 14,
+    "Math": 398,
+    "display_math": 17,
     "references": 54
   },
   "layout_warnings": [],
   "pages": 19,
   "publication_date": "2026-09-14",
-  "source_sha256": "ef2e7be1a8535ba76288ea99dfb887885378a3de111e191a62105308307d24a5",
-  "template_sha256": "6ea58319645ef241004a7bc36a4f6670fedc83aac56fa5b94d1fd9746a2e4603",
+  "source_sha256": "9e8aa07ef8b4a0c219ec50e5a5e68a8baf5254da1cfcd8d1db1fc8cae977c659",
+  "template_sha256": "6565415409ceb35410e8360603b79b0e17c31abf6fd9da43cd4ddfc830063fbd",
   "source_files": {
-    "main.tex": "769e4900c9352510b2f755e835d47263c6e7a1b03e9276b7fe5b98866b2d0992",
+    "main.tex": "c33f05db62113b50b063799bd167bbafd9115b738bd96515fb7634c338a20588",
     "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
     "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
-    "figures/fig-1.pdf": "30e21ad5f2b40d38679332c2d6a755221e89db52e6acf85da73abe3b665d3adf",
-    "figures/fig-2.pdf": "b360b88ca885d50be5e76a54f2655a6908d4a4c16791586353055abe887517bf",
-    "figures/fig-3.pdf": "feee4f1de910e720e7a96a31af97b31c46d2b426dd3deb9c91c70dd3fb565cff",
-    "figures/fig-4.pdf": "5e2d59a1af7a4572ae5783fb1f77c53a115458a796a0c6097b0b4c5c63ba1f1c"
+    "figures/fig-1.pdf": "f9667279baab913b4f047dcba09ac82b3964cbe3b2386ec441edf4557c4c4d58",
+    "figures/fig-2.pdf": "16b269483b8454d435cd55ae3430095faf9de764cda6a274de9917abcfaad2e7",
+    "figures/fig-3.pdf": "e54ee59f3ff44998148279ab97cf5c4da81f88ffb828a90243351d4880346c94",
+    "figures/fig-4.pdf": "58fc6686a5d4a2b8590697d9b45efcad01f27139d08d213b1f471c78f5f03965"
   },
-  "pdf_sha256": "92dd0e6807c98305ee80c8b573b44ded630b172a77b8495c4f94959354d73344",
-  "archive_sha256": "54c8549a75a281fed466552ac40d5e2ecd983b8968840cc3f9fe3cf19000c156"
+  "pdf_sha256": "decedd9ea733b31be48e817bbcbd1c3bf5d1b116cf67df0312353bbc8a032cb8",
+  "archive_sha256": "165958ed83aad8ff3c88c7e9c5f0b229d8eb71db3727ec6631fa8880f3197bcc"
 }
