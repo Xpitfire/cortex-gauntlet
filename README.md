@@ -3,7 +3,7 @@
 A standalone snapshot of the five-track coding-agent harness benchmark.
 
 - [Setup, scope and safety](benchmark/README.md)
-- [Paper and latest results](https://benchmark.cortex.a2olabs.com/docs.html)
+- [Paper and latest results](https://benchmark.cortex.a2olabs.com)
 - [Rendered paper PDF](published/paper/cortex-gauntlet.pdf)
 - [arXiv source archive](published/paper/cortex-gauntlet-arxiv.zip)
 - [Quantitative results](published/results-package.json)

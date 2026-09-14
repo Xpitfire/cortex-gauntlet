@@ -65,11 +65,14 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 
 ## Public paper and standalone snapshot (2026-09-14)
 
-- [x] Render the canonical paper through standard LaTeX, preserving all 336 mathematical
-  expressions, 54 references, four figures, three tables and six formal blocks.
-- [x] Supply a self-contained arXiv ZIP with `main.tex` and included PDF figures only;
-  keep the rendered PDF and submission metadata outside the upload archive.
-- [x] Reference the canonical website, latest results and public GitHub snapshot in the PDF.
+- [x] Render the canonical paper through native LaTeX, preserving its complete mathematical
+  expression multiset: currently 372 expressions, 54 references, four figures, three
+  tables and six formal blocks.
+- [x] Supply a self-contained arXiv ZIP with `main.tex`, the unmodified official ICLR 2027
+  style files and included PDF figures; keep rendered PDF and submission metadata outside it.
+- [x] Use named-preprint formatting; keep Contributions after Introduction and exclude the
+  website-only self-citation block from PDF/LaTeX.
+- [x] Reference the root benchmark website, public GitHub snapshot and Cortex CLI download site.
 - [x] Website download links require matching paper/template and artifact hashes.
 - [x] Inspect the PDF and exercise desktop/mobile website downloads.
 - [x] Screen the clean-history public snapshot; exclude raw captures, private integrations,
@@ -98,6 +101,12 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
   external source copy passed 418 tests with the same 24 private-integration skips.
   Existing managed dependencies were reused; a fresh install was not rerun after
   Cortex software evaluation denied local installation. The follow-up review approved.
+  Paper refinement: repaired soundness admission and history/domain definitions, made
+  scoring gates, QE weighting, judge backends and sampling events explicit, and removed
+  branded-loop terminology and unsupported citation-hover claims. Source review approved.
+  The final 19-page PDF compiles without layout warnings; the native export preserves all
+  372 canonical expressions, including 14 displays. The focused publication/report suite
+  passes 19 tests; 36 symbolic sanity checks pass in the benchmark environment.
 
 ## Containment & safety (gates — must pass before any real run)
 

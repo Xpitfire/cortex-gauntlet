@@ -32,6 +32,10 @@ Legacy missing metrics render as unavailable, not fabricated zero scores. Captur
 Security utility retains its numeric history but is labeled unverified; mixed
 adapter runs retain each harness's own modeled/unknown provenance.
 
+Publication and historical-utility notices belong after the methodology footer,
+below the report content and category explorers—not between navigation and the
+report heading. Preserve their wording and compact inline evidence/status labels.
+
 ## Performance direction and comparison order
 
 - Single-metric comparisons are ordered by actual saved values: lowest first for
@@ -154,9 +158,11 @@ same RunRecord so all three exports agree.
 
 `gauntlet.paper` consumes the canonical Markdown paper in `gauntlet/docs.py`.
 Pandoc parses the prose, tables, equations and references; the four authored SVG figures
-are converted to included PDFs. `paper_template.tex` uses the standard `article` class,
-not an unofficial class presented as an arXiv requirement. Native pdfLaTeX produces the
-paper PDF; this download is distinct from browser-print export of a result report.
+are converted to included PDFs. `paper_template.tex` uses the official ICLR 2027 style
+with the standard `article` class, named authors and an explicit preprint header.
+The `.sty` and `.bst` files are unmodified from `ICLR/Master-Template` revision
+`46ed6f4c6cef5b175dde23639e77d44c3463b230`; no conference acceptance is implied.
+Native pdfLaTeX produces the paper PDF, distinct from browser-print export of a result report.
 
 ```sh
 cd benchmark
@@ -164,16 +170,21 @@ cd benchmark
 ```
 
 The build requires Pandoc, `rsvg-convert`, pdfLaTeX and `pdfinfo`. Uploading the resulting
-source ZIP does not require those converters: it contains only `main.tex` and four
-included PDF figures, with an embedded bibliography. `submission.txt` links the official
+source ZIP does not require those converters: it contains `main.tex`, both official
+ICLR style files and four included PDF figures, with an embedded bibliography.
+`submission.txt` links the official
 arXiv source/metadata rules. arXiv currently defaults to TeX Live 2025; inspect its own
 generated PDF before author submission. A local TeX Live 2026 build is not an arXiv
 server compilation or acceptance claim.
 
 The site exposes the PDF, arXiv ZIP and submission instructions only when the manifest's
-canonical-paper, template and artifact hashes match. Both paper and website reference
-the canonical paper URL, current results and `Xpitfire/cortex-gauntlet`. The PDF is a
-dated paper snapshot, not a claim that archived runs were newly executed.
+canonical-paper, template/style and artifact hashes match. The paper links the root
+benchmark website, the public `Xpitfire/cortex-gauntlet` snapshot and the Cortex CLI
+download site. The website's “Cite this work” block is excluded from PDF/LaTeX.
+Contributions follow the Introduction in both formats. The PDF is a dated paper snapshot,
+not a claim that archived runs were newly executed.
+The exporter compares the complete mathematical-expression multiset against the canonical
+source; a changed style invalidates existing download metadata.
 
 The public repository has independent history and contains benchmark source, authored
 public fixtures, the paper and quantitative exports. Private Security scenarios are
@@ -184,3 +195,9 @@ checkout cannot regenerate the historical package without authorized source reco
 that failure must precede mutation of the existing archive.
 An unreadable source record is a separate privacy failure: its corresponding cached
 report is revoked before the build aborts, while unrelated screened archives are retained.
+
+Scientific editing preserves source measurements while correcting their interpretation.
+Define symbols at first use, state the actual evaluator backend and missingness conventions,
+and distinguish conditional mathematics from implementation behavior and historical evidence.
+Citation hover cards must describe the cited studies, not reintroduce unsupported comparisons.
+Keep prose direct; avoid promotional claims, repeated caveats and unnecessary em-dash asides.

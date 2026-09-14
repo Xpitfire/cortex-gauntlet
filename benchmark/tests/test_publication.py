@@ -20,7 +20,7 @@ def _paper_assets(directory):
     (directory / paper.PDF_NAME).write_bytes(pdf)
     (directory / paper.SOURCE_NAME).write_bytes(archive)
     manifest = {"source_sha256": paper.source_digest(),
-                "template_sha256": hashlib.sha256(paper.TEMPLATE.read_bytes()).hexdigest(),
+                "template_sha256": paper.template_digest(),
                 "pdf_sha256": hashlib.sha256(pdf).hexdigest(),
                 "archive_sha256": hashlib.sha256(archive).hexdigest()}
     (directory / "manifest.json").write_text(json.dumps(manifest))
@@ -69,6 +69,17 @@ def test_paper_downloads_do_not_expire_at_month_boundary(tmp_path, monkeypatch):
 
     monkeypatch.setattr(docs, "datetime", Future)
     assert "paper/cortex-gauntlet.pdf" in docs._paper_downloads(tmp_path / "docs.html")
+
+
+def test_changed_style_revokes_paper_downloads(tmp_path, monkeypatch):
+    style = tmp_path / "conference.sty"
+    style.write_bytes(paper.STYLE_FILES[0].read_bytes())
+    monkeypatch.setattr(paper, "STYLE_FILES", (style,))
+    _paper_assets(tmp_path / "paper")
+    style.write_text(style.read_text().replace("9.0 true in", "8.0 true in"))
+
+    with pytest.raises(ValueError, match="stale"):
+        docs._paper_downloads(tmp_path / "docs.html")
 
 
 def test_stale_paper_failure_preserves_published_archive(tmp_path, monkeypatch):

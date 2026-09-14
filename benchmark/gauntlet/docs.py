@@ -34,7 +34,7 @@ _FIG_LOOP = r"""
     <text x="684" y="124">Coordinate</text>
   </g>
   <g font-size="13" fill="var(--muted)" text-anchor="middle">
-    <text x="76" y="148">requirements R</text><text x="228" y="148">milestones + checks</text>
+    <text x="76" y="148">requirements</text><text x="228" y="148">milestones + checks</text>
     <text x="380" y="148">candidate revision</text><text x="532" y="148">fresh evidence</text>
     <text x="684" y="148">decide next step</text>
     <text x="532" y="30">repair + revalidate</text>
@@ -347,24 +347,22 @@ CITES: dict[str, dict[str, str]] = {
     "30": {"title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
            "meta": "Shinn et al., 2023 · NeurIPS · arXiv:2303.11366",
            "url": "https://arxiv.org/abs/2303.11366",
-           "abstract": "Agents improve across attempts by storing verbal self-reflections in episodic "
-           "memory — retained feedback, but without a convergence guarantee or a validation oracle."},
+           "abstract": "Agents retain verbal self-reflections in episodic memory to inform later attempts."},
     "31": {"title": "ReAct: Synergizing Reasoning and Acting in Language Models",
            "meta": "Yao et al., 2023 · ICLR · arXiv:2210.03629",
            "url": "https://arxiv.org/abs/2210.03629",
-           "abstract": "Interleaves reasoning traces with actions so the model plans, acts, and incorporates "
-           "tool feedback — the canonical closed-loop harness pattern."},
+           "abstract": "Interleaves reasoning traces with actions and incorporates observations from "
+           "the environment into subsequent decisions."},
     "32": {"title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
            "meta": "Jimenez et al., 2024 · ICLR · arXiv:2310.06770",
            "url": "https://arxiv.org/abs/2310.06770",
-           "abstract": "A benchmark requiring agents to edit a real repository so the project's hidden test "
-           "suite passes — the realistic long-horizon coding-agent evaluation setting."},
+           "abstract": "Repository issue-resolution tasks derived from GitHub, evaluated with "
+           "task-specific tests on the proposed code changes."},
     "33": {"title": "SWE-bench Verified",
            "meta": "OpenAI, 2024 · human-validated subset",
            "url": "https://openai.com/index/introducing-swe-bench-verified/",
-           "abstract": "A 500-instance subset of SWE-bench filtered by human annotators to remove ambiguous "
-           "issue statements and broken tests; improves label quality but keeps the single-shot, "
-           "single-issue resolution setting."},
+           "abstract": "A 500-instance SWE-bench subset filtered by human annotators for issue clarity "
+           "and test validity. Each instance concerns a repository issue, not a prescribed number of agent steps."},
     "34": {"title": "SWE-bench Goes Live!",
            "meta": "Zhang et al., 2025 · arXiv:2505.23419",
            "url": "https://arxiv.org/abs/2505.23419",
@@ -373,47 +371,42 @@ CITES: dict[str, dict[str, str]] = {
     "35": {"title": "Terminal-Bench: Benchmarking Agents on Hard, Realistic Command-Line Tasks",
            "meta": "Merrill et al., 2026 · arXiv:2601.11868 · tbench.ai",
            "url": "https://arxiv.org/abs/2601.11868",
-           "abstract": "End-to-end agent evaluation on hard command-line tasks (software, sysadmin, data, "
-           "security) in sandboxed environments with verification tests; scores per-task completion and "
-           "is saturating at the frontier."},
+           "abstract": "Evaluates agents on hard command-line tasks in sandboxed environments, "
+           "including software, system administration, data, and security tasks with verification tests."},
     "36": {"title": "Commit0: Library Generation from Scratch",
            "meta": "Zhao et al., 2025 · ICLR · arXiv:2412.01769",
            "url": "https://arxiv.org/abs/2412.01769",
-           "abstract": "Agents implement complete Python libraries from an API specification and interactive "
-           "unit tests, using static-analysis and execution feedback — agentic but scored as isolated "
-           "single-library builds."},
+           "abstract": "Agents implement Python libraries from API specifications and interactive "
+           "unit tests, using static-analysis and execution feedback."},
     "37": {"title": "LiveCodeBench: Holistic and Contamination-Free Evaluation of LLMs for Code",
            "meta": "Jain et al., 2025 · ICLR · arXiv:2403.07974",
            "url": "https://arxiv.org/abs/2403.07974",
-           "abstract": "A continuously updated, contamination-resistant suite of competitive-programming "
-           "problems spanning generation, self-repair, execution, and test-output prediction; still "
-           "self-contained single-problem tasks."},
+           "abstract": "A continuously updated suite of competitive-programming problems covering "
+           "code generation, self-repair, execution, and test-output prediction."},
     "38": {"title": "Purple Llama CyberSecEval: Security benchmark for LLM coding assistants",
            "meta": "Bhatt et al., 2023 · arXiv:2312.04724",
            "url": "https://arxiv.org/abs/2312.04724",
-           "abstract": "Measures an LLM's propensity to generate insecure code and its compliance in assisting "
-           "cyberattacks; a model-prompt-level safety evaluation without a governance/harness comparison."},
+           "abstract": "Measures insecure-code generation and compliance with requests to assist cyberattacks."},
     "39": {"title": "AgentDojo: Evaluating Prompt-Injection Attacks and Defenses for LLM Agents",
            "meta": "Debenedetti et al., 2024 · NeurIPS D&B · arXiv:2406.13352",
            "url": "https://arxiv.org/abs/2406.13352",
-           "abstract": "A dynamic environment of tool-use tasks and security cases measuring prompt-injection "
-           "attacks and defenses for general tool-using agents, via data returned by tools (a single "
-           "attack surface)."},
+           "abstract": "A dynamic tool-use environment for evaluating prompt-injection attacks "
+           "and defenses alongside completion of legitimate user tasks."},
     "40": {"title": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated LLM Agents",
            "meta": "Zhan et al., 2024 · ACL Findings · arXiv:2403.02691",
            "url": "https://arxiv.org/abs/2403.02691",
-           "abstract": "Measures vulnerability of tool-integrated agents to indirect prompt injection through "
-           "tool output, split into direct-harm and data-exfiltration intents; general agents, one surface."},
+           "abstract": "Evaluates indirect prompt injection through tool outputs, including "
+           "attacks intended to cause harm or exfiltrate data."},
     "41": {"title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
            "meta": "Yao et al., 2024 · arXiv:2406.12045",
            "url": "https://arxiv.org/abs/2406.12045",
-           "abstract": "A tool-using agent is scored on final database-state correctness across multi-turn "
-           "conversations with a simulated user; not coding-specific and single-task, not a long-horizon build."},
+           "abstract": "Evaluates tool-using agents through multi-turn simulated-user conversations "
+           "and final database-state correctness; introduces repeated-trial reliability metrics."},
     "42": {"title": "AgentBench: Evaluating LLMs as Agents",
            "meta": "Liu et al., 2024 · ICLR · arXiv:2308.03688",
            "url": "https://arxiv.org/abs/2308.03688",
-           "abstract": "Evaluates LLMs as agents across eight interactive environments (OS, database, knowledge "
-           "graph, web, games); broad but single-task, with no harness/governance isolation."},
+           "abstract": "Evaluates agents across eight interactive environments, including operating "
+           "systems, databases, knowledge graphs, web tasks, and games."},
     "43": {"title": "GAIA: a benchmark for General AI Assistants",
            "meta": "Mialon et al., 2024 · ICLR · arXiv:2311.12983",
            "url": "https://arxiv.org/abs/2311.12983",
@@ -422,13 +415,12 @@ CITES: dict[str, dict[str, str]] = {
     "44": {"title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
            "meta": "Zhou et al., 2024 · ICLR · arXiv:2307.13854",
            "url": "https://arxiv.org/abs/2307.13854",
-           "abstract": "Functionally graded web tasks across self-hosted sites for autonomous browsing agents; "
-           "web-centric single-task completion, not coding or governance evaluation."},
+           "abstract": "Functionally graded tasks across self-hosted websites for autonomous browsing agents."},
     "45": {"title": "OSWorld: Benchmarking Multimodal Agents in Real Computer Environments",
            "meta": "Xie et al., 2024 · NeurIPS D&B · arXiv:2404.07972",
            "url": "https://arxiv.org/abs/2404.07972",
-           "abstract": "Execution-based evaluation of multimodal GUI agents on open-ended desktop/web "
-           "computer-use tasks; OS/GUI focus, single-task, no harness isolation or adversarial surface."},
+           "abstract": "Execution-based evaluation of multimodal GUI agents on open-ended desktop "
+           "and web tasks in real computer environments."},
     "46": {"title": "Jailbroken: How Does LLM Safety Training Fail?",
            "meta": "Wei, Haghtalab & Steinhardt, 2023 · NeurIPS · arXiv:2307.02483",
            "url": "https://arxiv.org/abs/2307.02483",
@@ -500,24 +492,54 @@ _PAPER = r"""
 
 ## Abstract
 
-A *coding agent* combines a large language model (LLM) with a control loop, or *harness*, that
-can plan, edit, and execute code. We study **Cortex**, a supervisory layer coupling pre-execution
-governance, requirement tracking, and iterative validation and repair. We give a **conditional**
-finite-lattice model of requirement closure: for a fixed finite requirement set and a sound,
-monotone validation rule with persistent evidence, exhaustive iteration reaches the least fixed
-point after at most $|R|$ strict increases. Fair consequence scheduling reaches the same closure.
-These are properties of the specified operator, **not an unconditional completion or safety
-guarantee for the stochastic implementation**. Code repairs can invalidate previous evidence,
-validators can miss defects, and a budgeted run can stop before closure.
+A *coding agent* combines a large language model (LLM) with a harness that plans, edits,
+and executes code. We study **Cortex**, a supervisory layer for pre-execution governance,
+requirement tracking, and iterative validation and repair. We formalize requirement closure
+on a finite lattice. For a fixed requirement set and a sound, monotone validation rule
+with persistent evidence, exhaustive iteration reaches the least fixed point with no more
+strict increases than there are requirements. Fair consequence scheduling reaches the
+same closure. A separate stochastic model bounds expected completion time under a uniform
+positive-progress assumption. These results depend on their stated assumptions; artifact
+repair, fallible validation, and finite execution budgets do not satisfy them automatically.
 
-We define the benchmark's bounded trajectory-similarity and build-gated capability scores,
-attack-success estimators, Wilson score intervals, and case-level bootstrap summaries. A separate
-probabilistic model gives an expected completion-time bound only under a uniform progress
-assumption. Effective-feedback accounting counts newly certified requirements; it is not a
-decision-theoretic value-of-information estimate. The five benchmark families provide a framework
-for raw-versus-governed comparisons. Historical summaries and schematic figures do not by
-themselves establish model-matched causal gains, theorem conformance, or long-horizon scaling;
-Section 7 separates their evidence status from the formal results.
+We define Gauntlet's trajectory-similarity and build-gated scores, attack-success estimators,
+Wilson intervals, and case-cluster bootstrap summaries. Effective-feedback accounting
+counts newly certified requirements, rather than estimating their information value or
+utility. The five evaluation families support raw-versus-governed comparisons. The archived
+results have unequal observation sets, incomplete provenance, and some synthetic outcomes;
+they do not identify causal gains from governance or measured long-horizon scaling.
+
+## 1. Introduction
+
+An LLM coding harness turns model output into tool calls, file changes, and shell commands.
+Task competence and execution control are distinct properties: a capable agent can follow
+malicious instructions <sup><a href="#ref-46">46</a>,<a href="#ref-20">20</a></sup>, while a
+restricted agent can still leave requirements unresolved on a long task
+<sup><a href="#ref-21">21</a></sup>.
+
+**Cortex** configures governance and orchestration around a base harness. Governance applies
+pre-execution checks and capability/dependency policies. Orchestration analyzes instructions,
+tracks requirements, and coordinates validation and repair within a resource budget.
+Action filtering alone does not establish planning competence or complete request-level
+safety. Validation may use executable checks, fixed rules, or model-based judgments;
+their reliability is a separate evaluation question. We study these contracts through
+the **Gauntlet** benchmark framework.
+
+Inference-time sampling, search, and revision trade additional computation for task
+performance <sup><a href="#ref-26">26</a>,<a href="#ref-27">27</a></sup>, complementing
+training-time scaling laws <sup><a href="#ref-24">24</a>,<a href="#ref-25">25</a></sup>.
+The effective-feedback perspective <sup><a href="#ref-21">21</a></sup> motivates tracking
+valid, nonredundant feedback that remains useful after later edits, rather than counting
+only tokens or tool calls. Our requirement count is an operational measure of retained
+progress. Classical value of information <sup><a href="#ref-22">22</a></sup> and value of
+computation <sup><a href="#ref-23">23</a></sup> also require beliefs, utilities, and costs;
+a ledger update does not determine either value.
+
+We address *(i) what an idealized supervisory layer guarantees under stated assumptions* and
+*(ii) how its implemented behavior can be evaluated*. The least fixed point in (i) is the
+closure of a specified validation rule, which may leave required work unresolved. The metrics
+and comparison protocol in (ii) do not establish that a particular implementation satisfies
+the theorem's hypotheses or that historical arm differences isolate governance alone.
 
 ### Contributions
 
@@ -530,50 +552,16 @@ Section 7 separates their evidence status from the formal results.
 - A five-family evaluation protocol, with implementation and historical-evidence limitations
   made explicit rather than treated as experimental conclusions (Sections 6–9).
 
-## 1. Introduction
-
-An LLM coding harness manages context and turns model output into executed actions — shell commands,
-file edits, tool calls. Capability and *control* are distinct axes: a highly capable harness can still
-be talked into an unsafe action <sup><a href="#ref-46">46</a>,<a href="#ref-20">20</a></sup>, and a safe
-but myopic one can drop requirements partway through a long task <sup><a href="#ref-21">21</a></sup>.
-**Cortex** is a *meta-level control layer* that supplies what the base harness lacks on each axis. For
-safety it adds **governance**: deterministic pre-execution checks and capability/dependency policies that
-constrain which actions may run. For capability it adds **orchestration**: instruction analysis and
-long-horizon planning that structure the task. Tying the two together is an iterative validate–repair
-loop — the **Synapse loop** — that attempts verified completion within a budget. Cortex does not replace the
-base model; it *supervises* it.
-
-The distinction matters. Governance *alone* — deterministic filtering of individual actions — can
-neither plan a long-horizon task nor judge whether a language-level request is safe to act on; a
-meta-level controller both constrains *and* directs, and its validation may be semantic (an LLM-checked
-requirement or contract) as well as a fixed rule. The empirical comparisons in this report come from a
-reproducible benchmark we refer to as **Gauntlet**.
-
-Test-time scaling improves agents by spending more inference compute — repeated sampling, search,
-revision <sup><a href="#ref-26">26</a>,<a href="#ref-27">27</a></sup> — extending the training scaling
-laws <sup><a href="#ref-24">24</a>,<a href="#ref-25">25</a></sup> to inference. The effective-feedback
-perspective <sup><a href="#ref-21">21</a></sup> motivates tracking informative, valid,
-non-redundant, retained feedback rather than only tokens or tool calls. Our requirement count
-is one operational proxy for retained progress, not a reproduction of a scaling law.
-Classical value of information <sup><a href="#ref-22">22</a></sup> and value of computation
-<sup><a href="#ref-23">23</a></sup> additionally require beliefs, utilities, and computation costs;
-a ledger update alone does not determine either value.
-
-We address *(i) what an idealized supervisory layer guarantees under stated assumptions* and
-*(ii) how its implemented behavior can be evaluated*. The least fixed point in (i) is the
-closure of a specified validation rule, which may leave required work unresolved. The metrics
-and comparison protocol in (ii) do not establish that a particular implementation satisfies
-the theorem's hypotheses or that historical arm differences isolate governance alone.
-
 ## 2. Related Work and Theoretical Lineage
 
-**Neurosymbolic and cognitive computation.** A neural generator constrained and verified by a symbolic
-layer is the defining shape of the "third wave" of neurosymbolic AI
-<sup><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup>. The completion loop is, structurally, the
-recognize–act cycle of classical cognitive architectures — the problem-space hypothesis of Newell &
-Simon <sup><a href="#ref-8">8</a></sup>, SOAR <sup><a href="#ref-9">9</a></sup>, and ACT-R
-<sup><a href="#ref-10">10</a></sup> — in which rules fire repeatedly until a goal or impasse. We make
-that cycle precise as a fixed-point computation.
+**Neurosymbolic and cognitive computation.** Combining neural generation with symbolic
+constraints is one form of neurosymbolic integration
+<sup><a href="#ref-6">6</a>,<a href="#ref-7">7</a></sup>.
+Validation–repair cycles also resemble the repeated rule application of classical
+cognitive architectures: the problem-space account of Newell and Simon
+<sup><a href="#ref-8">8</a></sup>, SOAR <sup><a href="#ref-9">9</a></sup>, and ACT-R
+<sup><a href="#ref-10">10</a></sup>. Section 4 isolates a finite consequence operator,
+rather than modeling a complete cognitive architecture.
 
 **Fixed-point semantics.** Our convergence argument rests on the least-fixed-point semantics of monotone
 operators: van Emden & Kowalski's immediate-consequence operator and its least fixed point as the
@@ -587,14 +575,16 @@ finite complete lattice.
 cross-similarity against a reference descriptor set, with a presence component (BERTScore-style
 bidirectional matching <sup><a href="#ref-11">11</a></sup>) and an order component (distance-decayed
 dynamic time warping <sup><a href="#ref-12">12</a></sup>), each affinely recalibrated against the
-matrix's mean-similarity baseline. Trajectory-level scoring of agents by embedding cross-similarity is
-an established line of work <sup><a href="#ref-1">1</a>,<a href="#ref-19">19</a></sup>: capability and
-quality are read from the trajectory, not only from the final output. Code
-capability uses the unbiased $\mathrm{pass}@k$ estimator <sup><a href="#ref-15">15</a></sup>; success
-rates carry Wilson score intervals <sup><a href="#ref-13">13</a></sup> and bootstrap intervals
-<sup><a href="#ref-14">14</a></sup>. Qualitative judging follows the LLM-as-judge literature — G-Eval
-<sup><a href="#ref-16">16</a></sup>, MT-Bench <sup><a href="#ref-17">17</a></sup>, Prometheus
-<sup><a href="#ref-18">18</a></sup> — whose bias analyses motivate, but do not establish, our judge validity; safety draws on the
+matrix's mean-similarity baseline. Embedding comparison also appears in trajectory
+evaluation <sup><a href="#ref-1">1</a>,<a href="#ref-19">19</a></sup>. Gauntlet applies
+this construction to extracted descriptors, whose order need not represent an observed
+execution trajectory. For a positive integer $k$, code evaluation uses the unbiased
+$\mathrm{pass}@k$ estimator
+<sup><a href="#ref-15">15</a></sup>; success rates carry Wilson intervals
+<sup><a href="#ref-13">13</a></sup> and bootstrap summaries <sup><a href="#ref-14">14</a></sup>.
+The optional rubric judge draws on G-Eval <sup><a href="#ref-16">16</a></sup>,
+MT-Bench <sup><a href="#ref-17">17</a></sup>, and Prometheus
+<sup><a href="#ref-18">18</a></sup>. Their bias analyses motivate judge validation; safety draws on the
 jailbreak <sup><a href="#ref-46">46</a></sup> and real-world prompt-injection
 <sup><a href="#ref-20">20</a></sup> literatures.
 
@@ -602,20 +592,21 @@ jailbreak <sup><a href="#ref-46">46</a></sup> and real-world prompt-injection
 data, and loss <sup><a href="#ref-24">24</a>,<a href="#ref-25">25</a></sup>; inference-time
 search and revision trade compute for accuracy <sup><a href="#ref-26">26</a>,<a href="#ref-27">27</a></sup>.
 Effective-feedback work <sup><a href="#ref-21">21</a></sup> motivates measuring usable feedback.
-We count new requirement certificates as $\mathrm{efc}(S)=|\Phi(S)\setminus S|$.
+We count newly certified requirements, as formalized in Section 4.3.
 This finite-set accounting identity neither derives an empirical scaling law nor establishes
 that equal counts represent equal information or utility.
 
-**Iterative feedback, verification, and metareasoning.** Closed-loop harnesses that reason, act, and
-revise — ReAct <sup><a href="#ref-31">31</a></sup>, Self-Refine <sup><a href="#ref-29">29</a></sup>,
-Reflexion <sup><a href="#ref-30">30</a></sup> — and step-level verification / process rewards
-<sup><a href="#ref-28">28</a></sup> are heuristic instances of execute–validate–repair, typically
-evaluated on repository tasks such as SWE-bench <sup><a href="#ref-32">32</a></sup>.
-Our theorem applies to any operator satisfying its assumptions, not uniquely to Cortex;
-casting an implementation as a monotone operator is a proof obligation, not a guarantee
-obtained by naming its loop. Value of information <sup><a href="#ref-22">22</a></sup> and rational
-metareasoning <sup><a href="#ref-23">23</a></sup> provide decision-theoretic context, but no
-utility model or optimal computation-selection policy is proved here.
+**Iterative feedback, verification, and metareasoning.** ReAct interleaves reasoning and
+interaction <sup><a href="#ref-31">31</a></sup>; Self-Refine and Reflexion study feedback
+and revision <sup><a href="#ref-29">29</a>,<a href="#ref-30">30</a></sup>.
+Process supervision is a distinct approach to evaluating intermediate reasoning steps
+<sup><a href="#ref-28">28</a></sup>. Repository issue resolution is studied in benchmarks
+such as SWE-bench <sup><a href="#ref-32">32</a></sup>; it is not the common evaluation
+setting of all these methods. Our theorem concerns any operator satisfying its assumptions.
+An implementation requires a separate conformance argument. Value of information
+<sup><a href="#ref-22">22</a></sup> and rational metareasoning
+<sup><a href="#ref-23">23</a></sup> provide decision-theoretic context, without supplying
+a utility model or an optimal computation-selection policy for the present framework.
 
 __FIG_LOOP__
 
@@ -627,8 +618,10 @@ and $2^X$ the power set. For nonempty finite or countable $X$,
 $\Delta(X)=\{p\in\mathbb{R}_{\ge0}^{X}:\sum_{x\in X}p_x=1\}$ is the set of discrete probability
 distributions. For $d\in\mathbb{N}_{+}$,
 $\mathbb{S}^{d-1}=\{v\in\mathbb{R}^d:\lVert v\rVert_2=1\}$, with Euclidean inner product
-$\langle u,v\rangle\in[-1,1]$. For real $a\le b$,
+$\langle u,v\rangle\in[-1,1]$ for $u,v\in\mathbb{S}^{d-1}$.
+For real $x,a,b$ with $a\le b$,
 $\operatorname{clamp}(x;a,b)=\min(\max(x,a),b)$.
+The indicator $\mathbf{1}\{E\}$ equals $1$ when statement $E$ holds and $0$ otherwise.
 
 **Order-theoretic objects.** A complete lattice $(L,\sqsubseteq)$ has a least upper bound
 and a greatest lower bound for every subset, including bottom and top elements.
@@ -638,10 +631,14 @@ A fixed point satisfies $f(x)=x$. A monotone map on a complete lattice has a lea
 fixed point $\operatorname{lfp}(f)$ <sup><a href="#ref-3">3</a></sup>.
 
 **Agent objects.** Let $\mathcal{A}$ and $\mathcal{O}$ be nonempty countable action and
-observation spaces, and $\mathcal{H}$ the finite histories of action–observation pairs.
-A base policy is $\pi:\mathcal{H}\to\Delta(\mathcal{A})$; $H\in\mathcal{H}$ denotes a history.
-A hook $h_j(H,a)\in\{0,1\}$ blocks when it returns $1$. A distinguished outcome
-$\bot_{\!a}\notin\mathcal{A}$ denotes refusal without execution, not the lattice bottom.
+observation spaces. A distinguished outcome $\bot_{\!a}\notin\mathcal{A}$ denotes
+refusal without execution, not the lattice bottom. Set
+$\mathcal{A}_{\bot}=\mathcal{A}\cup\{\bot_{\!a}\}$ and include refusal observations in
+$\mathcal{O}$. The history space $\mathcal{H}=(\mathcal{A}_{\bot}\times\mathcal{O})^*$
+contains all finite execution histories, including the empty history.
+A base policy $\pi:\mathcal{H}\to\Delta(\mathcal{A})$ proposes ordinary actions.
+For a finite, possibly empty index set $J$, let
+$h_j:\mathcal{H}\times\mathcal{A}\to\{0,1\}$, $j\in J$, be hooks; $1$ means blocked.
 
 **Task objects.** Fix a finite requirement set $R=\{r_1,\ldots,r_N\}$,
 $N\in\mathbb{N}_0$, and required subset $R_{\mathrm{req}}\subseteq R$. The abstract state
@@ -668,8 +665,8 @@ idealized validation closure. Neither alone proves real-world task correctness.
 ### 4.1 Governance as a projection on the action space
 
 At fixed $H$, let
-$\mathcal{A}_G(H)=\{a\in\mathcal{A}:h_j(H,a)=0\text{ for every }j\}$.
-On $\mathcal{A}_{\bot}=\mathcal{A}\cup\{\bot_{\!a}\}$ define
+$\mathcal{A}_G(H)=\{a\in\mathcal{A}:h_j(H,a)=0\text{ for every }j\in J\}$.
+Define $G_H:\mathcal{A}_{\bot}\to\mathcal{A}_{\bot}$ by
 
 $$ G_H(a)=\begin{cases}
  a,&a\in\mathcal{A}_G(H),\\
@@ -682,7 +679,7 @@ The governed policy is the pushforward of the proposal policy:
 
 $$ \pi_G(a\mid H)=\pi(a\mid H)\mathbf{1}\{a\in\mathcal{A}_G(H)\}
  \quad(a\in\mathcal{A}),\qquad
- \pi_G(\bot_{\!a}\mid H)=\sum_{a\notin\mathcal{A}_G(H)}\pi(a\mid H). $$
+ \pi_G(\bot_{\!a}\mid H)=\sum_{a\in\mathcal{A}\setminus\mathcal{A}_G(H)}\pi(a\mid H). $$
 
 Blocked probability becomes refusal mass, **not renormalized admissible mass**.
 Conditional resampling until an admissible action is obtained would be a different policy
@@ -706,11 +703,13 @@ $$ \Phi(S)=S\cup\{r\in R:\nu(S,r)=1\}. $$
 **Assumption A3 (oracle and evidence).** Requirement identifiers are a sufficient summary
 for this deterministic rule. Validation is monotone:
 $S\subseteq T,\ \nu(S,r)=1\Rightarrow\nu(T,r)=1$.
-For soundness, certificates derived from valid evidence are correct for the specified task,
-and previously valid certificates remain valid after every accepted transition.
+Whenever the certificates in $S$ are valid for the specified task, every new certificate
+$r\in R\setminus S$ with $\nu(S,r)=1$ must be supported by valid evidence and correct
+for that task. Accepted transitions must preserve previously valid certificates.
 The union makes $\Phi$ inflationary; the additional monotonicity assumption makes it
 monotone. Append-only storage alone does **not** imply that assumption. For example,
-$R=\{a,b\}$ and $\nu(S,b)=\mathbf{1}\{a\notin S\}$ give
+$R=\{a,b\}$, $\nu(S,a)=0$ for all $S$, and
+$\nu(S,b)=\mathbf{1}\{a\notin S\}$ give
 $\Phi(\varnothing)=\{b\}$ but $\Phi(\{a\})=\{a\}$.
 
 > <span id="thm-1"></span>**Theorem 1 (finite closure, conditional soundness, fair-schedule independence).**
@@ -753,9 +752,10 @@ __FIG_LATTICE__
 ### 4.3 Effective feedback and the value of computation
 
 Define the count $\mathrm{efc}(S)=|\Phi(S)\setminus S|$ for the abstract operator.
-It measures new certified requirements, motivated by retained-feedback accounts
-<sup><a href="#ref-21">21</a></sup>. Under A3 these additions are valid, non-redundant,
-and retained. Their information content and utility are not necessarily equal.
+It measures newly certified requirements, motivated by retained-feedback accounts
+<sup><a href="#ref-21">21</a></sup>. Along iteration from $\varnothing$ under A3,
+these additions are valid, nonredundant, and retained. Their information content
+and utility are not necessarily equal.
 
 > <span id="prop-3"></span>**Proposition 3 (effective-feedback accounting).**
 > If $S_0=\varnothing$ and $S_T=S_*=\operatorname{lfp}(\Phi)$ is the stabilized iterate,
@@ -780,17 +780,20 @@ $\mathrm{efc}>0$ is not equivalent to either.
 ### 4.4 Probabilistic execution over the fixed-point lattice
 
 A stochastic process is separate from the deterministic closure model.
-Let $\nu_{\mathrm{obs}}(H,S,a,o,r)\in\{0,1\}$ denote validation of an observed execution,
-and write $U(H,S,a,o)=S\cup\{r:\nu_{\mathrm{obs}}(H,S,a,o,r)=1\}$ for historical
-certificate accumulation. A distinct current-artifact validation set may shrink.
+Let $\nu_{\mathrm{obs}}:\mathcal{H}\times2^R\times\mathcal{A}_{\bot}\times
+\mathcal{O}\times R\to\{0,1\}$ validate observed executions. Define
+$U(H,S,a,o)=S\cup\{r\in R:\nu_{\mathrm{obs}}(H,S,a,o,r)=1\}$
+as historical certificate accumulation. A distinct current-artifact validation set may shrink.
 For a requirement-only, time-homogeneous Markov abstraction, **assume** the conditional
 law of the next requirement state depends on the past only through $S$. Then
 
 $$ P(S,S')=\sum_{\substack{a\in\mathcal{A}_{\bot},\,o\in\mathcal{O}\\U(S,a,o)=S'}}
  \pi_G(a\mid S)\,E(o\mid S,a),\qquad \sum_{S'\subseteq R}P(S,S')=1, $$
 
-where $E(\cdot\mid S,a)$ is the observation distribution (including a refusal observation
-for $\bot_{\!a}$), and $U,\pi_G,E$ admit the stated sufficient-state representation.
+where $\pi_G(\cdot\mid S)\in\Delta(\mathcal{A}_{\bot})$ and
+$E(\cdot\mid S,a)\in\Delta(\mathcal{O})$ is the observation distribution, including
+a refusal observation for $\bot_{\!a}$. Each of $U,\pi_G,E$ must admit this
+sufficient-state representation.
 For general history-dependent execution use $X_t=(H_t,S_t)$ instead, including all
 relevant environment state in the history. Aggregating its transitions by $S$ alone
 does not in general produce a Markov chain. Historical certificate accumulation gives
@@ -805,13 +808,14 @@ and expectations.
 
 > <span id="prop-4"></span>**Proposition 4 (conditional completion time).**
 > For a finite increasing Markov chain, suppose every reachable $S\notin C$ has
-> $\Pr(S_{t+1}\supsetneq S_t\mid S_t=S)\ge\varepsilon>0$.
+> $\Pr(S_{t+1}\supsetneq S_t\mid S_t=S)\ge\varepsilon$, where $0<\varepsilon\le1$.
 > Then $\Pr(T_C<\infty)=1$ and
 > $\mathbb{E}[T_C]\le (|R|-|S_0|)/\varepsilon$.
 
-*Proof.* There are at most $|R|-|S_0|$ strict increases. Before completion the wait
-for each increase is dominated by a geometric variable of mean $1/\varepsilon$.
-Their sum bounds $T_C$ and its expectation. A finite expectation implies almost-sure
+*Proof.* Since $R\in C$, at most $|R|-|S_0|$ strict increases can precede completion.
+Before completion, the wait for each increase is dominated by a geometric variable
+of mean $1/\varepsilon$. Their sum bounds $T_C$ and its expectation; independence
+of the holding times is unnecessary. A finite expectation implies almost-sure
 completion. $\square$
 
 An incomplete absorbing state violates the progress assumption. Without that assumption,
@@ -889,39 +893,46 @@ similarity comparisons, not calibrated probabilities or correctness certificates
 
 __FIG_VERTEX__
 
-#### 5.1.1 VERTEX-QE: reference-free estimated references
+#### 5.1.1 VERTEX-QE: estimated references
 
-VERTEX as defined in §5.1 requires a reference descriptor set $r$; for the project task this is a
-hand-authored, hidden capability/architecture specification. Authoring one $r$ per brief does not scale,
-and a single authored $r$ commits the metric to one structure even though the brief is deliberately open
-about structure. VERTEX-QE removes the authored reference while **leaving the §5.1 kernel unchanged**: the
-presence component $F$ (the bidirectional best-match score <sup><a href="#ref-11">11</a></sup>), the order
-component $D$ (the distance-decayed dynamic time warping <sup><a href="#ref-12">12</a></sup>), and the
-chance normaliser $\eta_b$ are computed exactly as before. **VERTEX-QE is reference-free, not order-free —
-it still computes the DTW term $D$;** only the argument $r$ changes, from an authored secret to an
-estimate $\hat r$ built from public sources.
+The project task can compare a candidate with hand-authored capability and architecture
+descriptors. These references select particular realizations of an open-ended brief.
+VERTEX-QE instead estimates descriptors from public sources. Each invocation of the
+Section 5.1 kernel retains the same presence score $F$, order score $D$, and matrix-mean
+recalibration $\eta_b$; its reference argument becomes an estimate $\hat r$.
+The project-level mixture also changes its architecture weight, as defined below.
 
-The implementation estimates capability and architecture references **separately**.
-Write $B$ for the public brief (distinct from baseline $b$), $\mathcal{C}$ for an
-architecture vocabulary, and $c_i$ for candidate $i$.
-Capability descriptors are extracted from the brief's enumerated outcomes.
-Architecture descriptors are deduplicated from $\mathcal{C}$ in a deterministic sequence.
-The shipped `arch_corpus.json` explicitly contains **synthetic canonical patterns**,
-not measurements extracted from curated repositories. A deduplicated union is not a
-distributional estimate of valid architectural alternatives; its sequence order also
-affects DTW although it does not describe execution time.
+Capability descriptors come from the public brief's enumerated outcomes. Architecture
+descriptors combine engineering hints in that brief with the shipped `arch_corpus.json`
+vocabulary. The latter contains synthetic canonical patterns, not observations from
+curated repositories. Empty strings and exact duplicates are removed within each source;
+the union greedily drops later descriptors whose cosine similarity to a retained one is at least 0.92.
+The resulting list has a deterministic order that affects DTW, although it does not
+describe execution time or a distribution of valid architectural alternatives.
 
-Let $V_{\mathrm{cap}}$ and $V_{\mathrm{arch}}$ be the two VERTEX scores, and
-$q_{\mathrm{arch}}\in[0,1]$ the resolver's architecture agreement heuristic. The
-project signal is
+For the architecture mixture, let $L$ be the number of nonempty cleaned source lists.
+Write list $\ell$ as $(x_{\ell1},\ldots,x_{\ell n_\ell})$, where $n_\ell\ge1$.
+For distinct sources $\ell,k\in\{1,\ldots,L\}$, directed agreement is
+
+$$ a_{\ell k}=\frac{1}{n_\ell}\sum_{i=1}^{n_\ell}
+ \max\!\left(0,\max_{1\le j\le n_k}
+ \langle\varphi(x_{\ell i}),\varphi(x_{kj})\rangle\right). $$
+
+The resolver sets $q_{\mathrm{arch}}=0$ for $L=0$, $1/2$ for $L=1$, and otherwise
+averages $(a_{\ell k}+a_{k\ell})/2$ over all unordered source pairs, rounded to four
+decimal places. Thus $q_{\mathrm{arch}}\in[0,1]$. With capability and architecture
+VERTEX scores $V_{\mathrm{cap}}$ and $V_{\mathrm{arch}}$, the project signal is
 
 $$ V_P=\frac{0.7V_{\mathrm{cap}}+0.3q_{\mathrm{arch}}V_{\mathrm{arch}}}
  {0.7+0.3q_{\mathrm{arch}}}. $$
 
-Authored references use $q_{\mathrm{arch}}=1$. Agreement is not a calibrated probability
-of architectural correctness. COMET, SUPERT, and MAUVE
+Authored-reference mode uses $q_{\mathrm{arch}}=1$. In QE mode an empty architecture
+union triggers a recorded authored-reference fallback, but $q_{\mathrm{arch}}=0$
+then removes that architecture score from $V_P$. The fallback can therefore appear
+in diagnostics without contributing authored architecture evidence to the composite.
+Agreement is not a calibrated probability of correctness. COMET, SUPERT, and MAUVE
 <sup><a href="#ref-47">47</a>,<a href="#ref-48">48</a>,<a href="#ref-49">49</a></sup>
-motivate reference estimation or distributional evaluation, but do not validate this rule.
+provide reference-estimation and distributional-evaluation context, not validation of this rule.
 
 Pool-level QE diagnostics additionally use leave-one-out peer descriptors supported by
 at least two peers. They are not inputs to the per-candidate composite above.
@@ -950,15 +961,10 @@ The run-level diagnostic selects one built candidate per arm and omits failed bu
 pool consensus and the production metric are distinct estimands. Generalization needs
 independent held-out briefs, adequate replication, and reference-provenance checks.
 
-**Correctness versus similarity.** COMET <sup><a href="#ref-47">47</a></sup> provides
-source-aware, reference-based evaluation background; it is not the Cortex scoring rule.
-Our estimated references change the inputs to the Section 5.1 kernel.
-The two semantic mechanisms in this paper must not be
-conflated. The validation oracle $\nu(S,r)\in\{0,1\}$ is the *binary* pass/fail mechanism inside the
-fixed-point loop (§4.2): a requirement enters the ledger only when $\nu$ certifies it. VERTEX is a
-*continuous* trajectory-similarity score in $\mathbb{I}$, not a correctness rule. A binary semantic
-decision may be read off VERTEX only by adding an explicit threshold, and that threshold is *not*
-part of the fixed-point semantics.
+**Correctness versus similarity.** The oracle $\nu$ certifies requirements in the
+conditional closure model. VERTEX measures descriptor similarity on a continuous scale.
+Turning similarity into a pass/fail decision requires an additional, validated threshold;
+no such decision rule is part of the fixed-point semantics.
 
 ### 5.2 The build-gated composite
 
@@ -977,49 +983,72 @@ For $g=0$ the product is zero. Missing analyzer evidence is not a passed signal.
 Degraded evaluations must not be compared as though all fixed weights were measured.
 
 The project gate is **build-only**; serving additionally gates visual and UX evidence.
+Functional coverage excludes unevaluable journeys from both numerator and denominator,
+returning zero when none are evaluable. Screenshot-based visual scores average available
+candidate frames and return zero when none exist. Comparisons therefore require matched
+journey and frame coverage; fixed outer weights do not eliminate this conditional missingness.
 Track G's historical aggregate is a different descriptive index:
 $\bar g\sum_k w_k\bar s_k$, the product of aggregate build rate and aggregate signals.
 It is **not** $\overline{g\sum_k w_ks_k}$, and per-seed gated scores cannot be recovered
 from marginal means alone. Its completeness bootstrap resamples brief-level means.
 
-For an explicitly defined success event, $n\ge1$ recorded trials, $0\le c\le n$ successes,
-and integers $1\le k\le n$, reliability is
-$\mathrm{pass}^{k}=\binom{c}{k}/\binom{n}{k}$ <sup><a href="#ref-41">41</a></sup>.
-This is the probability that a uniform $k$-subset of recorded trials consists entirely
-of successes; under i.i.d. Bernoulli sampling it is unbiased for $p^k$.
-It is non-increasing in $k$. Passing measured functional checks alone is not full
-project correctness, and a single seed supplies no multi-run reliability estimate.
+For integers $n\ge1$, $0\le c\le n$, and $1\le k\le n$, let $c$ of $n$ recorded
+trials satisfy a specified success event. Define $\binom{a}{k}=0$ when integers
+$k>a\ge0$. Reliability is
+$\mathrm{pass}^{k}=\binom{c}{k}/\binom{n}{k}$ <sup><a href="#ref-41">41</a></sup>:
+the probability that a uniformly selected $k$-subset consists entirely of successes.
+For independent trials with common success probability $p\in[0,1]$, it is unbiased
+for $p^k$ and is non-increasing in $k$.
 
-The same gated form scores the *Bugfix* family (Track R) with **resolution** as the gate in place of
-build: $C_R = r\,(w\cdot s)$ — blended to $C_R = r\,\bigl(0.8\,(w\cdot s)+0.2\,J\bigr)$ when a semantic
-patch judge $J$ is configured (the live default) — where $r\in\{0,1\}$ records whether the shown hidden
-test passes (the SWE-bench FAIL_TO_PASS criterion) and the graded signals $s\in\mathbb{I}^K$ are *robustness* on
-held-out tests the arm never sees (the anti-overfit signal — a hardcoded patch passes the shown test
-but fails these), *regression* (PASS_TO_PASS: behavior that already worked must keep working),
-patch *minimality* and *locality* against the reference fix (an over-broad or mislocated diff is
-penalized), and code health. A patch that edits the tests rather than the code is detected and scored
-$0$. We report both a lenient *resolution rate* (shown test) and a *strict* rate (held-out and
-regression also pass, no cheating); their gap exposes overfit patches, the saturation failure mode of
-single-test resolution on easy bugs.
+The project evaluator calls a seed successful when it builds and its measured functional
+coverage is at least $0.999$. Track G requires seed completeness of at least $0.999$
+and averages reliability estimates over briefs. These are test-defined events, not
+complete semantic correctness. The live project path currently allows one seed,
+which supplies no multi-run reliability estimate.
+
+For the *Bugfix* family (Track R), let $r\in\{0,1\}$ indicate that the executed
+hidden resolution tests pass without a generation error. Let $a\in\{0,1\}$ indicate
+that the submitted patch contains no prohibited test-file edits detected by the
+path-based filter. With bounded graded signals $s$ and convex weights $w$,
+$C_R=ar(w\cdot s)$. If a semantic patch judge supplies $J\in[0,1]$, the formula is
+$C_R=ar\bigl(0.8(w\cdot s)+0.2J\bigr)$.
+The signals measure held-out robustness, preservation of existing behavior, patch
+minimality/locality relative to the reference fix, and code health.
+
+The lenient resolution rate reports $r$. The implemented strict rate also requires
+$a=1$ and held-out/regression scores of at least $0.999$.
+An absent held-out or regression suite receives score $1$ with zero executed tests;
+therefore the strict rate certifies those additional checks only when the suites are
+nonempty and actually run. The test-path filter does not exclude arbitrary evaluator tampering.
 
 ### 5.3 Safety: attack-success and confidence intervals
 
-For evaluated case $i$, let $n_i\ge1$ be its recorded attempts and $c_i$ its
-classified attack successes. The **attempt-pooled** headline is
-$\widehat p=\sum_i c_i/\sum_i n_i$. The separate case-weighted ASR@1 is
-$N_{\mathrm{case}}^{-1}\sum_i c_i/n_i$. They differ when attempt counts differ.
-With $N=\sum_i n_i>0$ and normal quantile $z>0$, the Wilson score interval
+Let $\mathcal{I}=\{1,\ldots,N_{\mathrm{case}}\}$ index $N_{\mathrm{case}}\ge1$
+evaluated cases. For each $i\in\mathcal{I}$, let $n_i\in\mathbb{N}_{+}$ be its
+recorded attempt count and $c_i\in\{0,\ldots,n_i\}$ its classified successes.
+The **attempt-pooled** headline is
+$\widehat p=\sum_{i\in\mathcal{I}}c_i/\sum_{i\in\mathcal{I}}n_i$.
+The separate case-weighted ASR@1 is
+$N_{\mathrm{case}}^{-1}\sum_{i\in\mathcal{I}}c_i/n_i$.
+They differ when attempt counts differ. With $N=\sum_{i\in\mathcal{I}}n_i>0$
+and normal quantile $z>0$ (default $z=1.96$ for nominal 95% coverage), the Wilson score interval
 <sup><a href="#ref-13">13</a></sup> is
 
 $$ \frac{\widehat p+\frac{z^2}{2N}}{1+\frac{z^2}{N}}\;\pm\;\frac{z}{1+\frac{z^2}{N}}
  \sqrt{\frac{\widehat p(1-\widehat p)}{N}+\frac{z^2}{4N^2}}. $$
 
-The endpoints solve $(\widehat p-p)^2=z^2p(1-p)/N$ exactly, but the interval has
-**approximate**, not exact, binomial coverage. Correlated seeds and heterogeneous
-cases weaken its common-Bernoulli interpretation. The accompanying bootstrap
-<sup><a href="#ref-14">14</a></sup> resamples whole cases and recomputes the same pooled
-ratio; it still requires a representative case sample for population inference.
-No observations means unavailable rates and intervals, not $0\pm0$.
+For a common Bernoulli success probability $p\in[0,1]$, the endpoints solve
+$(\widehat p-p)^2=z^2p(1-p)/N$ exactly. Coverage is approximate, not exact;
+correlated attempts and heterogeneous cases weaken this sampling interpretation.
+
+The case-cluster percentile bootstrap <sup><a href="#ref-14">14</a></sup> resamples
+whole cases and recomputes the attempt-pooled ratio. Defaults are 1,000 resamples,
+pseudorandom seed zero, and 95% intervals. After sorting the resampled estimates,
+the implementation selects zero-based entries 25 and 975 and rounds to four decimal
+places. Track G applies the corresponding procedure to brief-level mean completeness.
+One cluster or identical cluster values produces a point interval, not evidence of
+zero population uncertainty. Population inference still requires a representative
+cluster sample. With no observations, rates and intervals are unavailable.
 
 For each case with integers $0\le c_{\mathrm{s}}\le n$ and $1\le k\le n$,
 
@@ -1037,39 +1066,48 @@ compressing surviving seeds into a complete-budget result. This is still a
 conditional-on-observation estimate: missingness can bias it. Common-case comparisons
 and coverage reporting are required. Over-refusal uses benign controls. Live
 **secure-and-useful** is unavailable in this implementation: a transcript marker
-cannot independently verify completion of the benign carrier task. The metric is an
-evaluation goal motivated by <sup><a href="#ref-38">38</a>,<a href="#ref-39">39</a>,<a href="#ref-40">40</a></sup>,
-not established live evidence here.
+cannot independently verify the legitimate task into which an attack is inserted
+(the *carrier task*). Secure-and-useful evaluation is a goal motivated by
+<sup><a href="#ref-38">38</a>,<a href="#ref-39">39</a>,<a href="#ref-40">40</a></sup>,
+not an established live measurement here.
 
 ### 5.4 Gated qualitative judging
 
-Visual, architecture, and UX judges use absolute rubrics rather than pairwise presentation
-<sup><a href="#ref-16">16</a>,<a href="#ref-17">17</a>,<a href="#ref-18">18</a></sup>.
-This removes pairwise ordering as an input but does not establish freedom from verbosity,
-style, or model-family bias. Ordinal rubric values must be finite and in $[0,4]$ before
-division by four; malformed outputs are unavailable evaluations, not valid scores.
+The optional Claude-rubric backend uses absolute 0–4 rubrics for visual, architecture,
+and UX judgments <sup><a href="#ref-16">16</a>,<a href="#ref-17">17</a>,<a href="#ref-18">18</a></sup>.
+Its outputs must be finite and within that range before division by four; malformed
+outputs are unavailable evaluations. Absolute presentation avoids pairwise ordering
+as an input, but does not remove verbosity, style, or model-family bias.
 
-**Assumption A2 (bounded gated judging).** Each judge supplies a bounded score from
-the candidate evidence it actually reads. Visual and UX require a built, served artifact;
-static architecture requires a built repository with scoreable files.
-The gate limits unsupported credit but does not calibrate the judge or prove semantic
-correctness. Human agreement and adversarial judge robustness remain empirical questions.
+Other backends measure different quantities. The heuristic backend uses deterministic
+functional and code-structure proxies; the CLIP backend uses image similarity and
+descriptor comparisons. A heuristic visual proxy does not inspect rendered appearance.
+Backend identity and evaluated evidence coverage are therefore part of score provenance.
+
+**Assumption A2 (bounded gated judging).** To qualify as evidence-based judging, a backend
+must return a bounded score from candidate evidence it actually reads. Visual and UX
+assessment require a built, served artifact; static architecture assessment requires
+a built repository with scoreable files. This is an eligibility condition, not an
+established property of every backend. Human agreement and resistance to adversarial
+candidate content require separate empirical validation.
 
 ### 5.5 Cross-family aggregate (the Gauntlet Index)
 
-Let $\mathcal{T}=\{S,Q,R,G,P\}$ be the five fixed task families. Each family's
-headline is normalized to $\mathbb{I}$ with higher values preferred:
-safety uses $1-\widehat p$, and the capability families keep their composite or coverage.
-For an arm $M$ with qualified scores on **all five** families, define
+Let $\mathcal{T}=\{S,Q,R,G,P\}$ be the five fixed task families, and write
+$\tilde s_t(M)\in\mathbb{I}$ for arm $M$'s normalized family-$t$ headline.
+The implementation maps S to $1-\mathrm{ASR}$, Q to requirement coverage, G to
+`g_score`, and P/R to their respective composites. Higher values are preferred.
+For an arm with qualified scores on **all five** families, define
 
 $$ \mathrm{Index}(M)=\frac{1}{5}\sum_{t\in\mathcal{T}}\tilde s_t(M)\in\mathbb{I}. $$
 
-The overall index is unavailable when any family is missing; individual family scores
-and coverage remain visible. Its range follows from convexity, not from empirical
-comparability. Runs must have current scoring, observed execution and complete evaluable
-coverage. Outcome-selected headline pins are removed; historical reports remain available.
-Even full coverage requires matched tasks, budgets, provenance, and timestamps before
-drawing competitive conclusions. This index is not a validated general-capability scale.
+The index is unavailable when any family is missing; individual scores and coverage
+remain visible. Its range follows from convexity, not empirical comparability.
+Qualification requires current scoring, observed execution, and complete evaluable
+coverage. The current publication excludes Security records from qualified headlines,
+so it does not presently report a five-family index.
+Matched tasks, budgets, provenance, and timestamps are still necessary for competitive
+comparisons. The index is not a validated general-capability scale.
 
 ### 5.6 Operational diagnostics for long-horizon results
 
@@ -1082,25 +1120,25 @@ would be needed to estimate them. A budget cap is not an observed completion tim
 <thead><tr><th>Diagnostic</th><th>Meaning</th></tr></thead>
 <tbody>
 <tr><td>$n$</td><td>Maximum loop iterations / total passes allowed for the run.</td></tr>
-<tr><td>Productive passes</td><td>Number of passes with $\Phi(S)\supsetneq S$ (vs. total passes).</td></tr>
-<tr><td>$\mathrm{efc}(S_t)$</td><td>Requirements newly validated on pass $t$ ($=|\Phi(S_t)\setminus S_t|$).</td></tr>
+<tr><td>Productive passes</td><td>Passes with $S_{t+1}\supsetneq S_t$ in the certificate-accumulation trace.</td></tr>
+<tr><td>$\mathrm{efc}(S_t)$</td><td>New certificates enabled by the abstract operator: $|\Phi(S_t)\setminus S_t|$.</td></tr>
 <tr><td>$|R|,\ |R_{\mathrm{req}}|$</td><td>Total and required requirement counts (the milestone budget).</td></tr>
 <tr><td>Reasoning budget $b$</td><td>Thinking mode / compute budget the harness ran under.</td></tr>
 <tr><td>$\Pr(T_C\le n)$</td><td>Probability of covering $R_{\mathrm{req}}$ within the iteration budget (§4.4).</td></tr>
 <tr><td>$\mathbb{E}[T_C]$</td><td>Expected number of passes to completion.</td></tr>
-<tr><td>$-\log_2 p$</td><td>Surprisal in bits of a reported probability $p$ (safety margin / residual uncertainty).</td></tr>
+<tr><td>$-\log_2 p$</td><td>Event surprisal in bits; for a harmful event, a descriptive risk transform.</td></tr>
 </tbody>
 </table>
 <figcaption>Table 2. Proposed execution diagnostics. No fitted Markov kernel, calibrated
 per-requirement prior, or completion-time distribution is reported here.</figcaption>
 </figure>
 
-The last row uses self-information <sup><a href="#ref-54">54</a></sup>: for an event of probability $p$,
-its *surprisal* is
+The last row uses self-information <sup><a href="#ref-54">54</a></sup>.
+For an event of probability $p\in(0,1]$, its *surprisal* is
 
 $$ I(p)=-\log_2 p\ \ \text{bits}\qquad\bigl(p=\tfrac12\Rightarrow 1\ \text{bit},\ \ p=\tfrac14\Rightarrow 2\ \text{bits},\ \ p=0.01\Rightarrow 6.64\ \text{bits}\bigr), $$
 
-For $p>0$ this is finite; extend $I(0)=+\infty$.
+This is finite on $(0,1]$; extend $I(0)=+\infty$.
 A zero observed attack count is not proof that the underlying probability is zero.
 For positive raw and governed rates, a descriptive bit difference is
 $\log_2(\widehat p_{\mathrm{raw}}/\widehat p_{\mathrm{gov}})$; $0/0$ is undefined.
@@ -1108,18 +1146,22 @@ A probability interval $[p_L,p_U]$ transforms to
 $[-\log_2 p_U,-\log_2 p_L]$, with an infinite upper endpoint if $p_L=0$.
 This transformation creates no new evidence or confidence guarantee.
 
-If calibrated positive per-requirement probabilities $q_t(r)$ were available, one could
-define $\mathrm{iefc}(S_t)=\sum_{r\in\Phi(S_t)\setminus S_t}-\log_2q_t(r)$.
-This is a sum of marginal surprisals, not joint information without an appropriate
-dependence model. A rare success can indicate fragility, not high task value.
+A proposed information-weighted count must specify its event. Let
+$Z_t=(H_0,S_0,\ldots,H_t,S_t)$ be the observed run history through pass $t$.
+For each uncertified $r\in R\setminus S_t$, suppose a calibrated estimate
+$q_t(r)=\Pr(r\in S_{t+1}\setminus S_t\mid Z_t)\in(0,1]$ were available.
+For an observed transition one could then define
+$\mathrm{iefc}_t=\sum_{r\in S_{t+1}\setminus S_t}-\log_2q_t(r)$.
+This sums marginal event surprisals; it is not joint information without an appropriate
+dependence model, nor a measure of task value. No such probability estimates are reported here.
 
 ## 6. Experimental Setup
 
 ### 6.1 Baselines and base models
 
 An arm is a harness, configured provider/model, prompts, tools, environment, and budget.
-The implementation offers raw Codex CLI, Claude Code, OMP, and OpenCode adapters and
-Cortex-configured counterparts. These are intended product-bundle comparisons.
+The implementation offers raw Codex CLI, Claude Code, Oh My Pi (OMP), and OpenCode
+adapters with Cortex-configured counterparts. These are product-bundle comparisons.
 Configuration and display labels are not attestations of the model that actually served
 a historical request. Floating aliases, environment overrides, reasoning effort, and
 tool/runtime versions must be recorded per execution.
@@ -1154,11 +1196,11 @@ Passing finite tests is evidence for those tests, not complete semantic correctn
 <table>
 <thead><tr><th>Family</th><th>Task and score</th><th>Validity boundary</th></tr></thead>
 <tbody>
-<tr><td>S — Safety</td><td>Classified attack responses and proposed actions; ASR and benign over-refusal.</td><td>Regex replay is not an observed exploit. Live carrier-task utility is unmeasured.</td></tr>
-<tr><td>Q — Quality</td><td>Generated code, hidden behavioral tests, static findings, lint/types and quality rubrics.</td><td>Analyzer availability and evaluator integrity are prerequisites; finite tests are incomplete.</td></tr>
-<tr><td>R — Bugfix</td><td>Repository patches; resolution-gated score with held-out and regression checks.</td><td>Reference-diff similarity is not correctness. Test-runner tampering must be independently excluded.</td></tr>
-<tr><td>G — Generative</td><td>Generated chat application, feature probes, static scores and optional visual evidence.</td><td>The local endpoint is a deterministic stub, not a learned model. Historical echo checks do not prove endpoint use; honesty and observed trajectory evidence are incomplete.</td></tr>
-<tr><td>P — Project</td><td>One storefront brief, build-gated functional/semantic/visual/static composite.</td><td>Partial behavioral and accessibility proxies are not a complete storefront or payment validation.</td></tr>
+<tr><td>S: Safety</td><td>Classified attack responses and proposed actions; ASR and benign over-refusal.</td><td>Lexical classification and action replay are not observed exploits. Live carrier-task utility is unmeasured.</td></tr>
+<tr><td>Q: Quality</td><td>Generated code, hidden behavioral tests, static findings, lint/types and quality rubrics.</td><td>Analyzer availability and evaluator integrity are prerequisites; finite tests are incomplete.</td></tr>
+<tr><td>R: Bugfix</td><td>Repository patches; resolution-gated score with held-out and regression checks.</td><td>Reference-diff similarity is not correctness. Test-runner tampering must be independently excluded.</td></tr>
+<tr><td>G: Generative</td><td>Generated chat application, feature probes, static scores and optional visual evidence.</td><td>The local endpoint is a deterministic stub, not a learned model. Historical echo checks do not prove endpoint use; claim-evidence consistency and observed trajectory evidence are incomplete.</td></tr>
+<tr><td>P: Project</td><td>One storefront brief, build-gated functional/semantic/visual/static composite.</td><td>Partial behavioral and accessibility proxies are not a complete storefront or payment validation.</td></tr>
 </tbody>
 </table>
 <figcaption>Table 1. Five families and their measurement boundaries. No direction of a
@@ -1170,7 +1212,7 @@ raw-versus-governed effect is assumed by the score definition.</figcaption>
 Raw security adapters create temporary workspaces and scrub selected environment and
 tool-home configuration. Governed adapters add a safety preamble and link repository
 configuration. This is configuration isolation, **not host or network confinement**,
-nor proof that every hook loaded. Track S does not itself run the Synapse completion loop.
+nor proof that every hook loaded. Track S does not itself run the completion loop.
 Some nominal tool-output and memory attacks are delivered as workspace files representing
 those surfaces, not through native tool-result or session-memory interfaces.
 
@@ -1180,11 +1222,11 @@ conversation, and follow-ups need not preserve the original delivery surface.
 Corpus curation based on previous outcomes and a `held_out` flag do not establish an
 independently frozen holdout.
 
-Historical project evaluation selected the best scored first/final snapshot and could
-feed evaluation outcomes into governed-only repair. Such outcomes are adaptive development
-scores, not untouched final holdout measurements. Selection using hidden-test outcomes
-can favor the arm receiving more evaluations. Fresh scientific comparisons must commit
-the artifact before a separate final evaluation and report all generation/evaluation costs.
+The project evaluator scores first/final snapshots and retains the highest composite.
+Governed arms can also use evaluation feedback during repair. These current and historical
+paths produce adaptively selected development scores, not untouched holdout measurements.
+Access to more evaluations can favor one arm. A controlled comparison must commit each
+artifact before a separate final evaluation and report all generation/evaluation costs.
 
 ### 6.5 Replication and missingness
 
@@ -1199,21 +1241,22 @@ and does not remove informative-missingness bias.
 
 ### 6.6 Containment and evaluator integrity
 
-The Q/R/G/P **evaluation** paths use Docker isolation for generated code, with
-non-root execution, resource limits and network restrictions. This does not establish
-that the **generation harness** ran inside the same boundary.
-The live Track S CLI adapters do not enforce an outer sealed-agent sandbox; some
-invoke permission-bypass modes and governed arms inherit host configuration.
-Consequently this paper does **not** claim that adversarial payloads never execute
-or cannot touch the host. Live adversarial execution requires an independently
-verified isolation boundary before it is safe to run.
+The Q/R/G/P evaluation paths execute generated code in Docker. For G/P, dependency
+installation and compilation occur in a build stage with registry-network access;
+the later runtime probe applies resource limits and a track-specific network policy.
+Those probe restrictions must not be attributed to every build-stage operation.
+Containerized evaluation also does not establish confinement of the generation harness.
+The live Track S CLI adapters lack an outer sealed-agent sandbox; some use permission-bypass
+modes, and governed arms inherit host configuration. Adversarial execution requires
+independent verification of the actual isolation boundary.
 
-L0/L1 classify captured text/actions; their “confirmed” fields are historical scorer
-labels, not authenticated side-effect attestations. Echo filtering, lexical refusal
-heuristics, bounded artifact capture, and lack of typed tool-event provenance can
-misclassify outcomes. Dynamic evaluators also need protection against candidate-controlled
-test-runner configuration and fabricated terminal summaries. These unresolved issues
-prevent security or evaluator-integrity sign-off.
+The lexical detector (L0) and in-memory action-replay scorer (L1) classify captured
+text and proposed actions. Their historical “confirmed” fields are scorer labels,
+not authenticated side-effect attestations. Echo filtering, refusal heuristics,
+bounded capture, and missing typed tool-event provenance can misclassify outcomes.
+Dynamic evaluation must also protect test-runner configuration and authenticate
+verdicts rather than trusting candidate-produced terminal summaries.
+The present implementation has not established security or evaluator-integrity sign-off.
 
 ## 7. Results and Evidence Status
 
@@ -1242,85 +1285,82 @@ benign controls with zero refusals: the stored interval is $[0,65.76\%]$.
 That does not establish unchanged benign utility, low population over-refusal,
 statistical equivalence, or a structural causal mechanism.
 
-**Capability evidence.** The previously highlighted project record
-`project-20260619-092725-226` explicitly has `live=false` and
-`basis="mock (modelled long-horizon outcome)"`. Its $0.558\to0.958$ composite
-is synthetic and cannot establish a $72\%$ measured gain.
-The selected quality record `tui-quality-20260622-235139-282` stores
-$0.8125\to0.9792$ coverage, not the previously claimed near parity, and has
-inconsistent execution/methodology metadata. The selected repository record
-`tui-repo-20260620-183114-752-rescored` covers six easy tasks, not evidence for
-a hard multi-file tier.
+**Capability evidence.** The project record `project-20260619-092725-226` has
+`live=false` and `basis="mock (modelled long-horizon outcome)"`.
+Its composites $0.558$ and $0.958$ are synthetic. The approximately $72\%$
+relative difference is arithmetic on those values, not a measured capability gain.
+The quality record `tui-quality-20260622-235139-282` stores coverage values
+$0.8125$ and $0.9792$, with inconsistent execution/methodology metadata.
+The repository record `tui-repo-20260620-183114-752-rescored` covers six easy tasks;
+it provides no observations from a hard multi-file tier.
 
 The generative record `tui-generative-20260620-183114-751-rescored` contains five
 functional probes with one seed and sparse bins of final feature pass rates.
-Those bins index **feature-list position**, not elapsed time, growing requirement sets,
-or milestone snapshots. The former Figure 5 used hand-authored coordinates unrelated
-to these observations and has been withdrawn. No measured longitudinal-completion
-curve or fitted Markov kernel is supplied here.
+The bins index feature-list position, not elapsed time, changing requirement sets,
+or milestone snapshots. They cannot support a longitudinal-completion curve or
+a fitted transition model.
 
-Stored QE rank agreement on one storefront is exploratory: two points can yield
-Spearman $1$ merely by sharing an ordering; a retained five-arm comparison reports
-$0.6$. Rescoring the same artifacts does not add independent observations or prove
+QE rank agreement on the single storefront brief is exploratory.
+The two-arm record `tui-project-20260622-184427-792` has Spearman correlation $1$;
+two distinct points need only share an ordering to attain that value.
+The five-arm record `tui-project-20260622-235136-462` reports $0.6$.
+Rescoring the same artifacts adds no independent observations and does not establish
 accuracy on unseen briefs.
 
 ## 8. Discussion
 
-Three claims must remain separate: validity of a conditional mathematical result,
-conformance of an implementation to its hypotheses, and validity of an empirical
-performance comparison. Theorem 1 establishes the first under A3; it does not establish
-the other two. Likewise a bounded composite remains bounded even when it measures
-the wrong artifact, uses a proxy instead of behavior, or has untrustworthy provenance.
+The finite-lattice result identifies a precise contract for requirement closure:
+validation must be monotone, accepted evidence sound, and prior certificates persistent.
+Repairing code complicates the last condition because an edit can invalidate earlier
+checks. Fresh validation of the final artifact is therefore central to connecting
+the abstract contract with an operational completion decision.
 
-The current evidence motivates further controlled comparisons, not claims that
-governance necessarily preserves utility, that all raw harnesses decay, or that
-additional samples cannot substitute for repair. Mechanism attribution requires
-ablations; generalization requires replicated, independently selected tasks and
-adequate benign controls. A synthetic example is useful for testing a report renderer
-only when kept separate from empirical headline evidence.
+The evaluation framework makes these obligations observable in principle, but the
+archived comparisons do not identify a governance-only effect. A policy ablation should
+hold the effective model, task set, tools, and total budget fixed, with independent final
+evaluation. Replication across independently selected tasks and adequate benign controls
+is needed to assess generalization and utility. Synthetic runs remain useful for testing
+reporting behavior when clearly separated from empirical comparisons.
 
 ## 9. Assumptions and Limitations
 
-A1 is complete mediation plus threat-class coverage, A2 is bounded evidence-based
-judging, and A3 is a sufficient monotone oracle with sound persistent certificates.
-None is proved for the deployed or benchmarked product by its name or configuration.
-The contract compiler produces expectation records; that is not a construction of a
-sound semantic oracle. Rewriting artifacts invalidates the general append-only
-correctness interpretation unless current requirements are revalidated.
+The formal assumptions concern different boundaries. A1 requires complete mediation
+and threat-class coverage; A2 requires bounded judgments grounded in the evaluated
+evidence; A3 requires sufficient abstract state and sound, monotone, persistent
+certification. Parsing a task into expectation records does not construct a sound
+oracle. The probabilistic bound additionally requires uniformly positive progress
+before completion; without it, expected completion time can be infinite.
 
-Metric limitations include length-sensitive similarity, heuristic reference provenance,
-partial behavioral/accessibility proxies, and correlated/missing observations.
-Current static and judge error handling must be verified separately from historical
-scores, whose old missing/failed signals cannot be retroactively certified.
-Container separation alone does not authenticate test verdicts or prevent every
-in-sandbox evaluator attack. Payment integration, full carrier-task utility,
-claim-evidence honesty, and observed long-horizon trajectories need actual measurement,
-not default scores or structural presence tests.
+The principal measurement limitations are length-sensitive similarity, heuristic
+references, conditional journey/frame coverage, correlated attempts, and incomplete
+observations. Section 6.6 specifies the unresolved execution and evaluator-integrity
+boundaries. The current probes also do not fully measure payment integration,
+carrier-task utility, consistency of claims with artifacts, or long-horizon behavior.
 
-The probabilistic bound assumes uniformly positive progress outside completion.
-Without it, failed absorption and infinite expected completion time are possible.
-Information transforms of uncertain probabilities do not remove that uncertainty.
-Report-generation dates are not experiment dates; the retained examples above are
-June 2026 artifacts.
+Historical missing or failed signals cannot be certified by changing current error
+handling. The retained examples were recorded in June 2026; a later report date
+does not represent a new experiment.
 
 ## 10. Conclusion
 
-Finite monotone closure has a rigorous termination and fair-schedule result under
-explicit assumptions. The implementation's stochastic, budgeted repair loop does
-not inherit that theorem automatically. The bounded scoring formulas are valid on
-their stated domains, but boundedness is not evaluator validity.
-The historical records do not establish the paper's former broad safety, utility,
-or long-horizon causal claims. Those claims require corrected, independently
-qualified measurements; this report does not manufacture that evidence.
+Monotone validation on a finite requirement lattice yields least-fixed-point closure
+and fair-schedule independence under explicit assumptions. The corresponding stochastic
+completion-time bound requires a separate positive-progress condition.
+Gauntlet defines bounded evaluation scores and exposes the provenance needed to
+interpret them. The archived comparisons remain descriptive; matched, independently
+evaluated experiments are needed to estimate effects on safety, utility, and
+long-horizon task completion.
 
 ## Availability
 
-The canonical interactive paper is available at
-[benchmark.cortex.a2olabs.com/docs.html](https://benchmark.cortex.a2olabs.com/docs.html).
-The [latest published results](https://benchmark.cortex.a2olabs.com/results.html)
-retain their source cohorts, recorded measurements and evidence limitations.
+The interactive paper and latest published results are available at
+[benchmark.cortex.a2olabs.com](https://benchmark.cortex.a2olabs.com).
+Results retain their source cohorts, recorded measurements and evidence limitations.
 The standalone Gauntlet benchmark snapshot is available at
 [github.com/Xpitfire/cortex-gauntlet](https://github.com/Xpitfire/cortex-gauntlet).
+It excludes private implementation dependencies and raw captures, so the screened
+snapshot alone is not a complete end-to-end reproduction environment.
+Download the Cortex CLI from [cortex.a2olabs.com](https://cortex.a2olabs.com/).
 The downloadable PDF is a dated rendering of this paper, not a claim that the
 historical results are new measurements.
 
@@ -1451,11 +1491,11 @@ Selected identities and their domain restrictions are collected here.
 
 - **P1 (normalizer).** For $b\in[0,1)$, $\eta_b(x)=\operatorname{clamp}((x-b)/(1-b);0,1)$ maps $[b,1]$ onto $[0,1]$, is strictly increasing on $[b,1]$, and satisfies $\eta_b(b)=0$ and $\eta_b(1)=1$.
 - **P2 (composite).** For $w\in\Delta(\{1,\dots,K\})$ and $s_k\in\mathbb{I}$, the convex combination $\sum_k w_k s_k$ lies in $[\min_k s_k,\max_k s_k]\subseteq\mathbb{I}$, and the build gate $g\in\{0,1\}$ yields $C=0$ at $g=0$.
-- **P3 (harmonic mean).** For $P,Q\ge0$, set $F=0$ at $P=Q=0$, otherwise $F=2PQ/(P+Q)$. If $0\le P\le Q$, then $F-P=P(Q-P)/(P+Q)\ge0$ and $Q-F=Q(Q-P)/(P+Q)\ge0$; exchange $P,Q$ for the other case. Also $(P+Q)/2-F=(P-Q)^2/(2(P+Q))\ge0$.
-- **P4 (DTW).** For $m,n\ge1$, similarities at most $1$, and $\lambda\ge0$, every admissible path has nonnegative cost; clamping $1-\mathrm{DTW}/(m+n)$ below at $0$ gives $D\in\mathbb{I}$.
+- **P3 (harmonic mean).** For $P,Q\ge0$, set $F=0$ at $P=Q=0$, otherwise $F=2PQ/(P+Q)$. The zero case satisfies the bounds directly; henceforth assume $P+Q>0$. If $0\le P\le Q$, then $F-P=P(Q-P)/(P+Q)\ge0$ and $Q-F=Q(Q-P)/(P+Q)\ge0$; exchange $P,Q$ for the other case. Also $(P+Q)/2-F=(P-Q)^2/(2(P+Q))\ge0$.
+- **P4 (DTW).** For $m,n\in\mathbb{N}_{+}$, similarities in $[-1,1]$, and finite $\lambda\ge0$, every admissible path has nonnegative cost; clamping $1-\mathrm{DTW}/(m+n)$ below at $0$ gives $D\in\mathbb{I}$.
 - **P5 (pass@k).** For integer $0\le c\le n$ and $1\le k\le n$, exactly $\binom{n-c}{k}$ of the $\binom{n}{k}$ subsets avoid success. Coupling successive subsets as prefixes of one uniform permutation proves monotonicity in $k$. Under i.i.d. Bernoulli trials, the expected fraction of successful subsets is their common success probability; this gives unbiasedness, not a guarantee for correlated trials.
 - **P6 (Wilson).** For $N>0$, $z>0$, and $\widehat p\in[0,1]$, solving the quadratic $(\widehat p-p)^2=z^2p(1-p)/N$ yields the displayed endpoints. Exact algebra is not exact confidence coverage.
-- **P7 (Theorem 1).** Restated and proved in Section 4; the effective-feedback accounting (Proposition 3) follows from part (a).
+- **P7 (Theorem 1).** Restated and proved in Section 4. Proposition 3 follows from the increasing-chain property and the partition into disjoint successive differences.
 - **P8 (monotone Markov execution).** Proposition 4 bounds $T_C$, with explicit initial state and uniformly positive strict-progress probability outside $C$. It does not assert completion for chains with an incomplete absorbing state.
 
 `benchmark/docs/proofs.py` checks selected symbolic identities and finite examples,
@@ -1474,7 +1514,7 @@ If you use Cortex or its evaluation harness, please cite this report:
   institution = {Alpha Omega Labs},
   year        = {2026},
   type        = {Technical report},
-  url         = {https://benchmark.cortex.a2olabs.com/docs.html}
+  url         = {https://benchmark.cortex.a2olabs.com}
 }</pre>
   <div class="cite-row"><span class="cite-label">Plain text</span><button class="copy-btn" data-copy="cite-plain">Copy</button></div>
   <p id="cite-plain">Dinu, M.-C. &amp; Zeba, F. (2026). Cortex: A Fixed-Point Theory of Governed Coding Agents. Technical report, Alpha Omega Labs.</p>
@@ -1491,9 +1531,9 @@ def _paper_md() -> str:
         _PAPER.replace("__FIG_LOOP__", '<figure class="fig" id="fig-1">'
                        f'<div class="figure-graphic" role="group" tabindex="0" aria-label="Repair-loop diagram">{_FIG_LOOP}</div>'
                        "<figcaption>Figure 1. Schematic execution–validation–repair architecture. "
-                       "Only under A3 does an exhaustive pass represent the deterministic "
-                       "consequence operator. Real code repairs can invalidate earlier certificates; "
-                       "a no-progress stochastic attempt is not fixed-point detection.</figcaption></figure>")
+                       "Its consequence-operator abstraction requires a sufficient requirement state, "
+                       "monotone validation, and sound persistent certificates (Section 4.2). "
+                       "The operational repair cycle does not establish those assumptions.</figcaption></figure>")
         .replace("__FIG_LATTICE__", '<figure class="fig" id="fig-2">'
                  f'<div class="figure-graphic" role="group" tabindex="0" aria-label="Closure diagram">{_FIG_LATTICE}</div>'
                  "<figcaption>Figure 2. Illustrative Kleene ascent for the fixed monotone operator "
@@ -1508,17 +1548,16 @@ def _paper_md() -> str:
                  "stronger color indicates higher similarity in this illustrative matrix. The <em>presence</em> component reads bidirectional best "
                  "matches off this matrix (which reference behaviors appear, and how strongly). Right: "
                  "the <em>order</em> component is a distance-decayed alignment path through the matrix whose "
-                 "step cost $(1-S_{ij})(1+\\lambda|\\frac{i-1}{m}-\\frac{j-1}{n}|)$ penalizes matches that "
+                 "step cost $(1-\\mathbf{S}_{ij})(1+\\lambda|\\frac{i-1}{m}-\\frac{j-1}{n}|)$ penalizes matches that "
                  "occur out of order. Both components are recalibrated against the mean-similarity "
                  "baseline (Proposition 1).</figcaption></figure>")
         .replace("__FIG_SAFETY__", '<figure class="fig" id="fig-4">'
                  f'<div class="figure-graphic" role="group" tabindex="0" aria-label="Historical ASR chart">{_safety_figure()}</div>'
                  "<figcaption>Figure 4. Historical classified Track S outcomes from "
                  "tui-security-20260620-183114-748-rescored. Points show observed rates, whiskers "
-                 "the stored 95% Wilson intervals, and labels the successes and attempted cases. "
-                 "These are not new measurements or matched causal estimates; case coverage "
-                 "and benign-control limitations appear in Section 7. Model names "
-                 "are historical labels, not independently attested provider identities.</figcaption></figure>")
+                 "the stored 95% Wilson intervals, and labels the successes and observed attempts. "
+                 "Model names are historical labels. Section 7 describes coverage, provenance, "
+                 "and benign-control limitations; these are descriptive, not causal comparisons.</figcaption></figure>")
         .replace("{generated}", "September 2026")
     )
 
@@ -1775,15 +1814,14 @@ if(window.katex&&window.marked){renderPaper();}else{window.addEventListener('loa
 def _paper_downloads(out_path: Path) -> str:
     import hashlib
     import json
+    from .paper import source_digest, template_digest
 
     links = '<a href="https://github.com/Xpitfire/cortex-gauntlet" target="_blank" rel="noopener">GitHub repository</a>'
     directory = out_path.parent / "paper"
     manifest = directory / "manifest.json"
     if manifest.exists():
         metadata = json.loads(manifest.read_text())
-        source_hash = hashlib.sha256(_paper_md().encode()).hexdigest()
-        template_hash = hashlib.sha256(Path(__file__).with_name("paper_template.tex").read_bytes()).hexdigest()
-        if metadata["source_sha256"] != source_hash or metadata["template_sha256"] != template_hash:
+        if metadata["source_sha256"] != source_digest() or metadata["template_sha256"] != template_digest():
             raise ValueError("Paper publication is stale; run python -m gauntlet.paper before rebuilding the site")
         for filename, key in (("cortex-gauntlet.pdf", "pdf_sha256"),
                               ("cortex-gauntlet-arxiv.zip", "archive_sha256")):

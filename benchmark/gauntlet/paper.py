@@ -25,16 +25,26 @@ from .docs import CITES, _paper_md
 from .paths import ROOT
 from .report_common import REPORT_CSS
 
-PAPER_URL = "https://benchmark.cortex.a2olabs.com/docs.html"
-RESULTS_URL = "https://benchmark.cortex.a2olabs.com/results.html"
+PAPER_URL = "https://benchmark.cortex.a2olabs.com"
 REPOSITORY_URL = "https://github.com/Xpitfire/cortex-gauntlet"
 PDF_NAME = "cortex-gauntlet.pdf"
 SOURCE_NAME = "cortex-gauntlet-arxiv.zip"
 TEMPLATE = Path(__file__).with_name("paper_template.tex")
+STYLE_FILES = tuple(TEMPLATE.with_name(name) for name in (
+    "iclr2027_conference.sty", "iclr2027_conference.bst",
+))
 
 
 def source_digest() -> str:
-    return hashlib.sha256(_paper_md().encode()).hexdigest()
+    source = {"paper": _paper_md(), "citations": {key: item["meta"] for key, item in CITES.items()}}
+    return hashlib.sha256(json.dumps(source, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def template_digest() -> str:
+    digest = hashlib.sha256()
+    for path in (TEMPLATE, *STYLE_FILES):
+        digest.update(path.name.encode() + b"\0" + path.read_bytes() + b"\0")
+    return digest.hexdigest()
 
 
 def _run(argv: list[str], *, text: str | None = None, cwd: Path | None = None,
@@ -89,23 +99,19 @@ def _ascii(text: str) -> str:
 
 
 def _prepare(work: Path) -> tuple[dict, dict]:
-    source = _paper_md()
+    source = re.sub(r"\n## Cite this work\n.*?(?=\n## |\Z)", "", _paper_md(),
+                    count=1, flags=re.DOTALL)
     title = re.search(r"^# (.+)$", source, re.MULTILINE)[1]
     authors = re.findall(r'<span class="author">(.*?)</span>', source)
     affiliation = re.search(r'<div class="affil">(.*?)</div>', source)[1]
-    abstract = source.split("## Abstract\n", 1)[1].split("### Contributions", 1)[0].strip()
+    abstract = source.split("## Abstract\n", 1)[1].split("\n## ", 1)[0].strip()
     metadata = {"title": title, "authors": authors, "affiliation": affiliation,
                 "abstract": _ascii(_inline_text(abstract)), "paper_url": PAPER_URL,
-                "results_url": RESULTS_URL, "repository_url": REPOSITORY_URL}
+                "repository_url": REPOSITORY_URL}
     if len(metadata["abstract"]) > 1920:
         raise ValueError("The canonical abstract exceeds arXiv's 1920-character metadata limit")
     # Title/authors become TeX metadata; social controls are web UI, not paper content.
     body = "## Abstract\n" + source.split("## Abstract\n", 1)[1]
-    body = re.sub(r'<div class="cite-row">.*?</div>', "", body, flags=re.DOTALL)
-    body = re.sub(r'<pre[^>]*>(.*?)</pre>', lambda m: "\n```\n" + html.unescape(m[1]) + "\n```\n",
-                  body, flags=re.DOTALL)
-    body = re.sub(r'<p id="cite-plain">(.*?)</p>', lambda m: "\n" + html.unescape(m[1]) + "\n",
-                  body, flags=re.DOTALL)
     replacements: dict[str, list[dict]] = {}
     figures = work / "figures"
     figures.mkdir()
@@ -144,8 +150,12 @@ def _prepare(work: Path) -> tuple[dict, dict]:
     if [key for key, _ in entries] != [f"ref-{n}" for n in range(1, len(CITES) + 1)]:
         raise ValueError("Canonical bibliography IDs do not match citation metadata")
     bibliography = [_raw(r"\begin{thebibliography}{99}")]
-    for key, content in entries:
-        bibliography.append(_raw(r"\bibitem[" + key[4:] + "]{" + key + "}"))
+    for key, content in sorted(entries, key=lambda entry: CITES[entry[0][4:]]["meta"].casefold()):
+        authors, year = re.match(r"(.+), (\d{4})\b", CITES[key[4:]]["meta"]).groups()
+        if "," in authors:
+            authors = authors.split(",", 1)[0] + " et al."
+        label = _render(_parse(authors)).strip()
+        bibliography.append(_raw(r"\bibitem[" + label + "(" + year + ")]{" + key + "}"))
         bibliography.extend(_fragment(content))
     bibliography.append(_raw(r"\end{thebibliography}"))
     replacements["PAPERBIBLIOGRAPHY"] = bibliography
@@ -156,7 +166,7 @@ def _prepare(work: Path) -> tuple[dict, dict]:
         ids = re.findall(r'href="#(ref-\d+)"', match[1])
         if not ids or any(key not in {item[0] for item in entries} for key in ids):
             raise ValueError("Unresolved canonical citation")
-        return r"\cite{" + ",".join(ids) + "}"
+        return r" \citep{" + ",".join(ids) + "}"
 
     body = re.sub(r"<sup>(.*?)</sup>", citation, body, flags=re.DOTALL)
     body = re.sub(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>',
@@ -200,7 +210,7 @@ def _prepare(work: Path) -> tuple[dict, dict]:
     counts["display_math"] = sum(n["t"] == "Math" and n["c"][0]["t"] == "DisplayMath"
                                  for n in _nodes(document))
     counts["references"] = len(entries)
-    if (counts["Figure"], counts["Table"], counts["BlockQuote"], counts["display_math"]) != (4, 3, 6, 13):
+    if (counts["Figure"], counts["Table"], counts["BlockQuote"], counts["display_math"]) != (4, 3, 6, 14):
         raise ValueError(f"Paper structure changed; review export coverage: {counts}")
     metadata["content_inventory"] = counts
     return document, metadata
@@ -221,22 +231,30 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
         for node in _nodes(document):
             if node["t"] == "Header":
                 node["c"][0] -= 1
+            elif node["t"] == "Code":
+                # Keep literal code while allowing identifiers/paths to wrap at the ICLR width.
+                text = node["c"][1]
+                node.update(t="RawInline", c=[
+                    "latex", r"{\urlstyle{tt}\nolinkurl{" + text + "}}",
+                ])
             elif node["t"] == "Math" and node["c"][0]["t"] == "DisplayMath":
                 expression = node["c"][1]
                 if expression.count(r"\qquad") >= 2:
                     node["c"][1] = r"\begin{gathered}" + expression.replace(r"\qquad", r"\\") + r"\end{gathered}"
         blocks = document["blocks"]
         abstract_end = next(i for i, b in enumerate(blocks)
-                            if b["t"] == "Header" and b["c"][1][0] == "contributions")
+                            if i > 0 and b["t"] == "Header" and b["c"][0] == 1)
         blocks[0] = _raw(r"\begin{abstract}")
         blocks.insert(abstract_end, _raw(r"\end{abstract}"))
         body = _render(document)
         tex = (TEMPLATE.read_text().replace("__TITLE__", metadata["title"])
-               .replace("__AUTHORS__", r" \qquad ".join(metadata["authors"]))
+               .replace("__AUTHORS__", r" \& ".join(metadata["authors"]))
                .replace("__AFFILIATION__", metadata["affiliation"])
                .replace("__DATE__", publication_date.strftime("%B %d, %Y").replace(" 0", " "))
                .replace("__BODY__", body))
         (work / "main.tex").write_text(tex)
+        for style in STYLE_FILES:
+            shutil.copyfile(style, work / style.name)
         epoch = int(datetime.combine(publication_date, datetime.min.time(), tzinfo=timezone.utc).timestamp())
         env = {**os.environ, "SOURCE_DATE_EPOCH": str(epoch), "FORCE_SOURCE_DATE": "1"}
         for _ in range(3):
@@ -252,8 +270,9 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
         metadata["pages"] = int(re.search(r"^Pages:\s+(\d+)", info, re.MULTILINE)[1])
         metadata["publication_date"] = publication_date.isoformat()
         metadata["source_sha256"] = source_digest()
-        metadata["template_sha256"] = hashlib.sha256(TEMPLATE.read_bytes()).hexdigest()
-        members = [work / "main.tex", *sorted((work / "figures").glob("*.pdf"))]
+        metadata["template_sha256"] = template_digest()
+        members = [work / "main.tex", *(work / style.name for style in STYLE_FILES),
+                   *sorted((work / "figures").glob("*.pdf"))]
         metadata["source_files"] = {p.relative_to(work).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                                     for p in members}
         archive = work / SOURCE_NAME
@@ -273,7 +292,8 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
             "Gauntlet arXiv submission preparation\n\n"
             "Upload cortex-gauntlet-arxiv.zip, not the rendered PDF. Select main.tex and pdfLaTeX.\n"
             "arXiv currently defaults to TeX Live 2025. Inspect its generated PDF before submitting.\n"
-            "The source archive contains only main.tex and four included PDF figures.\n"
+            "The source archive contains main.tex, the official ICLR 2027 style files and four PDF figures.\n"
+            "The bibliography is embedded; the document is a named preprint, not an ICLR submission.\n"
             "No external conversion, Python, network, shell escape or private data is required.\n"
             "Confirm author details and coauthor consent; choose an appropriate category and license.\n"
             "Account registration, possible endorsement and moderation remain arXiv's requirements.\n"

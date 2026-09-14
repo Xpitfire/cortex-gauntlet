@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[2]
 PATTERNS = (
     "benchmark/gauntlet/**/*.py",
     "benchmark/gauntlet/paper_template.tex",
+    "benchmark/gauntlet/iclr2027_conference.sty",
+    "benchmark/gauntlet/iclr2027_conference.bst",
     "benchmark/gauntlet/tui/app.tcss",
     "benchmark/gauntlet/analysis/rules/security.yaml",
     "benchmark/tests/**/*.py",
@@ -90,7 +92,10 @@ def build(destination: Path, site: Path) -> dict:
         }
 
     for source in selected:
-        copy(source, source.relative_to(ROOT), "upstream Apache-2.0 benchmark source", ROOT)
+        provenance = ("unmodified ICLR 2027 style; upstream copyright notices retained"
+                      if source.name in {"iclr2027_conference.sty", "iclr2027_conference.bst"}
+                      else "upstream Apache-2.0 benchmark source")
+        copy(source, source.relative_to(ROOT), provenance, ROOT)
     for name in ("results-package.json", "results-package.csv"):
         copy(site / name, Path("published") / name, "screened public quantitative export", site)
     for name in ("cortex-gauntlet.pdf", "cortex-gauntlet-arxiv.zip", "manifest.json", "submission.txt"):
@@ -100,7 +105,7 @@ def build(destination: Path, site: Path) -> dict:
             "# Cortex Gauntlet\n\n"
             "A standalone snapshot of the five-track coding-agent harness benchmark.\n\n"
             "- [Setup, scope and safety](benchmark/README.md)\n"
-            "- [Paper and latest results](https://benchmark.cortex.a2olabs.com/docs.html)\n"
+            "- [Paper and latest results](https://benchmark.cortex.a2olabs.com)\n"
             "- [Rendered paper PDF](published/paper/cortex-gauntlet.pdf)\n"
             "- [arXiv source archive](published/paper/cortex-gauntlet-arxiv.zip)\n"
             "- [Quantitative results](published/results-package.json)\n\n"
@@ -115,6 +120,8 @@ def build(destination: Path, site: Path) -> dict:
             "Cortex Gauntlet\nCopyright 2026 Alpha Omega Labs\n\n"
             "Standalone benchmark snapshot from Cortex, licensed under the Apache License, Version 2.0.\n"
             "Cortex control-plane geolocation data and its third-party data notices are outside this snapshot.\n"
+            "ICLR 2027 style files are unmodified copies from ICLR/Master-Template revision "
+            "46ed6f4c6cef5b175dde23639e77d44c3463b230; their upstream copyright notices are retained.\n"
             "Referenced products, trademarks and external CDN assets remain with their respective owners.\n"
             "No redistribution grant for omitted third-party screenshots or private integrations is asserted.\n"
         ),

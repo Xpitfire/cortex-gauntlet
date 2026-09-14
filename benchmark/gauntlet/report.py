@@ -528,7 +528,8 @@ def build_report(record: dict, out_path: Path, links: dict | None = None) -> str
         notices.append('<aside class="publication-note utility-note" role="note">'
                        + " ".join(escape(note) for note in utility_notes) + '</aside>')
     if notices:
-        html = html.replace("</nav>", "</nav>" + "".join(notices), 1)
+        footer = '<footer id="method"></footer>'
+        html = html.replace(footer, footer + "".join(notices), 1)
         out_path.write_text(html, encoding="utf-8")
     return html
 

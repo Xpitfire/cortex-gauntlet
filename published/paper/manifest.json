@@ -5,31 +5,32 @@
     "Florian Zeba"
   ],
   "affiliation": "Alpha Omega Labs",
-  "abstract": "A coding agent combines a large language model (LLM) with a control loop, or harness, that can plan, edit, and execute code. We study Cortex, a supervisory layer coupling pre-execution governance, requirement tracking, and iterative validation and repair. We give a conditional finite-lattice model of requirement closure: for a fixed finite requirement set and a sound, monotone validation rule with persistent evidence, exhaustive iteration reaches the least fixed point after at most |R| strict increases. Fair consequence scheduling reaches the same closure. These are properties of the specified operator, not an unconditional completion or safety guarantee for the stochastic implementation. Code repairs can invalidate previous evidence, validators can miss defects, and a budgeted run can stop before closure.\n\nWe define the benchmark's bounded trajectory-similarity and build-gated capability scores, attack-success estimators, Wilson score intervals, and case-level bootstrap summaries. A separate probabilistic model gives an expected completion-time bound only under a uniform progress assumption. Effective-feedback accounting counts newly certified requirements; it is not a decision-theoretic value-of-information estimate. The five benchmark families provide a framework for raw-versus-governed comparisons. Historical summaries and schematic figures do not by themselves establish model-matched causal gains, theorem conformance, or long-horizon scaling; Section 7 separates their evidence status from the formal results.",
-  "paper_url": "https://benchmark.cortex.a2olabs.com/docs.html",
-  "results_url": "https://benchmark.cortex.a2olabs.com/results.html",
+  "abstract": "A coding agent combines a large language model (LLM) with a harness that plans, edits, and executes code. We study Cortex, a supervisory layer for pre-execution governance, requirement tracking, and iterative validation and repair. We formalize requirement closure on a finite lattice. For a fixed requirement set and a sound, monotone validation rule with persistent evidence, exhaustive iteration reaches the least fixed point with no more strict increases than there are requirements. Fair consequence scheduling reaches the same closure. A separate stochastic model bounds expected completion time under a uniform positive-progress assumption. These results depend on their stated assumptions; artifact repair, fallible validation, and finite execution budgets do not satisfy them automatically.\n\nWe define Gauntlet's trajectory-similarity and build-gated scores, attack-success estimators, Wilson intervals, and case-cluster bootstrap summaries. Effective-feedback accounting counts newly certified requirements, rather than estimating their information value or utility. The five evaluation families support raw-versus-governed comparisons. The archived results have unequal observation sets, incomplete provenance, and some synthetic outcomes; they do not identify causal gains from governance or measured long-horizon scaling.",
+  "paper_url": "https://benchmark.cortex.a2olabs.com",
   "repository_url": "https://github.com/Xpitfire/cortex-gauntlet",
   "content_inventory": {
-    "Header": 32,
+    "Header": 31,
     "Figure": 4,
     "Table": 3,
     "BlockQuote": 6,
-    "Math": 336,
-    "display_math": 13,
+    "Math": 372,
+    "display_math": 14,
     "references": 54
   },
   "layout_warnings": [],
-  "pages": 22,
+  "pages": 19,
   "publication_date": "2026-09-14",
-  "source_sha256": "bd0979a5347e6e62216adb6e7e6dd19ee67833a983b51cdfec1150883572ab9d",
-  "template_sha256": "fe17da439d0ca09a8f4e8239e8bdc9e549fa55bab73875d616fd63074dcf8c43",
+  "source_sha256": "ae3d9b7b2cc8e5ed34da908951f5af2712b81b5bcf60066da510fee0987f0f5b",
+  "template_sha256": "cddb071213243bd7b0cfdaa4558cac2232d20930829b0a9257fbb475ae438a8b",
   "source_files": {
-    "main.tex": "05be8a8aec00b65a0384f473185f0b6c47d27be9df1ef6985c7d57a687e2a044",
-    "figures/fig-1.pdf": "1abbfe94a2b79bbccff252b77f6baf0ddf98b1b25fa37a7db774ce570fba74dd",
-    "figures/fig-2.pdf": "cb636171c62e3be5a1b55b7e8f09249921f8c5058ecd0813ee8eb33e29e4c153",
-    "figures/fig-3.pdf": "1eceab583371eb34268acee20048e88c6dab49919890e6430bd4f31954523085",
-    "figures/fig-4.pdf": "79f67ddf76683749667adfe765c3350f733c4ff0672170c8833dfe54b0170555"
+    "main.tex": "ce4367a834049f5690d5c211916897bb72476fe523d11f9cfef3fe7aa07a598e",
+    "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
+    "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "figures/fig-1.pdf": "d789dadad42c7d010feb828367605a75d86e2f8ed58bf1534ac541cae5c26a49",
+    "figures/fig-2.pdf": "b92cad2bf3df61317cf4613463107b8cc275df88f26318ae58fcafe85401f298",
+    "figures/fig-3.pdf": "f2f19aa8fa7f23929b5c9a0c2dd0a8135acd8840c76a17594869466b61b5d5ce",
+    "figures/fig-4.pdf": "bbda199aaf2988a062bb5bd5d5ee38740e3deb9aaabd5fbc7d11b7fcabd14148"
   },
-  "pdf_sha256": "4cec89b7d1245a116f6b4f2d0a03b09775607c1ab096658e98497ec397aef538",
-  "archive_sha256": "dd389f94b17cba810658b0241e734edac8b1dd84d54d2f80a4ec676c9773ff77"
+  "pdf_sha256": "74f82505d52399c2166dee888136242e6775c5b41ea8af6967bce335e50685a4",
+  "archive_sha256": "c6ab3a4979f73d9dc964376d34df95ebcd0490f32e9e502321260197d24fc5f2"
 }

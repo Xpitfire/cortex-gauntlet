@@ -394,6 +394,7 @@ updateThemeIcon();
     '<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--muted)"><th style="padding:6px 8px">ITEM</th><th style="padding:6px 8px">HARNESS</th><th style="padding:6px 8px">REASON</th></tr></thead><tbody>'+
     sk.map(function(x){return '<tr style="border-top:1px solid var(--line)"><td style="padding:6px 8px">'+esc(x.item||x.case_id)+'</td><td style="padding:6px 8px">'+esc(x.harness||x.harness_id)+'</td><td style="padding:6px 8px;color:var(--muted)">'+esc(x.reason||'timed out')+'</td></tr>';}).join('')+
     '</tbody></table>';
-  host.appendChild(sec);
+  var footer=document.getElementById('method');
+  if(footer)footer.before(sec);else host.appendChild(sec);
 }catch(e){}})();
 """
