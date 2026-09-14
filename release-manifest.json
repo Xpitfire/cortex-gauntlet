@@ -30,8 +30,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/acceptance-tests.md": {
-      "sha256": "bffeefc6fc6ecc4a93249fab261515da091388401fac98a82accffa8eda0038b",
-      "bytes": 12146,
+      "sha256": "ac7a28d6c07ad3b0d041949366ad02d7f4a44449cfd3e9e08a8bd98e3cb81725",
+      "bytes": 12914,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/architecture.md": {
@@ -110,13 +110,13 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/docs/proofs.py": {
-      "sha256": "01fab84d36446032380082cb9c7b8710cb5c6c819cc720890a09d5a6b95c44f9",
-      "bytes": 11335,
+      "sha256": "4e0abee27b594a9f5f56df542bc6434781b6e4600a11c964c49865b110c1d4f9",
+      "bytes": 12462,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/docs/reporting-design.md": {
-      "sha256": "52e9d7c14e3bfc926b2bbda6fd4a3b8cb65ffbc1e4d11ccc058b18956bb12300",
-      "bytes": 14249,
+      "sha256": "86246db4ef208134c148d80c93519a5cb69167aa9210901031e56aa31e23a653",
+      "bytes": 14871,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/docs/reuse-map.md": {
@@ -290,8 +290,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/docs.py": {
-      "sha256": "f6efd0aac0d0930a24e26d96c5e8d0f946fd7847816e3ef9ba219a7496dd4400",
-      "bytes": 125511,
+      "sha256": "2751c431a4b9b7b419da3dc4588035a6c415ec3df223db9f67d8a4c23635302d",
+      "bytes": 126141,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/enums.py": {
@@ -640,33 +640,33 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/report.py": {
-      "sha256": "7d921d15785b357d7b8e9a5725b4671075aaeb810ff912cd6c3ffd0d1807da43",
-      "bytes": 30367,
+      "sha256": "6459ba3a24b679a14d6300937fda8eb77a7bda1face387d311552aca2a30aad3",
+      "bytes": 30508,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/report_common.py": {
-      "sha256": "291ffe63d947c55e8a0e944006a634e4cc17492cfbf224480998c3cb42761f8c",
-      "bytes": 28027,
+      "sha256": "2d6a2d55f394d9550c966998da02fe751a4aebe6692fd01ff5f19921b7286ae8",
+      "bytes": 28025,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/report_generative.py": {
-      "sha256": "fd7ad0b839615cce4954e2d0cfcceb90659acde7854265bf3cc7d4d8e017439e",
-      "bytes": 20123,
+      "sha256": "357a4466d67ede3d86375240e1be87b51224988e72dc8cf2272168be52d0f88b",
+      "bytes": 20075,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/report_project.py": {
-      "sha256": "f6c44abe51c5d924f120db9be6d02bcaf0e158c0a39e0c19add1ee4af7855afb",
-      "bytes": 14519,
+      "sha256": "587b7ce5ae469c938af04b7d1dd7520ae1edda22e7f3ebb9e64453df9cec328e",
+      "bytes": 14471,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/report_quality.py": {
-      "sha256": "fbee2e7ee93d48e8ef9b1787fb5a84dbc03c5d7ff139006294bc844d7c5fd0ba",
-      "bytes": 18035,
+      "sha256": "da3b052a9538dc48c8f73cbbe2b9496f296c7ebad2bd9d67addff32151045345",
+      "bytes": 17987,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/report_repo.py": {
-      "sha256": "93cd194fb6d86c6beb5077393f5e1d90a24fa23f13c780cdb9c1458a53dc80a1",
-      "bytes": 13304,
+      "sha256": "c7142d4b6270cf1d8dcbb208051a6643dbf0a38a0b851a188b5f1d91a66dc8b9",
+      "bytes": 13256,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/rescore.py": {
@@ -1215,8 +1215,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_publication.py": {
-      "sha256": "634f1329b6614f75caf5fb64ba6a9b97e1a594a5de13c77d67ead58087ded91c",
-      "bytes": 4990,
+      "sha256": "49d2692d3184e6140b523de48e4d314ce97bc9860fd054870d81c3a7db69eb2e",
+      "bytes": 5697,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_quality.py": {
@@ -1400,17 +1400,17 @@
       "provenance": "screened public quantitative export"
     },
     "published/paper/cortex-gauntlet.pdf": {
-      "sha256": "74f82505d52399c2166dee888136242e6775c5b41ea8af6967bce335e50685a4",
-      "bytes": 555552,
+      "sha256": "c9feede0ff996e1841cda3f1eab4befbc6afa3723713f43c79d135d640284a49",
+      "bytes": 555904,
       "provenance": "canonical paper publication build"
     },
     "published/paper/cortex-gauntlet-arxiv.zip": {
-      "sha256": "c6ab3a4979f73d9dc964376d34df95ebcd0490f32e9e502321260197d24fc5f2",
-      "bytes": 266824,
+      "sha256": "85fe41dc80d13dd6d8d171fcec401d74f50fca41b0f888f250ae711bb5c36e1e",
+      "bytes": 267004,
       "provenance": "canonical paper publication build"
     },
     "published/paper/manifest.json": {
-      "sha256": "21fef655505712f964bfb2bb6d562f68aa3d4e503886a399db45e6230dfeca6c",
+      "sha256": "e9084bfc10db29dfbc7f5b65131a357dd8b45d01f867eb5024cac222bf70624e",
       "bytes": 2920,
       "provenance": "canonical paper publication build"
     },

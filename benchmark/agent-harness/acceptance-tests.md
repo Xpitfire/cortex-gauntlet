@@ -66,7 +66,7 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 ## Public paper and standalone snapshot (2026-09-14)
 
 - [x] Render the canonical paper through native LaTeX, preserving its complete mathematical
-  expression multiset: currently 372 expressions, 54 references, four figures, three
+  expression multiset: currently 379 expressions, 54 references, four figures, three
   tables and six formal blocks.
 - [x] Supply a self-contained arXiv ZIP with `main.tex`, the unmodified official ICLR 2027
   style files and included PDF figures; keep rendered PDF and submission metadata outside it.
@@ -82,6 +82,11 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 - [x] Preserve all approved historical result exports and screened website archive assets.
 - [x] Publish `Xpitfire/cortex-gauntlet` and deploy only the benchmark through Cortex.
 - [x] Verify public PDF/ZIP hashes, GitHub link and production website health.
+- [x] Reject a missing publication footer before creating or replacing a report;
+  keep all five renderers behind the common disclosure-and-write boundary.
+- [x] Distinguish any-success `pass@k` from all-success `pass^k` in Appendix P5,
+  including their opposite monotonicity and distinct independent-trial expectations.
+- [x] Repeated paper-copy clicks restore the original label and copy the complete text.
 - [ ] Authors review arXiv metadata, category/license and arXiv's server-rendered PDF.
   Account submission, endorsement and acceptance are not claimed by local compilation.
   Local evidence: clean editable install and Security/Generative CLI smokes; the
@@ -104,9 +109,13 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
   Paper refinement: repaired soundness admission and history/domain definitions, made
   scoring gates, QE weighting, judge backends and sampling events explicit, and removed
   branded-loop terminology and unsupported citation-hover claims. Source review approved.
-  The final 19-page PDF compiles without layout warnings; the native export preserves all
+  Release 0.1.14's 19-page PDF compiles without layout warnings; its native export preserves all
   372 canonical expressions, including 14 displays. The focused publication/report suite
   passes 19 tests; 36 symbolic sanity checks pass in the benchmark environment.
+  Follow-up corrections preserve 109 embedded report payloads. The 19-page paper now
+  preserves 379 expressions; its extracted archive compiles independently in three passes
+  without unresolved references or overfull boxes. Publication/site tests pass 21 cases,
+  45 symbolic checks pass, and both the scientific and operational re-reviews approve.
 
 ## Containment & safety (gates — must pass before any real run)
 

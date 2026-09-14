@@ -195,9 +195,16 @@ checkout cannot regenerate the historical package without authorized source reco
 that failure must precede mutation of the existing archive.
 An unreadable source record is a separate privacy failure: its corresponding cached
 report is revoked before the build aborts, while unrelated screened archives are retained.
+Required publication notices are attached after the complete methodology footer, so
+category explorers and appended diagnostics remain above them. The common report builder
+validates this anchor before writing the destination; specialized renderers return HTML
+without persisting it. A missing anchor must preserve an existing published report.
 
 Scientific editing preserves source measurements while correcting their interpretation.
 Define symbols at first use, state the actual evaluator backend and missingness conventions,
 and distinguish conditional mathematics from implementation behavior and historical evidence.
 Citation hover cards must describe the cited studies, not reintroduce unsupported comparisons.
 Keep prose direct; avoid promotional claims, repeated caveats and unnecessary em-dash asides.
+Appendix P5 distinguishes the any-success and all-success subset estimators, their opposite
+monotonicity in the subset size, and their different expectations under independent trials.
+Symbolic finite examples support those distinctions without claiming a general formal proof.

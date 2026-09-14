@@ -13,24 +13,24 @@
     "Figure": 4,
     "Table": 3,
     "BlockQuote": 6,
-    "Math": 372,
+    "Math": 379,
     "display_math": 14,
     "references": 54
   },
   "layout_warnings": [],
   "pages": 19,
   "publication_date": "2026-09-14",
-  "source_sha256": "ae3d9b7b2cc8e5ed34da908951f5af2712b81b5bcf60066da510fee0987f0f5b",
+  "source_sha256": "ef2e7be1a8535ba76288ea99dfb887885378a3de111e191a62105308307d24a5",
   "template_sha256": "cddb071213243bd7b0cfdaa4558cac2232d20930829b0a9257fbb475ae438a8b",
   "source_files": {
-    "main.tex": "ce4367a834049f5690d5c211916897bb72476fe523d11f9cfef3fe7aa07a598e",
+    "main.tex": "17948e2fe348c3e1c9b8b4e459b3faacc8b2f45cdc48d229463e99e141f05f77",
     "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
     "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
-    "figures/fig-1.pdf": "d789dadad42c7d010feb828367605a75d86e2f8ed58bf1534ac541cae5c26a49",
-    "figures/fig-2.pdf": "b92cad2bf3df61317cf4613463107b8cc275df88f26318ae58fcafe85401f298",
-    "figures/fig-3.pdf": "f2f19aa8fa7f23929b5c9a0c2dd0a8135acd8840c76a17594869466b61b5d5ce",
-    "figures/fig-4.pdf": "bbda199aaf2988a062bb5bd5d5ee38740e3deb9aaabd5fbc7d11b7fcabd14148"
+    "figures/fig-1.pdf": "7952a8eae5e6e193b668e5a6598a90c94e87653988e4d2b547e4e6d72de67912",
+    "figures/fig-2.pdf": "4e05e0329b6a8a3fc712c0a024ec5505c736895b034e174524172b8bdc551276",
+    "figures/fig-3.pdf": "8ba2ff60b6560f9545e3c5b6ac23af608427a2c9322c71a7a30ad1d7a05e282b",
+    "figures/fig-4.pdf": "62c9f889bf3c750cca0d7583d8a50ae9628ecc33d2adfa450a09fb22dc6e9af3"
   },
-  "pdf_sha256": "74f82505d52399c2166dee888136242e6775c5b41ea8af6967bce335e50685a4",
-  "archive_sha256": "c6ab3a4979f73d9dc964376d34df95ebcd0490f32e9e502321260197d24fc5f2"
+  "pdf_sha256": "c9feede0ff996e1841cda3f1eab4befbc6afa3723713f43c79d135d640284a49",
+  "archive_sha256": "85fe41dc80d13dd6d8d171fcec401d74f50fca41b0f888f250ae711bb5c36e1e"
 }

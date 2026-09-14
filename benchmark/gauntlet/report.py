@@ -487,6 +487,7 @@ __COMMON_JS__
 
 
 def build_report(record: dict, out_path: Path, links: dict | None = None) -> str:
+    """Publish only after rendering and attaching all required disclosures."""
     track = getattr(record.get("track"), "value", record.get("track"))
     if track == "quality":
         from .report_quality import build_quality_report
@@ -529,8 +530,10 @@ def build_report(record: dict, out_path: Path, links: dict | None = None) -> str
                        + " ".join(escape(note) for note in utility_notes) + '</aside>')
     if notices:
         footer = '<footer id="method"></footer>'
+        if footer not in html:
+            raise ValueError(f"Report is missing its publication footer: {track}")
         html = html.replace(footer, footer + "".join(notices), 1)
-        out_path.write_text(html, encoding="utf-8")
+    out_path.write_text(html, encoding="utf-8")
     return html
 
 
@@ -541,5 +544,4 @@ def _build_security_report(record: dict, out_path: Path, links: dict | None = No
         .replace("__TITLE__", str(record.get("run_id", "run")))
         .replace("__GENERATED__", datetime.now().isoformat(timespec="seconds"))
     )
-    out_path.write_text(html, encoding="utf-8")
     return html

@@ -303,5 +303,4 @@ def build_generative_report(record: dict, out_path: Path, links: dict | None = N
         .replace("__TITLE__", str(record.get("run_id", "run")))
         .replace("__GENERATED__", datetime.now().isoformat(timespec="seconds"))
     )
-    out_path.write_text(html, encoding="utf-8")
     return html

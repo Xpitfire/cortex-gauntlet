@@ -44,7 +44,7 @@ REPORT_CSS = r"""
   body{margin:0;background:var(--page);color:var(--ink);
        font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   .wrap{max-width:1180px;margin:0 auto;padding:24px 24px 80px}
-  .publication-note{max-width:1132px;margin:20px auto 0;padding:16px 20px;border:1px solid var(--warn);
+  .publication-note{max-width:1132px;margin:20px auto;padding:16px 20px;border:1px solid var(--warn);
                     border-radius:12px;background:var(--card);color:var(--ink)}
   .package-note a{color:var(--accent)}
   nav.bar{position:sticky;top:0;z-index:40;backdrop-filter:saturate(1.4) blur(8px);

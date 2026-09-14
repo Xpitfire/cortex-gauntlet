@@ -7,7 +7,8 @@ These checks are not general theorem proofs, runtime verification, or empirical 
   P2 build-gated composite is a convex combination -> in [min s_k, max s_k] ⊆ [0,1]  (project/score.py)
   P3 BERTScore-style F = 2PR/(P+R) ∈ [0,1], min(P,R) ≤ F ≤ max(P,R)            (analysis/vertex.py:_unordered_f)
   P4 DTW-decay similarity D = max(0, 1 - cost/(m+n)) ∈ [0,1]                   (analysis/vertex.py:_dtw_decay)
-  P5 pass@k = 1 - C(n-c,k)/C(n,k) equals 1 - P(zero pass in k draws), ∈[0,1], ↑ in k   (scoring)
+  P5 pass@k counts any-success subsets; pass^k counts all-success subsets.
+     They are respectively ↑ and ↓ in k; under i.i.d. Bernoulli(p) trials their targets are 1-(1-p)^k and p^k.
   P6 Wilson score interval bounds are exactly the roots of the score equation (p̂-p)²=z²p(1-p)/n
   P7 one monotone, inflationary prerequisite lattice: ≤ |R| strict increases from ∅;
      one extra evaluation detects equality; repeated full sweeps are fair schedules.
@@ -98,22 +99,42 @@ def p4_dtw() -> None:
     check("P4 clamp gives ≥ 0", sp.Max(0, sp.Rational(-3)) == 0 and sp.Max(0, sp.Rational(1, 2)) == sp.Rational(1, 2))
 
 
-# ---- P5 — pass@k estimator equals 1 - P(zero successes in k draws), bounded, monotone ----------
+# ---- P5 — any-success and all-success subset estimators --------------------------------------
 def p5_passk() -> None:
     def passk(n, c, k):
         return 1 - sp.binomial(n - c, k) / sp.binomial(n, k)
 
+    def all_pass(n, c, k):
+        return sp.binomial(c, k) / sp.binomial(n, k)
+
     # combinatorial identity: P(zero of c successes appear in a k-subset) = C(n-c,k)/C(n,k)
-    for n, c, k in [(5, 2, 3), (8, 3, 4), (6, 6, 2), (7, 0, 3)]:
+    for n, c, k in [(5, 3, 2), (8, 3, 4), (6, 6, 2), (7, 0, 3)]:
         all_subsets = list(combinations(range(n), k))
         succ = set(range(c))  # the c "passing" samples
         zero = sum(1 for sub in all_subsets if not (set(sub) & succ))
         brute = 1 - sp.Rational(zero, len(all_subsets))
         check(f"P5 pass@k identity n={n},c={c},k={k}", sp.simplify(passk(n, c, k) - brute) == 0)
+        all_success = sum(1 for sub in all_subsets if set(sub) <= succ)
+        check(f"P5 pass^k identity n={n},c={c},k={k}",
+              all_pass(n, c, k) == sp.Rational(all_success, len(all_subsets)))
     # bounds + monotonicity in k
     check("P5 pass@k=0 when c=0", passk(7, 0, 3) == 0)
     check("P5 pass@k=1 when c=n", passk(5, 5, 2) == 1)
     check("P5 pass@k nondecreasing in k", passk(10, 3, 4) >= passk(10, 3, 2))
+    check("P5 pass^k=0 when c<k", all_pass(7, 2, 3) == 0)
+    check("P5 pass^k=1 when c=n", all_pass(5, 5, 2) == 1)
+    check("P5 pass^k nonincreasing in k", all_pass(10, 3, 4) <= all_pass(10, 3, 2))
+    # Exact polynomial expectations over the random count C ~ Binomial(6, p).
+    p = sp.symbols("p", real=True)
+    n = 6
+    for estimator, target, name in (
+        (passk, lambda k: 1 - (1 - p) ** k, "pass@k"),
+        (all_pass, lambda k: p ** k, "pass^k"),
+    ):
+        check(f"P5 {name} unbiased for n={n}, all k",
+              all(sp.expand(sum(sp.binomial(n, c) * p ** c * (1 - p) ** (n - c)
+                                * estimator(n, c, k) for c in range(n + 1))
+                            - target(k)) == 0 for k in range(1, n + 1)))
 
 
 # ---- P6 — Wilson bounds are exactly the roots of the score equation (p̂-p)² = z² p(1-p)/n -------

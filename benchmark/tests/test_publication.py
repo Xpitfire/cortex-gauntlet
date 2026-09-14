@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from gauntlet import docs, paper, site
+from gauntlet import docs, paper, report, site
 from gauntlet.adapters import subprocess_base
 from gauntlet.agentic_corpus import SCENARIOS, load_private_scenarios
 from gauntlet.cases import load_security_suite
@@ -113,3 +113,20 @@ def test_snapshot_rejects_symlinked_source_directory(tmp_path, monkeypatch):
     with pytest.raises(ValueError):
         public_snapshot.build(destination, reviewed_site)
     assert not destination.exists()
+
+
+@pytest.mark.parametrize("previous", [None, "previous published report"])
+def test_restricted_report_rejects_missing_disclosure_anchor(tmp_path, monkeypatch, previous):
+    monkeypatch.setattr(
+        report, "_TEMPLATE", report._TEMPLATE.replace('<footer id="method"></footer>', "")
+    )
+    record = {"track": "security", "publication": {"evidence_redacted": True}}
+    output = tmp_path / "report.html"
+    if previous is not None:
+        output.write_text(previous)
+    with pytest.raises(ValueError, match="publication footer"):
+        report.build_report(record, output)
+    if previous is None:
+        assert not output.exists()
+    else:
+        assert output.read_text() == previous

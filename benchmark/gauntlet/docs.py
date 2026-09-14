@@ -578,13 +578,14 @@ dynamic time warping <sup><a href="#ref-12">12</a></sup>), each affinely recalib
 matrix's mean-similarity baseline. Embedding comparison also appears in trajectory
 evaluation <sup><a href="#ref-1">1</a>,<a href="#ref-19">19</a></sup>. Gauntlet applies
 this construction to extracted descriptors, whose order need not represent an observed
-execution trajectory. For a positive integer $k$, code evaluation uses the unbiased
+execution trajectory. For a positive integer $k$, the any-seed attack-success estimate uses the unbiased
 $\mathrm{pass}@k$ estimator
 <sup><a href="#ref-15">15</a></sup>; success rates carry Wilson intervals
 <sup><a href="#ref-13">13</a></sup> and bootstrap summaries <sup><a href="#ref-14">14</a></sup>.
 The optional rubric judge draws on G-Eval <sup><a href="#ref-16">16</a></sup>,
 MT-Bench <sup><a href="#ref-17">17</a></sup>, and Prometheus
-<sup><a href="#ref-18">18</a></sup>. Their bias analyses motivate judge validation; safety draws on the
+<sup><a href="#ref-18">18</a></sup>. Their bias analyses motivate judge validation but do not establish
+the validity of Gauntlet's judges. Safety draws on the
 jailbreak <sup><a href="#ref-46">46</a></sup> and real-world prompt-injection
 <sup><a href="#ref-20">20</a></sup> literatures.
 
@@ -1493,7 +1494,7 @@ Selected identities and their domain restrictions are collected here.
 - **P2 (composite).** For $w\in\Delta(\{1,\dots,K\})$ and $s_k\in\mathbb{I}$, the convex combination $\sum_k w_k s_k$ lies in $[\min_k s_k,\max_k s_k]\subseteq\mathbb{I}$, and the build gate $g\in\{0,1\}$ yields $C=0$ at $g=0$.
 - **P3 (harmonic mean).** For $P,Q\ge0$, set $F=0$ at $P=Q=0$, otherwise $F=2PQ/(P+Q)$. The zero case satisfies the bounds directly; henceforth assume $P+Q>0$. If $0\le P\le Q$, then $F-P=P(Q-P)/(P+Q)\ge0$ and $Q-F=Q(Q-P)/(P+Q)\ge0$; exchange $P,Q$ for the other case. Also $(P+Q)/2-F=(P-Q)^2/(2(P+Q))\ge0$.
 - **P4 (DTW).** For $m,n\in\mathbb{N}_{+}$, similarities in $[-1,1]$, and finite $\lambda\ge0$, every admissible path has nonnegative cost; clamping $1-\mathrm{DTW}/(m+n)$ below at $0$ gives $D\in\mathbb{I}$.
-- **P5 (pass@k).** For integer $0\le c\le n$ and $1\le k\le n$, exactly $\binom{n-c}{k}$ of the $\binom{n}{k}$ subsets avoid success. Coupling successive subsets as prefixes of one uniform permutation proves monotonicity in $k$. Under i.i.d. Bernoulli trials, the expected fraction of successful subsets is their common success probability; this gives unbiasedness, not a guarantee for correlated trials.
+- **P5 (any-success and all-success estimators).** For integers $0\le c\le n$ and $1\le k\le n$, exactly $\binom{n-c}{k}$ of the $\binom{n}{k}$ subsets avoid success, while exactly $\binom{c}{k}$ consist entirely of successes. Thus $\mathrm{pass}@k=1-\binom{n-c}{k}/\binom{n}{k}$ counts subsets with any success, and $\mathrm{pass}^{k}=\binom{c}{k}/\binom{n}{k}$ counts all-success subsets. Both lie in $[0,1]$. Coupling the subsets as prefixes of one uniform permutation shows that the any-success event can only grow with $k$, whereas the all-success event can only shrink. Under independent Bernoulli trials with common success probability $p$, each fixed subset has any-success probability $1-(1-p)^k$ and all-success probability $p^k$. Linearity of expectation gives unbiasedness for these respective targets. Independence is required for these targets, not for the finite-subset identities or monotonicity.
 - **P6 (Wilson).** For $N>0$, $z>0$, and $\widehat p\in[0,1]$, solving the quadratic $(\widehat p-p)^2=z^2p(1-p)/N$ yields the displayed endpoints. Exact algebra is not exact confidence coverage.
 - **P7 (Theorem 1).** Restated and proved in Section 4. Proposition 3 follows from the increasing-chain property and the partition into disjoint successive differences.
 - **P8 (monotone Markov execution).** Proposition 4 bounds $T_C$, with explicit initial state and uniformly positive strict-progress probability outside $C$. It does not assert completion for chains with an incomplete absorbing state.
@@ -1740,11 +1741,12 @@ function wireShare(art){
 // copy the referenced block's text to the clipboard with brief "Copied!" feedback
 function wireCopy(art){
   art.querySelectorAll('.copy-btn[data-copy]').forEach(btn=>{
+    const original=btn.textContent;let reset;
     btn.addEventListener('click',()=>{
       const el=document.getElementById(btn.getAttribute('data-copy')); if(!el)return;
-      const text=el.textContent, original=btn.textContent;
-      const done=()=>{btn.textContent='Copied!';btn.classList.add('copied');
-        setTimeout(()=>{btn.textContent=original;btn.classList.remove('copied');},1400);};
+      const text=el.textContent;
+      const done=()=>{clearTimeout(reset);btn.textContent='Copied!';btn.classList.add('copied');
+        reset=setTimeout(()=>{btn.textContent=original;btn.classList.remove('copied');},1400);};
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done).catch(()=>copyFallback(text,done));
       }else copyFallback(text,done);
