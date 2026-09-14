@@ -82,6 +82,14 @@ def test_changed_style_revokes_paper_downloads(tmp_path, monkeypatch):
         docs._paper_downloads(tmp_path / "docs.html")
 
 
+@pytest.mark.parametrize("setting", ["PAPER_URL", "REPOSITORY_URL"])
+def test_changed_publication_url_revokes_paper_downloads(tmp_path, monkeypatch, setting):
+    _paper_assets(tmp_path / "paper")
+    monkeypatch.setattr(paper, setting, getattr(paper, setting) + "/changed")
+    with pytest.raises(ValueError, match="stale"):
+        docs._paper_downloads(tmp_path / "docs.html")
+
+
 def test_stale_paper_failure_preserves_published_archive(tmp_path, monkeypatch):
     archive = tmp_path / "site/runs/previous/report.html"
     archive.parent.mkdir(parents=True)

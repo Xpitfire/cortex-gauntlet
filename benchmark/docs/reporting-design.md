@@ -178,13 +178,16 @@ generated PDF before author submission. A local TeX Live 2026 build is not an ar
 server compilation or acceptance claim.
 
 The site exposes the PDF, arXiv ZIP and submission instructions only when the manifest's
-canonical-paper, template/style and artifact hashes match. The paper links the root
-benchmark website, the public `Xpitfire/cortex-gauntlet` snapshot and the Cortex CLI
-download site. The website's “Cite this work” block is excluded from PDF/LaTeX.
+canonical-paper, template/style and artifact hashes match. The PDF's first-page footnote
+links the canonical `docs.html`, latest `results.html`, and public
+`Xpitfire/cortex-gauntlet` source; the Cortex CLI reference remains in the paper.
+The website's “Cite this work” block is excluded from PDF/LaTeX.
 Contributions follow the Introduction in both formats. The PDF is a dated paper snapshot,
 not a claim that archived runs were newly executed.
 The exporter compares the complete mathematical-expression multiset against the canonical
-source; a changed style invalidates existing download metadata.
+source; a changed style or publication URL invalidates existing download metadata.
+Footnote destinations use `PAPER_URL` and `REPOSITORY_URL`, the same constants as
+the publication manifest and submission instructions.
 
 The public repository has independent history and contains benchmark source, authored
 public fixtures, the paper and quantitative exports. Private Security scenarios are

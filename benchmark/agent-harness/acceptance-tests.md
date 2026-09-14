@@ -73,7 +73,9 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 - [x] Use named-preprint formatting; keep Contributions after Introduction and exclude the
   website-only self-citation block from PDF/LaTeX.
 - [x] Reference the root benchmark website, public GitHub snapshot and Cortex CLI download site.
-- [x] Website download links require matching paper/template and artifact hashes.
+- [x] Put the explicit canonical paper, latest-results and benchmark-source URLs
+  in a clickable first-page PDF footnote; leave the title unchanged.
+- [x] Website download links require matching paper/template, publication-URL and artifact hashes.
 - [x] Inspect the PDF and exercise desktop/mobile website downloads.
 - [x] Screen the clean-history public snapshot; exclude raw captures, private integrations,
   private Security scenarios and screenshot fixtures without established redistribution rights.

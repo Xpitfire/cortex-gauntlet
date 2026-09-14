@@ -44,6 +44,8 @@ def template_digest() -> str:
     digest = hashlib.sha256()
     for path in (TEMPLATE, *STYLE_FILES):
         digest.update(path.name.encode() + b"\0" + path.read_bytes() + b"\0")
+    for url in (PAPER_URL, REPOSITORY_URL):
+        digest.update(url.encode() + b"\0")
     return digest.hexdigest()
 
 
@@ -250,6 +252,8 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
         tex = (TEMPLATE.read_text().replace("__TITLE__", metadata["title"])
                .replace("__AUTHORS__", r" \& ".join(metadata["authors"]))
                .replace("__AFFILIATION__", metadata["affiliation"])
+               .replace("__PAPER_URL__", PAPER_URL)
+               .replace("__REPOSITORY_URL__", REPOSITORY_URL)
                .replace("__DATE__", publication_date.strftime("%B %d, %Y").replace(" 0", " "))
                .replace("__BODY__", body))
         (work / "main.tex").write_text(tex)
