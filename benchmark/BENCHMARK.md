@@ -81,7 +81,9 @@ authenticated production profile; never use bare `cortex deploy` from this repo.
 Pass the exact pushed commit SHA to `--ref`, not the moving `main` branch.
 The versioned deployment must publish committed artifacts rather than hand-editing
 the running container. Roll back only to a previously screened Git ref through
-the same manifest with `--ref <previous-ref>`. Do not restore known-exposed artifacts;
+that ref's benchmark manifest with `--ref <previous-ref>`. Retain the prior manifest
+when adding health URLs: older releases do not have the PDF/ZIP endpoints.
+Do not restore known-exposed artifacts;
 release 0.1.4 is not a safe rollback target.
 
 The public navigation separates **Overview**, **Security**, **Quality**,

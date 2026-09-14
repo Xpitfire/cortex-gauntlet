@@ -10,8 +10,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/BENCHMARK.md": {
-      "sha256": "e8e6d9e2e182e48a2aa57ded651aee9f98e8dbdaea06a81cd3050830aa6bf4ed",
-      "bytes": 8343,
+      "sha256": "84c336c574d307b5fdc554845dec6cbe185994c3f8bb99b973b434ccd71a7b6b",
+      "bytes": 8456,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/README.md": {
@@ -25,8 +25,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/acceptance-tests.md": {
-      "sha256": "490b01b8b9758085f80858d89e3785ce823f16afb322858fe480771c05e083b9",
-      "bytes": 10454,
+      "sha256": "8edbb162ac246b2d1ea83e42b0db4ca2243a6281521d792294597bf2f1fa946a",
+      "bytes": 10915,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/architecture.md": {

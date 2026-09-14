@@ -77,8 +77,8 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
 - [x] Verify a fresh editable installation without Cortex/Synapse and explicit unavailable
   behavior for missing private datasets, governance and required images.
 - [x] Preserve all approved historical result exports and screened website archive assets.
-- [ ] Publish `Xpitfire/cortex-gauntlet` and deploy only the benchmark through Cortex.
-- [ ] Verify public PDF/ZIP hashes, GitHub link and production website health.
+- [x] Publish `Xpitfire/cortex-gauntlet` and deploy only the benchmark through Cortex.
+- [x] Verify public PDF/ZIP hashes, GitHub link and production website health.
 - [ ] Authors review arXiv metadata, category/license and arXiv's server-rendered PDF.
   Account submission, endorsement and acceptance are not claimed by local compilation.
   Local evidence: clean editable install and Security/Generative CLI smokes; the
@@ -86,6 +86,12 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
   skips. The final publication/reference gate rerun passed 18 tests. Native Nginx
   serves byte-identical PDF/ZIP downloads. All 99 screened records and 247 retained
   media files match the approved archive; raw source records remain unchanged.
+  Production 0.1.13 uses commit `1e9535581ecd19f7a99216864de2637502918373`.
+  All 368 public artifacts match their release hashes; browser PDF/ZIP downloads
+  match at 1440px and 390px, and only the benchmark container changed.
+  Gitleaks reports zero findings in the final 285-file public snapshot. The
+  Stripe-shaped decoy was replaced with an explicit non-credential marker;
+  GitHub push protection was not bypassed. arXiv submission remains author-owned.
 
 ## Containment & safety (gates — must pass before any real run)
 
