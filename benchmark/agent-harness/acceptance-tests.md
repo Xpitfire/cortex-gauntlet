@@ -92,6 +92,12 @@ the corresponding milestone lands. Grouped by concern; mirrors the Cortex agent-
   Gitleaks reports zero findings in the final 285-file public snapshot. The
   Stripe-shaped decoy was replaced with an explicit non-credential marker;
   GitHub push protection was not bypassed. arXiv submission remains author-owned.
+  Follow-up source checks: governed OMP runs with shared governance and no private
+  settings; wheel builds carry the stylesheet and scanner rules. Both defects were
+  reproduced before repair. Targeted checks passed 22 tests; the full suite in an
+  external source copy passed 418 tests with the same 24 private-integration skips.
+  Existing managed dependencies were reused; a fresh install was not rerun after
+  Cortex software evaluation denied local installation. The follow-up review approved.
 
 ## Containment & safety (gates — must pass before any real run)
 

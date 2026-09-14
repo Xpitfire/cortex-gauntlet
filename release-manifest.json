@@ -9,6 +9,11 @@
       "bytes": 11915,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
+    "benchmark/.python-version": {
+      "sha256": "02e735b3dfe1c32833eb550b7ff8ffa17f5f2bc3fa1e7bae61a8f5a3883ce398",
+      "bytes": 5,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
     "benchmark/BENCHMARK.md": {
       "sha256": "84c336c574d307b5fdc554845dec6cbe185994c3f8bb99b973b434ccd71a7b6b",
       "bytes": 8456,
@@ -25,8 +30,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/acceptance-tests.md": {
-      "sha256": "8edbb162ac246b2d1ea83e42b0db4ca2243a6281521d792294597bf2f1fa946a",
-      "bytes": 10915,
+      "sha256": "f7f64af3fd2fe6314624b9283caa84831889326e66a38fde01faf8387d359e8d",
+      "bytes": 11415,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/architecture.md": {
@@ -60,8 +65,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/security-model.md": {
-      "sha256": "e799d7d0f43dacdf032ab2aa4e39e52be256c2d51500cbc68365b2b124fe6372",
-      "bytes": 6331,
+      "sha256": "ed71ead99515674a949d20ef959eb72392bd43b12af08a3aa1d492b259e5b944",
+      "bytes": 7173,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/track-p-runbook.md": {
@@ -185,8 +190,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/adapters/subprocess_base.py": {
-      "sha256": "5029379c1589a0fb897960cd9bb61044c21802f042bfafa05151bf87b011e480",
-      "bytes": 19073,
+      "sha256": "74baa4f1c56648ec30b3add479d1d152bf04fb67e784e4110e890892a685370d",
+      "bytes": 19301,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/agentic_corpus.py": {
@@ -830,8 +835,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/pyproject.toml": {
-      "sha256": "9d91837151a5a2444338dab935a46a8734ed449429a3609569c005c535ad3cc7",
-      "bytes": 2318,
+      "sha256": "c4f5084524c54119668237ac7c46b08a098381f4db0ab494013aec5bb73d165e",
+      "bytes": 2366,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/requirements-tui.txt": {
@@ -1085,8 +1090,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_harness_isolation.py": {
-      "sha256": "bd9f3ea072e6420e895e87eb4bda984e80e08c61080f4f2ed8d459e7a1b8e369",
-      "bytes": 13060,
+      "sha256": "4d7b8e1e9278606467013f391d60134988679397fde88e6e70e1474be7f8d77f",
+      "bytes": 13652,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_harness_watchdog.py": {
@@ -1310,8 +1315,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_synapse.py": {
-      "sha256": "d8bc7dfd7e6efa3c3c2efc7ddcdfbb0b1a22597e05edac27355dd0581497a988",
-      "bytes": 1324,
+      "sha256": "b0acec56b4b92d15ea2f95f0553a5b6de663e99ac0f02aa2f8ff9bc543c53733",
+      "bytes": 1002,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_synapse_dag.py": {
@@ -1365,8 +1370,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tools/public_snapshot.py": {
-      "sha256": "88f8945ca8a4ae2f530012d79d7bf71039a066b74b87c2ec99f7153381cfb9d6",
-      "bytes": 8336,
+      "sha256": "85806c821d21e7f1db604f6d70bada241668ccac7ed46c0e2f8f4dc93d7f7b2b",
+      "bytes": 8369,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/uv.lock": {
@@ -1405,8 +1410,8 @@
       "provenance": "canonical paper publication build"
     },
     "README.md": {
-      "sha256": "986944b5c49c82e7a0fd1b941a3f86122a478ec154acf1468eef6dbf5a42ca44",
-      "bytes": 789,
+      "sha256": "07e9298f306c81518c2721791f329e60f0593fd8714f27f5432d614c3d965c8b",
+      "bytes": 807,
       "provenance": "standalone release metadata"
     },
     "NOTICE": {
@@ -1418,11 +1423,6 @@
       "sha256": "ba44f99adb8d8c2ce174f1f0dac0d4f0b8d6148a4bee76f00a3e4c61e615d70f",
       "bytes": 323,
       "provenance": "standalone release metadata"
-    },
-    "benchmark/.python-version": {
-      "sha256": "02e735b3dfe1c32833eb550b7ff8ffa17f5f2bc3fa1e7bae61a8f5a3883ce398",
-      "bytes": 5,
-      "provenance": "upstream Apache-2.0 benchmark source"
     }
   }
 }

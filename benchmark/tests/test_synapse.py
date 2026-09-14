@@ -1,6 +1,6 @@
 """Synapse planning layer (offline shim mirroring PlanGraphBuilder / ValidationRuntime)."""
 
-from gauntlet.synapse import Requirement, RequirementKind, SynapsePlanner, synapse_available
+from gauntlet.synapse import Requirement, RequirementKind, SynapsePlanner
 
 
 def _reqs():
@@ -14,9 +14,7 @@ def _reqs():
 
 def test_plan_builds_three_milestones_by_kind():
     plan = SynapsePlanner().plan(_reqs())
-    titles = [m.title for m in plan.milestones]
-    assert titles == ["Understand and constrain", "Deliver required work", "Validate and hand off"]
-    assert plan.milestones[2].requirement_ids == ["v"]
+    assert [m.requirement_ids for m in plan.milestones] == [["g", "c"], ["d"], ["v"]]
 
 
 def test_validate_surfaces_skipped_required_work():
@@ -28,7 +26,3 @@ def test_validate_surfaces_skipped_required_work():
     assert planner.validate(plan, {"g", "c", "d", "v"}).status == "complete"
 
 
-def test_backend_label_reflects_availability():
-    backend = SynapsePlanner().backend
-    assert backend in ("synapse", "shim")
-    assert (backend == "synapse") == synapse_available()

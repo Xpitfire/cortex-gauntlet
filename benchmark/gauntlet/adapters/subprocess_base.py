@@ -167,7 +167,10 @@ def _link_governance(workspace: Path, binary_name: str) -> None:
     """Symlink Cortex's governance config from the repo root into the governed arm's decoy workspace."""
 
     root = _repo_root()
-    adapter_dir = {"codex": ".codex", "claude": ".claude", "omp": ".omp", "cortex": ".agents"}[binary_name]
+    # OMP reads the shared instruction/rule surface; private .omp settings are optional.
+    adapter_dir = {"codex": ".codex", "claude": ".claude", "omp": ".agents", "cortex": ".agents"}.get(binary_name)
+    if adapter_dir is None:
+        raise EvaluationUnavailable(f"Live Cortex governance is undefined for harness {binary_name!r}")
     if (not all((root / name).is_file() for name in ("AGENTS.md", "CLAUDE.md"))
             or not all((root / name).is_dir() for name in (".agents", adapter_dir))):
         raise EvaluationUnavailable(

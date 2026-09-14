@@ -48,4 +48,4 @@ where = ["."]
 include = ["gauntlet*"]
 
 [tool.setuptools.package-data]
-gauntlet = ["paper_template.tex"]
+gauntlet = ["paper_template.tex", "tui/app.tcss", "analysis/rules/security.yaml"]

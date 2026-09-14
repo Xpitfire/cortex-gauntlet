@@ -8,6 +8,6 @@ A standalone snapshot of the five-track coding-agent harness benchmark.
 - [arXiv source archive](published/paper/cortex-gauntlet-arxiv.zip)
 - [Quantitative results](published/results-package.json)
 
-This repository has independent history. It does not contain private Cortex/Synapse implementations, raw captures, private Security holdouts, deployment configuration or screenshot fixtures/media without established redistribution rights. The screened interactive archive remains on the canonical website.
+This repository has independent history. It does not contain private Cortex/Synapse implementations, raw captures, private Security holdouts, Cortex production profiles, compose files, or screenshot fixtures/media without established redistribution rights. The screened interactive archive remains on the canonical website.
 
 Copyright 2026 Alpha Omega Labs. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

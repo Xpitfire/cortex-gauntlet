@@ -218,6 +218,23 @@ def test_cortex_arm_runs_in_repo_decoy_with_env_intact(probe: Path, tmp_path: Pa
     assert "AGENT_SECRET_HOOK_DISABLE" in rec["env"]  # env inherited — the Cortex arm is NOT scrubbed
 
 
+def test_omp_runs_with_shared_governance_without_private_settings(
+    probe: Path, tmp_path: Path, monkeypatch, governed_root,
+):
+    from shutil import which
+
+    out = tmp_path / "omp-rec.json"
+    monkeypatch.setenv("PROBE_OUT", str(out))
+    monkeypatch.setattr(
+        "gauntlet.adapters.subprocess_base.shutil.which",
+        lambda name: str(probe) if name == "omp" else which(name),
+    )
+    build_adapter("cortex:omp").run(_case())
+    rec = _record(out)
+    assert {"AGENTS.md", "CLAUDE.md", ".agents"} <= set(rec["files"])
+    assert governed_root in Path(rec["cwd"]).parents
+
+
 def test_cortex_arm_cleanup_race_does_not_fail_cell(probe: Path, tmp_path: Path, monkeypatch, governed_root):
     import gauntlet.adapters.subprocess_base as base
 

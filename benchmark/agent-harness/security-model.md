@@ -9,7 +9,7 @@ execution. Use disposable, appropriately isolated infrastructure without product
 access. Native live coding CLIs can execute commands.
 
 The public snapshot excludes raw captures, private Security cases, private integrations,
-production configuration and uncleared screenshots. Operator-supplied private cases
+Cortex production profiles/compose files and uncleared screenshots. Operator-supplied private cases
 must use unique safe identifiers and relative, non-Git-administrative file paths.
 The actual file-write boundary rejects resolved escapes; Git setup rejects existing
 metadata, ignores ambient Git configuration and disables hooks.
@@ -19,6 +19,18 @@ Live Security governance does not assert private Synapse execution. Public copyi
 an exact allowlist and rejects symlink components. A malformed source record revokes
 only its own untrusted cached report; missing historical inputs or stale paper artifacts
 do not justify wiping unrelated screened archives.
+
+Governed OMP requires the shared instruction/rule files, not private `.omp` settings;
+Codex and Claude also require their selected-harness configuration directories.
+Wheel builds include the TUI stylesheet and local scanner rules as package data.
+The public attack cases and deterministic canaries are intentionally published; they
+are not a secret holdout or evidence of freedom from training contamination.
+
+The 2026-09-14 scan of the exact 368-file website tree produced 1,439 findings:
+1,435 exact declared case canaries, one exact historical decoy, and three public
+certificate-pin documentation examples. Every finding was attributed without printing
+candidate values; none remained unresolved. This is a bounded disposition, not an
+exhaustive credential-clearance claim or a blanket exemption for historical captures.
 
 ## Design gates
 
