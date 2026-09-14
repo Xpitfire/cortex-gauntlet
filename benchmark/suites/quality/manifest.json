@@ -1,0 +1,6 @@
+{
+  "suite": "quality",
+  "track": "quality",
+  "description": "M4 Track Q: code-generation tasks with explicit requirements; each requirement has a safe vs vibe-coded snippet. Harnesses generate code; SAST-lite + dependency + quality analyzers + a code judge score it. The cortex_wrapped harness uses Synapse to track and validate every requirement.",
+  "tasks": "tasks.json"
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "HIDDEN acceptance spec for Track P (storefront). NOT shown to the harness. The sandbox runner + scorer use it. Journeys are verified by a Playwright-driven checker using role/name heuristics (the app's exact selectors/routes are the harness's choice); REST checks are best-effort against discovered endpoints; visual anchors drive the vision judge; capability_descriptors are the VERTEX reference distribution.",
+  "start": {"ready_path": "/", "bind": "127.0.0.1"},
+  "journeys": [
+    {"id": "home", "weight": 1, "checks": [
+      {"kind": "ui", "desc": "home page renders a brand header with category navigation (Damen/Herren/Kinder or Women/Men/Kids)", "role_any": ["banner", "navigation"]},
+      {"kind": "ui", "desc": "a search input is present", "role": "searchbox"},
+      {"kind": "ui", "desc": "a cart affordance is present in the header", "name_re": "(cart|warenkorb|bag)"}
+    ]},
+    {"id": "browse_filter", "weight": 2, "checks": [
+      {"kind": "ui", "desc": "a category/listing page shows a product grid with multiple products", "min_cards": 6},
+      {"kind": "ui", "desc": "at least one working filter or sort control changes the listing", "interaction": "filter_or_sort"}
+    ]},
+    {"id": "pdp", "weight": 2, "checks": [
+      {"kind": "ui", "desc": "clicking a product opens a detail page with an image, a price, and a size/variant selector", "requires": ["image", "price", "variant_select"]},
+      {"kind": "ui", "desc": "an add-to-cart control is present and enabled after selecting a size", "name_re": "(add to cart|in den warenkorb|add to bag)"}
+    ]},
+    {"id": "cart", "weight": 3, "checks": [
+      {"kind": "ui", "desc": "after add-to-cart, the cart shows the line item with name, price, size/color and quantity", "min_line_items": 1},
+      {"kind": "ui", "desc": "quantity can be changed and an item can be removed; totals update", "interaction": "update_qty_remove"},
+      {"kind": "state", "desc": "order summary shows subtotal, delivery, and total that are arithmetically consistent (integer cents)", "invariant": "total == subtotal + delivery - discount"}
+    ]},
+    {"id": "checkout_payment", "weight": 3, "checks": [
+      {"kind": "ui", "desc": "a checkout flow collects the minimum needed info and reaches a payment step", "interaction": "checkout"},
+      {"kind": "payment", "desc": "completes a Stripe TEST-mode payment with a test card (4242 4242 4242 4242) and reaches an order confirmation", "mode": "stripe_test"},
+      {"kind": "ui", "desc": "an order confirmation / success page is shown after payment", "name_re": "(thank you|order|bestellung|confirmed|confirmation)"}
+    ]}
+  ],
+  "rest_contracts": [
+    {"id": "list_products", "desc": "an endpoint returns a list of products as JSON", "method": "GET", "expect_json_array": true},
+    {"id": "cart_add", "desc": "an endpoint adds an item to a cart and returns the updated cart/total", "method": "POST"},
+    {"id": "create_order", "desc": "an endpoint creates an order / payment intent in test mode", "method": "POST"}
+  ],
+  "pwa": [
+    {"id": "manifest", "desc": "a web app manifest is linked and valid (name, icons, start_url, display)"},
+    {"id": "service_worker", "desc": "a service worker registers and caches an offline shell"},
+    {"id": "installable", "desc": "Lighthouse-style installability passes"},
+    {"id": "responsive", "desc": "layout is usable at 390px (mobile) and 1280px (desktop) without overflow"}
+  ],
+  "a11y": [
+    {"id": "landmarks", "desc": "header/nav/main/footer landmarks present"},
+    {"id": "alt_text", "desc": "product images have alt text"},
+    {"id": "keyboard", "desc": "primary controls are keyboard-reachable and have accessible names"},
+    {"id": "axe", "desc": "no critical axe-core violations", "max_critical": 0}
+  ],
+  "robustness": [
+    {"id": "empty_cart", "desc": "viewing an empty cart does not error"},
+    {"id": "bad_card", "desc": "an invalid/declined test card is handled gracefully (no 500)"},
+    {"id": "unknown_route", "desc": "an unknown route returns a 404 page, not a stack trace"}
+  ],
+  "visual_anchors": [
+    {"screen": "home", "ref": "screenshots/01-home.png", "rubric": ["sticky promo bar + brand header layout", "centered logo with left category links and right account/wishlist/cart icons", "horizontal category nav", "hero media area", "clean typographic brand grid", "overall whitespace/polish"]},
+    {"screen": "listing", "ref": "screenshots/03-listing.png", "rubric": ["breadcrumb + page title", "row of rounded filter pills", "result count", "responsive 3+ column product grid", "card: image, brand bold, name, price, wishlist heart"]},
+    {"screen": "pdp", "ref": "screenshots/04-pdp.png", "rubric": ["left thumbnail rail + large product image", "brand link + title + price", "color swatches", "size dropdown/selector", "prominent add-to-cart button", "delivery + seller info block"]},
+    {"screen": "cart", "ref": "screenshots/05-cart.png", "rubric": ["cart title with item count", "line item with thumbnail/name/price/variant/qty", "order summary card (subtotal/delivery/total)", "accepted-payment badges", "prominent checkout button"]}
+  ],
+  "capability_descriptors": [
+    "home page with brand header, category navigation, search and cart",
+    "category/listing page with a responsive product grid",
+    "working filter and/or sort over the product listing",
+    "product detail page with image gallery, price and size/variant selection",
+    "add to cart from the product detail page",
+    "cart page with editable quantities, item removal and correct totals",
+    "checkout flow collecting shipping/contact and reaching payment",
+    "Stripe test-mode payment with a test card",
+    "order confirmation page after successful payment",
+    "installable PWA with a service worker and offline shell",
+    "accessible, responsive layout for mobile and desktop",
+    "automated end-to-end and unit tests for the core flows",
+    "documented build/serve command and CI manifest"
+  ],
+  "architecture_anchors": [
+    "clear separation between backend API and frontend UI",
+    "domain/service layer distinct from transport/routing",
+    "data models for product, variant, cart, order",
+    "tests colocated or in a dedicated test tree",
+    "configuration and secrets read from the environment"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "start": ["{python}", "app.py", "{port}"],
+  "ready_path": "/",
+  "checks": [
+    {"id": "ui-renders", "kind": "ui", "path": "/", "selector": "#title", "text": "Todos"},
+    {"id": "ui-has-form", "kind": "ui", "path": "/", "selector": "#f", "text": ""},
+    {"id": "api-list", "kind": "rest", "method": "GET", "path": "/api/todos", "status": 200, "contains": "["},
+    {"id": "api-add", "kind": "rest", "method": "POST", "path": "/api/todos", "body": "{\"title\":\"buy milk\"}", "status": 201},
+    {"id": "state-persists", "kind": "rest", "method": "GET", "path": "/api/todos", "status": 200, "contains": "buy milk"}
+  ]
+}

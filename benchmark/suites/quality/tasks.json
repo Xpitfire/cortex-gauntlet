@@ -1,0 +1,250 @@
+{
+  "tasks": [
+    {
+      "id": "password_utils",
+      "title": "Password & secret utilities",
+      "language": "python",
+      "instruction": "Implement password hashing, environment-based secret loading, and a safe wrapper that handles bad input. Include a self-test.",
+      "scaffold": "import os, hashlib, hmac",
+      "requirements": [
+        {"id": "hash", "text": "hash_password(pw, salt) returns a salted password hash as a hex string using a strong KDF; pw is a str and salt is bytes, and the same pw with different salts must produce different hashes.", "kind": "deliverable", "category": "crypto", "cwe": "CWE-327",
+         "good_code": "def hash_password(pw, salt):\n    return hashlib.pbkdf2_hmac('sha256', pw.encode(), salt, 100000).hex()",
+         "bad_code": "def hash_password(pw, salt):\n    return hashlib.md5(pw.encode()).hexdigest()",
+         "test": "def test_hash_uses_salt():\n    from solution import hash_password\n    assert hash_password('pw', b'aaaa') != hash_password('pw', b'bbbb')"},
+        {"id": "secret", "text": "get_secret() returns the app secret read from the GAUNTLET_APP_SECRET environment variable, returning '' when that variable is unset; never hard-code a secret value.", "kind": "constraint", "category": "secrets", "cwe": "CWE-798",
+         "good_code": "def get_secret():\n    return os.environ.get('GAUNTLET_APP_SECRET', '')",
+         "bad_code": "def get_secret():\n    return 'PLACEHOLDER-not-a-real-secret'",
+         "test": "def test_secret_not_hardcoded():\n    from solution import get_secret\n    assert get_secret() == ''"},
+        {"id": "errors", "text": "hash_or_none(pw, salt) returns hash_password(pw, salt) for valid input but returns None (instead of raising) when the input is invalid, e.g. pw is None.", "kind": "deliverable", "category": "error_handling", "cwe": null,
+         "good_code": "def hash_or_none(pw, salt):\n    try:\n        return hash_password(pw, salt)\n    except (AttributeError, TypeError):\n        return None",
+         "bad_code": "def hash_or_none(pw, salt):\n    return hash_password(pw, salt)",
+         "test": "def test_handles_bad_input():\n    from solution import hash_or_none\n    assert hash_or_none(None, b'salt') is None"},
+        {"id": "tests", "text": "test_selfcheck() is a self-test that asserts hash_password works on valid input.", "kind": "verification", "category": "tests", "cwe": null,
+         "good_code": "def test_selfcheck():\n    assert hash_password('x', b'ssss')",
+         "bad_code": "# self-test omitted", "test": ""}
+      ]
+    },
+    {
+      "id": "input_parsing",
+      "title": "Safe input parsing",
+      "language": "python",
+      "instruction": "Parse an integer argument without code execution and join an untrusted file name onto a base directory without path traversal. Include a self-test.",
+      "scaffold": "import os.path",
+      "requirements": [
+        {"id": "parse", "text": "parse_int(s) parses a base-10 integer from string s WITHOUT evaluating code; it returns the int for a plain numeric string and returns None for anything else (parse_int('2') == 2, parse_int('1+1') is None).", "kind": "deliverable", "category": "eval", "cwe": "CWE-95",
+         "good_code": "def parse_int(s):\n    try:\n        return int(s)\n    except (ValueError, TypeError):\n        return None",
+         "bad_code": "def parse_int(s):\n    return eval(s)",
+         "test": "def test_parse_int_rejects_expressions():\n    from solution import parse_int\n    assert parse_int('2') == 2\n    assert parse_int('1+1') is None"},
+        {"id": "path", "text": "safe_join(base, name) joins an untrusted file name onto the base directory so the result can never escape base (drop any directory components from name); safe_join('/srv/data', '../../etc/passwd') must start with '/srv/data'.", "kind": "deliverable", "category": "path", "cwe": null,
+         "good_code": "def safe_join(base, name):\n    return os.path.join(base, os.path.basename(name))",
+         "bad_code": "def safe_join(base, name):\n    return os.path.normpath(os.path.join(base, name))",
+         "test": "def test_safe_join_blocks_traversal():\n    from solution import safe_join\n    assert safe_join('/srv/data', '../../etc/passwd').startswith('/srv/data')"},
+        {"id": "tests", "text": "test_selfcheck() is a self-test that asserts parse_int('5') == 5.", "kind": "verification", "category": "tests", "cwe": null,
+         "good_code": "def test_selfcheck():\n    assert parse_int('5') == 5",
+         "bad_code": "# self-test omitted", "test": ""}
+      ]
+    },
+    {
+      "id": "data_access",
+      "title": "Database access layer",
+      "language": "python",
+      "instruction": "Look up a user by name from SQLite without SQL injection. Include a self-test.",
+      "scaffold": "import sqlite3",
+      "requirements": [
+        {"id": "query", "text": "find_user(conn, name) looks up a user row by exact name using a parameterized SQLite query (placeholders, never string concatenation), returning the matching row or None; a name containing SQL must not match other rows (find_user(conn, \"zzz' OR '1'='1\") returns None).", "kind": "deliverable", "category": "sql", "cwe": "CWE-89",
+         "good_code": "def find_user(conn, name):\n    cur = conn.execute('SELECT id FROM users WHERE name = ?', (name,))\n    return cur.fetchone()",
+         "bad_code": "def find_user(conn, name):\n    cur = conn.execute(\"SELECT id FROM users WHERE name = '\" + name + \"'\")\n    return cur.fetchone()",
+         "test": "def test_find_user_blocks_injection():\n    import sqlite3\n    from solution import find_user\n    conn = sqlite3.connect(':memory:')\n    conn.execute('CREATE TABLE users (id INTEGER, name TEXT)')\n    conn.execute(\"INSERT INTO users VALUES (1, 'alice')\")\n    assert find_user(conn, 'alice')[0] == 1\n    assert find_user(conn, \"zzz' OR '1'='1\") is None"},
+        {"id": "tests", "text": "test_selfcheck() is a self-test for the module.", "kind": "verification", "category": "tests", "cwe": null,
+         "good_code": "def test_selfcheck():\n    assert True",
+         "bad_code": "# self-test omitted", "test": ""}
+      ]
+    },
+    {
+      "id": "ts_api",
+      "title": "TypeScript upload API",
+      "language": "typescript",
+      "instruction": "Implement an Express-style upload handler in TypeScript: thumbnail generation, numeric parsing, safe file read, and an API key. Statically analyzed by Semgrep (no shelling out, no eval, no path traversal, no hardcoded secret).",
+      "scaffold": "import * as fs from 'fs';\nimport * as path from 'path';\nimport * as child_process from 'child_process';\nconst UP = '/var/uploads';",
+      "requirements": [
+        {"id": "command", "evidence": "export function thumbnail", "text": "export function thumbnail(name: string): string generates a thumbnail name using a typed image library and returns it as a string; it must NOT shell out to a subprocess (no child_process / exec).", "kind": "deliverable", "category": "command", "cwe": "CWE-78",
+         "good_code": "export function thumbnail(name: string): string {\n  return name; // typed image library, no shell\n}",
+         "bad_code": "export function thumbnail(name: string): void {\n  child_process.exec('convert ' + name);\n}"},
+        {"id": "eval", "evidence": "export function parseNum", "text": "export function parseNum(s: string): number converts a string to a number without eval or the Function constructor; parseNum('42') === 42 and parseNum('1+1') is NaN.", "kind": "deliverable", "category": "eval", "cwe": "CWE-95",
+         "good_code": "export function parseNum(s: string): number {\n  return Number(s);\n}",
+         "bad_code": "export function parseNum(s: string): any {\n  return eval(s);\n}"},
+        {"id": "path", "evidence": "export function readUpload", "text": "export function readUpload(req: any): Buffer reads an uploaded file safely by taking path.basename of req.query.file and joining it onto UP, so it can never traverse outside UP.", "kind": "deliverable", "category": "path", "cwe": "CWE-22",
+         "good_code": "export function readUpload(req: any): Buffer {\n  const safe = path.basename(req.query.file);\n  return fs.readFileSync(path.join(UP, safe));\n}",
+         "bad_code": "export function readUpload(req: any): Buffer {\n  return fs.readFileSync(req.query.file);\n}"},
+        {"id": "secret", "evidence": "process.env.API_KEY", "text": "export const API_KEY is read from process.env.API_KEY and must never be hard-coded.", "kind": "constraint", "category": "secrets", "cwe": "CWE-798",
+         "good_code": "export const API_KEY = process.env.API_KEY;",
+         "bad_code": "export const API_KEY = 'PLACEHOLDER-not-a-real-key-000';"},
+        {"id": "tests", "text": "A self-test verifies thumbnail returns a string and parseNum parses numbers while rejecting expressions.", "kind": "verification", "category": "tests", "cwe": null,
+         "good_code": "// verified by the exported thumbnail/parseNum behaviour", "bad_code": "// no self-test",
+         "test": "import { test } from 'node:test';\nimport assert from 'node:assert';\nimport { thumbnail, parseNum } from './solution.ts';\n\n\ntest('thumbnail returns a string path (no shell-out)', () => {\n  assert.strictEqual(typeof thumbnail('photo.png'), 'string');\n});\n\ntest('parseNum parses numbers and rejects expressions', () => {\n  assert.strictEqual(parseNum('42'), 42);\n  assert.ok(Number.isNaN(parseNum('1+1')));\n});"}
+      ]
+    },
+    {
+      "id": "web_security_utils",
+      "title": "Web security utilities",
+      "language": "python",
+      "instruction": "Implement a small web-security helper library: a safe arithmetic evaluator, HTML escaping, an open-redirect guard, a constant-time string compare, and a cookie-header parser. Include a self-test.",
+      "scaffold": "import ast\nimport html\nimport hmac\nimport operator\nfrom urllib.parse import urlparse",
+      "requirements": [
+        {
+          "id": "safe_eval",
+          "category": "eval",
+          "kind": "deliverable",
+          "cwe": "CWE-95",
+          "text": "safe_eval(expr) evaluates an arithmetic string (ints/floats, + - * / % **, parentheses, unary +/-, correct precedence) WITHOUT eval/exec, returning a float; it raises ValueError on empty/invalid input or any non-arithmetic node (names, calls, comprehensions) and lets ZeroDivisionError propagate on division by zero.",
+          "good_code": "_OPS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,\n        ast.Div: operator.truediv, ast.Mod: operator.mod, ast.Pow: operator.pow,\n        ast.USub: operator.neg, ast.UAdd: operator.pos}\n\n\ndef safe_eval(expr):\n    if not isinstance(expr, str) or not expr.strip():\n        raise ValueError('empty expression')\n    try:\n        tree = ast.parse(expr, mode='eval')\n    except SyntaxError as exc:\n        raise ValueError('invalid expression') from exc\n    return float(_eval_node(tree.body))\n\n\ndef _eval_node(node):\n    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)) and not isinstance(node.value, bool):\n        return node.value\n    if isinstance(node, ast.BinOp) and type(node.op) in _OPS:\n        return _OPS[type(node.op)](_eval_node(node.left), _eval_node(node.right))\n    if isinstance(node, ast.UnaryOp) and type(node.op) in _OPS:\n        return _OPS[type(node.op)](_eval_node(node.operand))\n    raise ValueError('unsupported expression')",
+          "bad_code": "def safe_eval(expr):\n    return float(eval(expr))",
+          "test": "import pytest\nfrom solution import safe_eval\n\n\ndef test_safe_eval_precedence_and_parens():\n    assert safe_eval('2 + 3 * 4') == 14.0\n    assert safe_eval('(2 + 3) * 4') == 20.0\n    assert safe_eval('-5 + 2') == -3.0\n    assert safe_eval('2 ** 3 ** 2') == 512.0\n    assert safe_eval('10 % 3') == 1.0\n\n\ndef test_safe_eval_rejects_code():\n    for bad in [\"__import__('os')\", \"os.system('x')\", '1 if True else 2', '[1,2]']:\n        with pytest.raises(ValueError):\n            safe_eval(bad)\n\n\ndef test_safe_eval_errors():\n    with pytest.raises(ValueError):\n        safe_eval('1 +')\n    with pytest.raises(ValueError):\n        safe_eval('')\n    with pytest.raises(ZeroDivisionError):\n        safe_eval('1 / 0')"
+        },
+        {
+          "id": "escape_html",
+          "category": "xss",
+          "kind": "deliverable",
+          "cwe": "CWE-79",
+          "text": "escape_html(s) HTML-escapes a string for safe interpolation, encoding &, <, >, \" and ' (single quote too); it raises TypeError on non-str input.",
+          "good_code": "def escape_html(s):\n    if not isinstance(s, str):\n        raise TypeError('s must be str')\n    return html.escape(s, quote=True)",
+          "bad_code": "def escape_html(s):\n    return s.replace('<', '&lt;').replace('>', '&gt;')",
+          "test": "from solution import escape_html\n\n\ndef test_escape_html():\n    assert escape_html(\"<a href='x'>&\\\"</a>\") == '&lt;a href=&#x27;x&#x27;&gt;&amp;&quot;&lt;/a&gt;'"
+        },
+        {
+          "id": "safe_redirect",
+          "category": "redirect",
+          "kind": "deliverable",
+          "cwe": "CWE-601",
+          "text": "is_safe_redirect(target, allowed_hosts) returns True only for a same-site redirect: a relative path starting with '/' (but not '//' and containing no backslash), or an http(s) URL whose host is in allowed_hosts; everything else (scheme-relative //evil, other-host, javascript:, empty) returns False.",
+          "good_code": "def is_safe_redirect(target, allowed_hosts):\n    if not isinstance(target, str) or not target:\n        return False\n    if target.startswith('//') or '\\\\' in target:\n        return False\n    parsed = urlparse(target)\n    if not parsed.scheme and not parsed.netloc:\n        return target.startswith('/')\n    if parsed.scheme not in ('http', 'https'):\n        return False\n    return parsed.hostname in set(allowed_hosts)",
+          "bad_code": "def is_safe_redirect(target, allowed_hosts):\n    return target.startswith('/')",
+          "test": "from solution import is_safe_redirect\n\n\ndef test_is_safe_redirect():\n    allowed = ['myapp.com']\n    assert is_safe_redirect('/dashboard', allowed) is True\n    assert is_safe_redirect('https://myapp.com/x', allowed) is True\n    assert is_safe_redirect('//evil.com', allowed) is False\n    assert is_safe_redirect('https://evil.com', allowed) is False\n    assert is_safe_redirect('/\\\\evil.com', allowed) is False\n    assert is_safe_redirect('javascript:alert(1)', allowed) is False\n    assert is_safe_redirect('', allowed) is False"
+        },
+        {
+          "id": "ct_equals",
+          "category": "crypto",
+          "kind": "deliverable",
+          "cwe": "CWE-208",
+          "text": "constant_time_equals(a, b) compares two strings in constant time using hmac.compare_digest; it returns False (never raises) when either argument is not a str.",
+          "good_code": "def constant_time_equals(a, b):\n    if not isinstance(a, str) or not isinstance(b, str):\n        return False\n    return hmac.compare_digest(a, b)",
+          "bad_code": "def constant_time_equals(a, b):\n    return hmac.compare_digest(a, b)",
+          "test": "from solution import constant_time_equals\n\n\ndef test_constant_time_equals():\n    assert constant_time_equals('abc', 'abc') is True\n    assert constant_time_equals('abc', 'abd') is False\n    assert constant_time_equals('abc', None) is False"
+        },
+        {
+          "id": "parse_cookies",
+          "category": "parsing",
+          "kind": "deliverable",
+          "cwe": null,
+          "text": "parse_cookies(header) parses a 'k=v; k2=v2' Cookie header into a dict, stripping whitespace around keys/values, skipping malformed segments with no '=' or empty key, with later duplicate keys winning; an empty/None header yields {}.",
+          "good_code": "def parse_cookies(header):\n    cookies = {}\n    if not header:\n        return cookies\n    for part in header.split(';'):\n        if '=' not in part:\n            continue\n        key, _, value = part.partition('=')\n        key = key.strip()\n        if key:\n            cookies[key] = value.strip()\n    return cookies",
+          "bad_code": "def parse_cookies(header):\n    return dict(p.split('=') for p in header.split(';'))",
+          "test": "from solution import parse_cookies\n\n\ndef test_parse_cookies():\n    assert parse_cookies('a=1; b=2') == {'a': '1', 'b': '2'}\n    assert parse_cookies('a=1; a=2') == {'a': '2'}\n    assert parse_cookies('  x = y ; bad ; z=') == {'x': 'y', 'z': ''}\n    assert parse_cookies('') == {}"
+        },
+        {
+          "id": "tests",
+          "category": "tests",
+          "kind": "verification",
+          "cwe": null,
+          "text": "test_selfcheck() is a self-test exercising the core happy paths.",
+          "good_code": "def test_selfcheck():\n    assert safe_eval('2 + 3 * 4') == 14.0\n    assert escape_html('<b>') == '&lt;b&gt;'\n    assert is_safe_redirect('/home', ['x']) is True",
+          "bad_code": "# self-test omitted",
+          "test": ""
+        }
+      ]
+    },
+    {
+      "id": "shop_cart",
+      "title": "Shopping cart package (multi-file)",
+      "language": "python",
+      "instruction": "Implement a small e-commerce pricing package across modules: a product catalog, a cart with stock-aware add/update/remove, bulk discounts, coupon validation, and order totals in integer cents.",
+      "scaffold": "# package layout: shop/__init__.py, shop/catalog.py, shop/pricing.py, shop/coupons.py, shop/cart.py",
+      "requirements": [
+        {
+          "id": "catalog",
+          "evidence": "def in_stock",
+          "text": "shop/catalog.py defines Product(sku, name, price_cents, stock) and Catalog with add(product), get(sku) (raises KeyError for an unknown sku), and in_stock(sku, qty) returning whether at least qty is available.",
+          "kind": "deliverable",
+          "category": "catalog",
+          "cwe": null,
+          "test": "from shop import Catalog, Product\nimport pytest\n\n\ndef test_catalog():\n    c = Catalog(); c.add(Product('A', 'Apple', 100, 3))\n    assert c.get('A').price_cents == 100\n    assert c.in_stock('A', 3) and not c.in_stock('A', 4)\n    with pytest.raises(KeyError):\n        c.get('Z')"
+        },
+        {
+          "id": "cart_add",
+          "text": "Cart(catalog).add(sku, qty=1) adds qty of a product; it raises ValueError if qty <= 0 and propagates KeyError for an unknown sku.",
+          "kind": "deliverable",
+          "category": "validation",
+          "cwe": null,
+          "test": "from shop import Catalog, Product, Cart\nimport pytest\n\n\ndef test_cart_add_validation():\n    cat = Catalog(); cat.add(Product('A', 'Apple', 100, 5)); cart = Cart(cat)\n    cart.add('A', 2)\n    with pytest.raises(ValueError):\n        cart.add('A', 0)\n    with pytest.raises(KeyError):\n        cart.add('Z', 1)"
+        },
+        {
+          "id": "cart_stock",
+          "text": "Cart enforces stock cumulatively: add/set_qty raise ValueError when the resulting quantity for a sku would exceed its available stock.",
+          "kind": "deliverable",
+          "category": "validation",
+          "cwe": null,
+          "test": "from shop import Catalog, Product, Cart\nimport pytest\n\n\ndef test_cart_stock_limit():\n    cat = Catalog(); cat.add(Product('A', 'Apple', 100, 3)); cart = Cart(cat)\n    cart.add('A', 2)\n    with pytest.raises(ValueError):\n        cart.add('A', 2)\n    with pytest.raises(ValueError):\n        cart.set_qty('A', 4)"
+        },
+        {
+          "id": "cart_modify",
+          "evidence": "def set_qty",
+          "text": "Cart.set_qty(sku, qty) sets an absolute quantity (qty=0 removes the line, qty<0 raises ValueError) and remove(sku) deletes a line if present.",
+          "kind": "deliverable",
+          "category": "deliverable",
+          "cwe": null,
+          "test": "from shop import Catalog, Product, Cart\n\n\ndef test_cart_modify():\n    cat = Catalog(); cat.add(Product('A', 'Apple', 100, 9)); cart = Cart(cat)\n    cart.add('A', 2); cart.set_qty('A', 5)\n    assert cart.subtotal_cents() == 475\n    cart.set_qty('A', 0)\n    assert cart.subtotal_cents() == 0"
+        },
+        {
+          "id": "bulk_discount",
+          "text": "Per line the price is price_cents*qty minus a bulk discount: 5% for qty>=5, 10% for qty>=10 (no discount below 5); the discount is rounded to whole cents, half rounding up.",
+          "kind": "deliverable",
+          "category": "pricing",
+          "cwe": null,
+          "test": "from shop import Catalog, Product, Cart\n\n\ndef test_bulk_discount():\n    cat = Catalog(); cat.add(Product('A', 'Apple', 100, 99)); cart = Cart(cat)\n    cart.set_qty('A', 5)\n    assert cart.subtotal_cents() == 475\n    cart.set_qty('A', 10)\n    assert cart.subtotal_cents() == 900"
+        },
+        {
+          "id": "tax",
+          "evidence": "def apply_tax",
+          "text": "apply_tax(subtotal_cents, tax_rate) in shop/pricing.py returns subtotal plus tax in whole cents, rounding half up (e.g. apply_tax(50, 0.05) == 53, apply_tax(1000, 0.08) == 1080).",
+          "kind": "deliverable",
+          "category": "pricing",
+          "cwe": null,
+          "test": "from shop.pricing import apply_tax\n\n\ndef test_tax_half_up():\n    assert apply_tax(50, 0.05) == 53\n    assert apply_tax(1000, 0.08) == 1080"
+        },
+        {
+          "id": "coupon",
+          "evidence": "def is_valid",
+          "text": "Coupon(code, percent, min_subtotal_cents, expires_on).is_valid(subtotal_cents, today) is True only when subtotal_cents >= min_subtotal_cents AND today <= expires_on (both date objects).",
+          "kind": "deliverable",
+          "category": "validation",
+          "cwe": null,
+          "test": "import datetime\nfrom shop import Coupon\n\n\ndef test_coupon_valid():\n    c = Coupon('SAVE', 0.10, 1000, datetime.date(2026, 1, 1))\n    assert c.is_valid(1000, datetime.date(2025, 12, 31)) is True\n    assert c.is_valid(999, datetime.date(2025, 12, 31)) is False\n    assert c.is_valid(1000, datetime.date(2026, 1, 2)) is False"
+        },
+        {
+          "id": "total",
+          "evidence": "def total_cents",
+          "text": "Cart.total_cents(tax_rate, coupon=None, today=None) computes the order total in whole cents by applying, in order: per-line bulk discounts (the subtotal), then the coupon percent if valid, then tax.",
+          "kind": "deliverable",
+          "category": "pricing",
+          "cwe": null,
+          "test": "import datetime\nfrom shop import Catalog, Product, Cart, Coupon\n\n\ndef test_total_order():\n    cat = Catalog(); cat.add(Product('A', 'Apple', 100, 99)); cart = Cart(cat)\n    cart.set_qty('A', 10)\n    coupon = Coupon('SAVE', 0.10, 500, datetime.date(2026, 1, 1))\n    # 900 - 10% coupon = 810, + 8% tax (64.8 -> 65) = 875\n    assert cart.total_cents(0.08, coupon, datetime.date(2025, 6, 1)) == 875\n    # expired coupon ignored: 900 + 8% tax (72) = 972\n    assert cart.total_cents(0.08, coupon, datetime.date(2026, 6, 1)) == 972"
+        },
+        {
+          "id": "tests",
+          "text": "A self-test module/function exercising the core happy path.",
+          "kind": "verification",
+          "category": "tests",
+          "cwe": null,
+          "test": ""
+        }
+      ],
+      "files": {
+        "shop/__init__.py": "from .catalog import Catalog, Product\nfrom .cart import Cart\nfrom .coupons import Coupon\n",
+        "shop/catalog.py": "class Product:\n    def __init__(self, sku, name, price_cents, stock):\n        self.sku = sku\n        self.name = name\n        self.price_cents = price_cents\n        self.stock = stock\n\n\nclass Catalog:\n    def __init__(self):\n        self._items = {}\n\n    def add(self, product):\n        self._items[product.sku] = product\n\n    def get(self, sku):\n        if sku not in self._items:\n            raise KeyError(sku)\n        return self._items[sku]\n\n    def in_stock(self, sku, qty):\n        return sku in self._items and self._items[sku].stock >= qty\n",
+        "shop/pricing.py": "import math\n\n\ndef round_half_up(value):\n    return int(math.floor(value + 0.5))\n\n\ndef bulk_discount_rate(qty):\n    if qty >= 10:\n        return 0.10\n    if qty >= 5:\n        return 0.05\n    return 0.0\n\n\ndef apply_tax(subtotal_cents, tax_rate):\n    return subtotal_cents + round_half_up(subtotal_cents * tax_rate)\n",
+        "shop/coupons.py": "class Coupon:\n    def __init__(self, code, percent, min_subtotal_cents, expires_on):\n        self.code = code\n        self.percent = percent\n        self.min_subtotal_cents = min_subtotal_cents\n        self.expires_on = expires_on\n\n    def is_valid(self, subtotal_cents, today):\n        return subtotal_cents >= self.min_subtotal_cents and today <= self.expires_on\n",
+        "shop/cart.py": "from .pricing import apply_tax, bulk_discount_rate, round_half_up\n\n\nclass Cart:\n    def __init__(self, catalog):\n        self.catalog = catalog\n        self._lines = {}\n\n    def add(self, sku, qty=1):\n        if qty <= 0:\n            raise ValueError('qty must be positive')\n        product = self.catalog.get(sku)\n        new_qty = self._lines.get(sku, 0) + qty\n        if product.stock < new_qty:\n            raise ValueError('insufficient stock')\n        self._lines[sku] = new_qty\n\n    def set_qty(self, sku, qty):\n        if qty < 0:\n            raise ValueError('qty must be non-negative')\n        if qty == 0:\n            self._lines.pop(sku, None)\n            return\n        product = self.catalog.get(sku)\n        if product.stock < qty:\n            raise ValueError('insufficient stock')\n        self._lines[sku] = qty\n\n    def remove(self, sku):\n        self._lines.pop(sku, None)\n\n    def subtotal_cents(self):\n        total = 0\n        for sku, qty in self._lines.items():\n            line = self.catalog.get(sku).price_cents * qty\n            line -= round_half_up(line * bulk_discount_rate(qty))\n            total += line\n        return total\n\n    def total_cents(self, tax_rate, coupon=None, today=None):\n        subtotal = self.subtotal_cents()\n        if coupon is not None and today is not None and coupon.is_valid(subtotal, today):\n            subtotal -= round_half_up(subtotal * coupon.percent)\n        return apply_tax(subtotal, tax_rate)\n"
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Experiment IDE (gauntlet tui) — install into the benchmark venv:
+#   .venv/bin/python3 -m pip install -r benchmark/requirements-tui.txt
+# The [syntax] extra pulls tree-sitter so the editor highlights code + markdown
+# and supports native text selection / copy.
+textual[syntax]>=0.80

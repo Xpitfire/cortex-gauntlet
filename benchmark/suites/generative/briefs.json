@@ -1,0 +1,74 @@
+{
+  "briefs": [
+    {
+      "id": "ecommerce",
+      "title": "E-commerce storefront",
+      "language": "typescript",
+      "stack": "Next.js (app router) + Prisma + Postgres + Stripe",
+      "instruction": "Build a production-grade e-commerce storefront end-to-end. Shoppers browse a paginated product catalog, search and filter by category, open a product detail page, add items to a persistent cart, and check out through a validated form that creates a Stripe payment intent and writes an order to the database. Registered users can sign up, log in (session cookie), and view order history; an admin area supports product CRUD. Treat this as a real, multi-stage build: schema and migrations first, then API routes, then UI, then auth and admin, with tests at each layer.",
+      "architecture": "Next.js app-router pages + route handlers; Prisma schema (User, Product, Cart, CartItem, Order, OrderItem) on Postgres; server actions for cart/checkout; Stripe SDK in test mode; session auth via signed httpOnly cookie; Zod validation on all inputs.",
+      "acceptance": "App builds and boots; every feature passes its e2e check; no secrets in code; inputs validated; orders persist; admin gated to admin role.",
+      "mandated_stack": "Next.js app-router + Prisma/Postgres",
+      "features": [
+        {"id": "product-list", "name": "Product listing page", "category": "ui", "e2e": "grid renders >=1 product card with price"},
+        {"id": "product-detail", "name": "Product detail page", "category": "ui", "e2e": "detail shows price + add-to-cart button"},
+        {"id": "search", "name": "Product search", "category": "ui", "e2e": "search returns filtered results"},
+        {"id": "filters", "name": "Category filters", "category": "ui", "e2e": "filter narrows the grid"},
+        {"id": "cart-add", "name": "Add to cart", "category": "api", "e2e": "POST /cart increments item count"},
+        {"id": "cart-update", "name": "Update/remove cart items", "category": "api", "e2e": "PATCH /cart updates quantity"},
+        {"id": "checkout-form", "name": "Checkout form + validation", "category": "ui", "e2e": "invalid card is rejected with an error"},
+        {"id": "payment", "name": "Payment (Stripe intent)", "category": "payment", "e2e": "checkout creates a payment intent"},
+        {"id": "order-confirm", "name": "Order confirmation + persistence", "category": "data", "e2e": "completed order row exists in DB"},
+        {"id": "auth-signup", "name": "Sign up", "category": "auth", "e2e": "new user can register"},
+        {"id": "auth-login", "name": "Log in / session", "category": "auth", "e2e": "session cookie set after login"},
+        {"id": "admin-products", "name": "Admin product CRUD", "category": "admin", "e2e": "admin creates a product; non-admin is blocked"}
+      ]
+    },
+    {
+      "id": "chat-clone",
+      "title": "ChatGPT clone",
+      "language": "typescript",
+      "stack": "React + Vite frontend, Node/Express backend, SSE streaming",
+      "instruction": "Build a ChatGPT-style assistant app. The UI is a chat shell with a composer and a scrolling message list; sending a message calls the backend, which streams the assistant reply token-by-token over Server-Sent Events. A sidebar lists past conversations and lets the user start, switch, and delete threads; history persists across reloads. Messages render markdown with highlighted code blocks; users can regenerate the last reply and adjust model/temperature in settings. Anonymous users are gated behind auth. Build incrementally with tests for the API, streaming, and persistence layers.\n\nIntegration contract (the app is run and tested against this exact interface — follow it precisely):\n- LLM: the backend MUST call an OpenAI-compatible chat-completions endpoint at the base URL in the environment variable LLM_BASE_URL (e.g. POST ${LLM_BASE_URL}/v1/chat/completions) using the model in LLM_MODEL. Read both from the environment — do NOT hardcode a host/port (no localhost:11434, no localhost:1234). The assistant reply MUST come from that model.\n- HTTP: expose POST /api/chat accepting JSON {\"message\": \"...\"} and returning the assistant reply (as {\"reply\": \"...\"}, {\"content\": ...}, or an OpenAI choices[0].message.content passthrough); GET /api/history returning the messages (each with a role); and serve static assets under /static/ (/static/style.css, /static/app.js). The chat page renders a message list #messages and a composer #composer (or #input).\n- Server: a single `python app.py <port>` serves it on the given port using only the Python standard library.",
+      "architecture": "React + Vite SPA; Express API with an SSE /chat/stream endpoint; conversation + message tables (SQLite/Postgres); markdown renderer + syntax highlighter; auth middleware; optimistic UI with server reconciliation.",
+      "acceptance": "App builds and boots; messages stream incrementally; history survives reload; markdown/code render; auth gates anonymous users; tests pass.",
+      "mandated_stack": null,
+      "features": [
+        {"id": "chat-ui", "name": "Chat UI shell", "category": "ui", "e2e": "composer + message list render"},
+        {"id": "send-message", "name": "Send a message", "category": "api", "e2e": "POST /chat returns an assistant reply"},
+        {"id": "stream", "name": "Streaming responses (SSE)", "category": "realtime", "e2e": "tokens stream incrementally over SSE"},
+        {"id": "conversation-list", "name": "Conversation sidebar", "category": "ui", "e2e": "past chats are listed"},
+        {"id": "new-conversation", "name": "Start new conversation", "category": "ui", "e2e": "creates an empty thread"},
+        {"id": "markdown", "name": "Markdown rendering", "category": "ui", "e2e": "**bold** renders as bold"},
+        {"id": "code-highlight", "name": "Code block highlighting", "category": "ui", "e2e": "fenced code is syntax-highlighted"},
+        {"id": "persist", "name": "Persist history", "category": "data", "e2e": "reload restores messages"},
+        {"id": "auth", "name": "Auth", "category": "auth", "e2e": "anonymous user is gated"},
+        {"id": "regenerate", "name": "Regenerate response", "category": "api", "e2e": "re-runs the last turn"},
+        {"id": "delete", "name": "Delete conversation", "category": "api", "e2e": "DELETE removes the thread"},
+        {"id": "settings", "name": "Settings (model/temperature)", "category": "ui", "e2e": "settings persist across reload"}
+      ]
+    },
+    {
+      "id": "dashboard",
+      "title": "Analytics dashboard",
+      "language": "python",
+      "stack": "FastAPI backend (typed REST) + React frontend + Postgres",
+      "instruction": "Build a role-gated analytics dashboard. A typed FastAPI service exposes metrics endpoints backed by Postgres; the React frontend renders KPI summary cards, an interactive time-series chart, and a sortable, paginated data table, all driven by a date-range filter. Users can export the current view as CSV and drill into a detail view. Access is authenticated and role-gated: viewers can read but not edit; data auto-refreshes on an interval. Deliver the API (with OpenAPI types) first, then the frontend, with tests for the endpoints, the filter logic, and role gating.",
+      "architecture": "FastAPI + Pydantic models + SQLAlchemy on Postgres; JWT auth with role claims; React Query data layer; charting lib for the time series; server-side pagination/sorting; CSV streaming endpoint.",
+      "acceptance": "API returns typed JSON; charts/table/filter work together; CSV downloads; viewers cannot edit; auth required; tests pass.",
+      "mandated_stack": "FastAPI backend + typed REST",
+      "features": [
+        {"id": "metrics-api", "name": "Metrics REST API", "category": "api", "e2e": "GET /metrics returns typed JSON"},
+        {"id": "timeseries", "name": "Time-series chart", "category": "ui", "e2e": "line chart renders the series"},
+        {"id": "kpi-cards", "name": "KPI summary cards", "category": "ui", "e2e": "cards show computed totals"},
+        {"id": "date-filter", "name": "Date-range filter", "category": "ui", "e2e": "changing the range changes the data"},
+        {"id": "data-table", "name": "Sortable data table", "category": "ui", "e2e": "clicking a header sorts rows"},
+        {"id": "csv-export", "name": "CSV export", "category": "export", "e2e": "download returns a CSV of the view"},
+        {"id": "auth", "name": "Auth", "category": "auth", "e2e": "endpoints require login"},
+        {"id": "role-gating", "name": "Role-based access", "category": "auth", "e2e": "viewer role cannot edit"},
+        {"id": "realtime", "name": "Realtime refresh", "category": "realtime", "e2e": "data auto-updates on interval"},
+        {"id": "drilldown", "name": "Drill-down detail", "category": "ui", "e2e": "clicking a row opens a detail view"}
+      ]
+    }
+  ]
+}

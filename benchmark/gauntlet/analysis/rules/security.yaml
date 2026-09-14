@@ -1,0 +1,38 @@
+# Local Semgrep ruleset for JS/TS (offline, deterministic — no registry/network).
+# Each rule maps to a CWE so findings normalize into the shared Finding model.
+rules:
+  - id: js-eval-injection
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Dynamic eval of input (code injection)
+    metadata:
+      cwe: "CWE-95"
+    pattern: eval(...)
+
+  - id: js-command-injection
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: OS command executed via child_process
+    metadata:
+      cwe: "CWE-78"
+    pattern-either:
+      - pattern: child_process.exec(...)
+      - pattern: $X.exec($A + ...)
+
+  - id: js-path-traversal
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: File read from unsanitized request input (path traversal)
+    metadata:
+      cwe: "CWE-22"
+    pattern-either:
+      - pattern: fs.readFileSync(req.$Q.$F)
+      - pattern: fs.readFile(req.$Q.$F, ...)
+
+  - id: js-hardcoded-secret
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: Hardcoded credential
+    metadata:
+      cwe: "CWE-798"
+    pattern-regex: (?i)(password|secret|api_?key|token)\s*[:=]\s*['"][^'"]{6,}['"]

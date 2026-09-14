@@ -1,0 +1,50 @@
+% Portable arXiv-compatible preprint. No journal-specific or unofficial arXiv class.
+% Compile with pdfLaTeX; all figures are preconverted and bundled.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx,booktabs,longtable,array,calc}
+\usepackage{caption}
+% Pandoc uses this counter for tables whose canonical captions are unnumbered.
+\newcounter{none}
+\usepackage{fvextra}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{same}
+\hypersetup{pdftitle={__TITLE__},pdfauthor={Marius-Constantin Dinu and Florian Zeba},
+  pdfsubject={Conditional semantics and evaluation methodology for governed coding agents}}
+\DeclareUnicodeCharacter{03C4}{\ensuremath{\tau}}
+\DeclareUnicodeCharacter{2032}{\ensuremath{\prime}}
+\DeclareUnicodeCharacter{2227}{\ensuremath{\land}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\setcounter{secnumdepth}{-1}
+\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\renewcommand{\arraystretch}{1.12}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,fontsize=\footnotesize}
+\newsavebox{\pandocbox}
+\newcommand{\pandocbounded}[1]{%
+  \sbox{\pandocbox}{#1}%
+  \ifdim\wd\pandocbox>\linewidth
+    \resizebox{\linewidth}{!}{\usebox{\pandocbox}}%
+  \else\usebox{\pandocbox}\fi}
+\title{\textbf{__TITLE__}\\[5pt]
+  \large Conditional semantics and an evaluation methodology for governed coding agents}
+\author{__AUTHORS__\\[4pt]\small __AFFILIATION__}
+\date{__DATE__}
+\begin{document}
+\maketitle
+\begin{center}\small
+Canonical paper and latest results:\\
+\url{https://benchmark.cortex.a2olabs.com/docs.html}\\
+\url{https://benchmark.cortex.a2olabs.com/results.html}\\[3pt]
+Benchmark source: \url{https://github.com/Xpitfire/cortex-gauntlet}
+\end{center}
+__BODY__
+\end{document}

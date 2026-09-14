@@ -1,0 +1,91 @@
+/* Gauntlet experiment IDE — true-black, high-contrast three-pane layout. */
+
+Screen { background: #000000; }
+
+/* ---- top bar: title + progress + counts ---- */
+#topbar {
+    height: 3;
+    dock: top;
+    padding: 0 2;
+    background: #0a0b10;
+    border-bottom: heavy $accent;
+}
+#title   { width: 2fr; content-align: left middle; text-style: bold; color: $accent; }
+#pbar    { width: 2fr; content-align: center middle; }
+#counts  { width: auto; min-width: 36; content-align: right middle; text-style: bold; }
+#pbar Bar > .bar--bar       { color: $success; }
+#pbar Bar > .bar--complete  { color: $success; }
+#pbar PercentageStatus      { color: $accent; text-style: bold; }
+
+/* ---- body: tree | main | side ---- */
+#body { height: 1fr; background: #000000; }
+
+#tree-pane {
+    width: 32;
+    min-width: 22;
+    background: #000000;
+    border-right: heavy $accent 70%;
+}
+#tree-pane > Tree { padding: 1 1; background: #000000; }
+Tree > .tree--cursor  { background: $accent 35%; text-style: bold; }
+Tree > .tree--guides  { color: $accent 40%; }
+Tree > .tree--highlight-line { background: $accent 20%; }
+
+#main-pane { width: 1fr; background: #000000; }
+
+#cellbar {
+    height: 4;
+    padding: 1 2;
+    background: #0c0e15;
+    border-bottom: heavy $accent 70%;
+}
+
+#workarea { height: 1fr; background: #000000; }
+
+#filetree {
+    width: 28;
+    min-width: 18;
+    background: #000000;
+    border: round $accent;
+    border-title-color: $accent;
+    border-title-align: left;
+    padding: 0 1;
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-size: 1 1;
+}
+#filetree > .tree--cursor { background: $accent 30%; text-style: bold; }
+
+#editor {
+    width: 1fr;
+    border: round $accent;
+    border-title-color: $accent;
+    border-title-align: left;
+    scrollbar-size: 1 1;
+}
+
+#terminal-tabs {
+    height: 12;
+}
+
+.terminal-log {
+    height: 1fr;
+    padding: 0 1;
+    background: #05060a;
+    border: round $warning;
+    border-title-color: $warning;
+    border-title-align: left;
+}
+
+#side-pane {
+    width: 36;
+    min-width: 24;
+    background: #000000;
+    border-left: heavy $accent 70%;
+    border-title-color: $accent;
+    border-title-align: left;
+    padding: 1 2;
+}
+
+Footer { background: #0a0b10; }
+Footer > .footer--key { color: $accent; text-style: bold; }

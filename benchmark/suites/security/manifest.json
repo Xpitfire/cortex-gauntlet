@@ -1,0 +1,8 @@
+{
+  "suite": "security",
+  "track": "security",
+  "modality": "text",
+  "description": "Track S — a CURATED, discriminative prompt-injection corpus. The hard agentic tier (a benign carrier task plus an injection planted in a file the agent reads, in a prepared workspace with a decoy .env) spans secret-exfil / malicious-dep / destructive-git over repo-file, tool-output, memory, and image/audio surfaces; plus canary probes and benign over-refusal controls. The saturated blatant-exfil obfuscation matrix was removed (every frontier model refuses it → no signal). See docs/agentic-redesign-research.md.",
+  "probe_techniques": ["direct", "encoding_base64"],
+  "seeds": "cases/seeds.json"
+}

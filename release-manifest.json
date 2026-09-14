@@ -1,0 +1,1428 @@
+{
+  "repository": "https://github.com/Xpitfire/cortex-gauntlet",
+  "source_project": "Cortex / Alpha Omega Labs",
+  "license": "Apache-2.0",
+  "paper_date": "2026-09-14",
+  "files": {
+    "LICENSE": {
+      "sha256": "390b42ac13507bea7cd4f077c2c61b1fc8c85177483aab00c1d4342093c0cf4c",
+      "bytes": 11915,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/BENCHMARK.md": {
+      "sha256": "e8e6d9e2e182e48a2aa57ded651aee9f98e8dbdaea06a81cd3050830aa6bf4ed",
+      "bytes": 8343,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/README.md": {
+      "sha256": "30aedb6856a63238d6bcaf9d00b6744b5ced8394e963681bde99d214c14f58eb",
+      "bytes": 21357,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/adapters/README.md": {
+      "sha256": "c036afe853a29440569810ab7115b309899fb75e44e578988c8ecfacfe9d991f",
+      "bytes": 1377,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/acceptance-tests.md": {
+      "sha256": "490b01b8b9758085f80858d89e3785ce823f16afb322858fe480771c05e083b9",
+      "bytes": 10454,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/architecture.md": {
+      "sha256": "258cdad1241928741dd3e701d279ba13f07c29c1c83841207d4b5839cd70f4aa",
+      "bytes": 8477,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/benchmark-experiments.md": {
+      "sha256": "828f187ed888444e8a9d47d596ec4d5fbbbb8c2d4bfe651a8bf26c851f50fd6b",
+      "bytes": 3650,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/implementation-plan.md": {
+      "sha256": "7343994b4b895347646b87eef899f0e8fa0298d1700d4c8e7b0e686efb273500",
+      "bytes": 11514,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/realization-roadmap.md": {
+      "sha256": "f181a0960d72725cea42d858293add0fd4eea6238b1c4dc48b6ddffca5f7a0d5",
+      "bytes": 8751,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/requirements.md": {
+      "sha256": "00b6562b872af9259236bf94aa418c38674a13e269af57c438f1ec1041324f37",
+      "bytes": 6225,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/research-state-of-art.md": {
+      "sha256": "4be8ec4274047359a39a26c70c1c1251bd461e5463c00f732ee12203ca1988bd",
+      "bytes": 13542,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/security-model.md": {
+      "sha256": "e799d7d0f43dacdf032ab2aa4e39e52be256c2d51500cbc68365b2b124fe6372",
+      "bytes": 6331,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/track-p-runbook.md": {
+      "sha256": "9222c194d6218ffe7e74951071e6f3f7271a2d2ed7ff854836068b5a47f2c510",
+      "bytes": 7668,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/track-p-sandbox.md": {
+      "sha256": "01326229ce455f19550f24feb14ee5578f24e18fb1a9b451a932a7b04877bace",
+      "bytes": 5807,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/track-p-scoring.md": {
+      "sha256": "dcf3740549af00b565da34102743c58870fcda34ec2313e72bb30fa85e01cd9c",
+      "bytes": 8741,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/agent-harness/track-p-storefront-plan.md": {
+      "sha256": "e84c846bef7963b0ed064354fada30100f4ea3998c901d4a1686c88266b37047",
+      "bytes": 19129,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/conftest.py": {
+      "sha256": "0a247a3f6fe3f99151205e6c076cbb001763c9616d042f76b364f190aa46e02c",
+      "bytes": 181,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/agentic-redesign-research.md": {
+      "sha256": "9371b68a8e284033ec98b876d3cbbb12751fdcba48f6e3bea161437f58645e76",
+      "bytes": 23670,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/attack-taxonomy.md": {
+      "sha256": "16af839c39e535fd98a93f4ed36f4d09eab1aaadfce87b3cdba66dc284dd2073",
+      "bytes": 4883,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/dimensions.md": {
+      "sha256": "ff661673459b676abd4926be02c2ac42da009ab41ab494503e7aba4f8702dec7",
+      "bytes": 4163,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/proofs.py": {
+      "sha256": "01fab84d36446032380082cb9c7b8710cb5c6c819cc720890a09d5a6b95c44f9",
+      "bytes": 11335,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/reporting-design.md": {
+      "sha256": "b9a05624a90a02b3ce1df5ba731fab3564b4c3f123e5a19b028765dd529ad98b",
+      "bytes": 13044,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/reuse-map.md": {
+      "sha256": "3db090629f825405de737826c347d4542e9c5e35797530eaf370ac362ad09a97",
+      "bytes": 5567,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/docs/scoring-and-judging.md": {
+      "sha256": "a6310fe0d286962736900c6c612bdcf15823a030f41661fee20d1d8d03296c82",
+      "bytes": 26762,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/eslint.config.mjs": {
+      "sha256": "9bd4e77ce5291ced0ae1a1486482b0699e94dfb53b6b8666f9241c3311faf081",
+      "bytes": 821,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/__init__.py": {
+      "sha256": "e186ce9dd09c6c7ac83949553c8ee531368e7572e9c233c8070668eb9fe078ea",
+      "bytes": 140,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/__main__.py": {
+      "sha256": "0c338a3e1e467bb925d41e93466681e891f4d8eb6d9ed888cf1de19a1d875ccb",
+      "bytes": 145,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/__init__.py": {
+      "sha256": "2b0a439baccfab0fae53013b1d6d0b1bae7e7277d63a0eff57de76c0a98e48e7",
+      "bytes": 477,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/base.py": {
+      "sha256": "d4f6589dbb5c3160ff488bb7f623170e1803a86fbae274cfd7e82c9fb8d9ce29",
+      "bytes": 839,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/claude.py": {
+      "sha256": "58e535015d6485c45774a57b4ac4ef3dd49fcf4907a521aca0f66361cbc18c01",
+      "bytes": 1377,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/codex.py": {
+      "sha256": "e1a1eac30d91ba27eea72ed085019f35d050979c9236269cd4b893cbeda872db",
+      "bytes": 2468,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/cortex.py": {
+      "sha256": "309a21a7bcd51c087560f92862a9886702e865f28bc2054c4ef62b401dd8ce5b",
+      "bytes": 1089,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/governance.py": {
+      "sha256": "f063458f1d1f399c39af7e77f57be8a4b5cca58690daa43da26df6bf6bb98da7",
+      "bytes": 1817,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/mock.py": {
+      "sha256": "a95a437a4fbda273f1fda3cc5b2e788806d5955aa809b9626b6a9c8e79b12377",
+      "bytes": 8538,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/omp.py": {
+      "sha256": "e44fb1f226a59e3b1638e6ccaf372b220cdc96c3a855ebc2b96435c12a765050",
+      "bytes": 936,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/opencode.py": {
+      "sha256": "cf3daa86e57ecf9afbb933dbc1042b91a74d99ddfd93bb2f2b31a076ab00af4b",
+      "bytes": 2779,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/adapters/subprocess_base.py": {
+      "sha256": "5029379c1589a0fb897960cd9bb61044c21802f042bfafa05151bf87b011e480",
+      "bytes": 19073,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/agentic_corpus.py": {
+      "sha256": "358dd63a962736343facacbb5ed19ae12b8ef9e5a0031997829cc8be142a1de4",
+      "bytes": 45369,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/__init__.py": {
+      "sha256": "436322dfdfcc94f84cd80059a405e13fd3e4bac4ba5e9ad4652084f5d34408a8",
+      "bytes": 1000,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/_proc.py": {
+      "sha256": "4142512e918e39adb8b2b31ff296d21e0955fb191719cb861a53a1cebb870c7e",
+      "bytes": 5832,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/deps.py": {
+      "sha256": "9e69892f0317296e6221d3875e2f001b63d5cb0099a4f005eb40e995c4f61fe2",
+      "bytes": 2344,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/dynamic.py": {
+      "sha256": "7fa7272a6a6b7e0ff6df841889c3f8eec61c2526f602668aa5b9b218c0b19841",
+      "bytes": 6509,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/embedding.py": {
+      "sha256": "c144957bdbce3297674e56829fbc7f80f2bc4fbbef516dbe210c3b7afbef09a2",
+      "bytes": 6744,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/lint_types.py": {
+      "sha256": "e67012145e21ef2e870645d9fc3a3c78dc652b7f228b5e3232e63a6b9ee9d6ae",
+      "bytes": 10980,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/models.py": {
+      "sha256": "70037a9a688fa3c6d64fa9111d71cce98cbde30495375b544cf1a12c0a4ef479",
+      "bytes": 837,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/rules/security.yaml": {
+      "sha256": "332a555b5fc4133c0cdb6901196df68998945eb31d1b55e3ec08105fbaf0e8e1",
+      "bytes": 1182,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/sarif.py": {
+      "sha256": "68aef53aea4cef54971943d37179b16e9fbdf757c55c9a819e5ac027ab010d36",
+      "bytes": 1895,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/security.py": {
+      "sha256": "e23a09c63814640793df934f3ed79985270454a28f848fa2cfa2be4671e23cf7",
+      "bytes": 3409,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/semgrep_local.py": {
+      "sha256": "2938134488d4139df37e0eaa2e8201d08d0cb8e7c8dddd4dca68f2f76b6dc1cb",
+      "bytes": 1823,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/static.py": {
+      "sha256": "ff9dffa1ab9e02ae1ad1e09de35c724f493be971973b9023bb444383b0f88b54",
+      "bytes": 6020,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/analysis/vertex.py": {
+      "sha256": "3b2468175e4f49dc7fa60db12475713fb884d25463ad742efd5485f2b795c24a",
+      "bytes": 5625,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/bootstrap.py": {
+      "sha256": "70a06baead7af47b265ac5c99062acf8b2b257fe80258cb731f56af333055883",
+      "bytes": 5786,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/cases.py": {
+      "sha256": "5104ce90828b80eadc43bf1dd298a127801e888e32679cbb7fdf3223200fd253",
+      "bytes": 5041,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/checks.py": {
+      "sha256": "85f407335f68fa573af10da2a54eefca8edd239986f8086361843cb5dc4a1f53",
+      "bytes": 1310,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/cli.py": {
+      "sha256": "3b8b01b142f4a019a0ee5c3fc1c4131ac1d28d6189ae2b69cd10e72056652475",
+      "bytes": 39607,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/decoy.py": {
+      "sha256": "f696c68570530e91e7c95b6d3ab40a87bd3d1d3710f91f0bf4b9d1ea05124aac",
+      "bytes": 2408,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/docs.py": {
+      "sha256": "4569cb717808169c061fda0b533c7041a1fa1233e103dcfc318fa6fcf92dd734",
+      "bytes": 124474,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/enums.py": {
+      "sha256": "a3b272a7c37c80b1895ca4ccb3e4e1f1034951e5352ba53a1cae3781f316df4f",
+      "bytes": 4979,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/errors.py": {
+      "sha256": "a246ed57a7ff6bd198c4972d0fc85b6ff6d92e354a1ce579aa46158e09c27c1e",
+      "bytes": 2442,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/__init__.py": {
+      "sha256": "9d756bb8575c24bc16125aa9546f86884379a3b73ffa8237034d91669757d08e",
+      "bytes": 178,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/aggregate.py": {
+      "sha256": "0897b0b8cb39164e42750853131d580d48b674e4a40cb521d0523c96a0a6d078",
+      "bytes": 6802,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/corpus.py": {
+      "sha256": "023ba04dd1a868b3f17a745d6dcc1e0bf1a675ffdb185fbe85b2771e6d6b39f6",
+      "bytes": 1070,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/e2e.py": {
+      "sha256": "22dbfe7f1996348f57e556eb9f2fe5c3ef1f17bdff6e37fe06896bd9ea15b52c",
+      "bytes": 9106,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/gen_probe.py": {
+      "sha256": "78c261574e3a40a5713ee4326887a11fbc18da5fab6c819edb17696c7cc7ce63",
+      "bytes": 9722,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/generate.py": {
+      "sha256": "35d879044496345628504c801a94bc88d324cd69108114f8f5138ba14f44da40",
+      "bytes": 5581,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/judge.py": {
+      "sha256": "9feaa6c53c9f3ddc9b58f88a812f4490058f35b63f0d8b2415bdb8603e1fa2f1",
+      "bytes": 3405,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/live.py": {
+      "sha256": "4864039843beb2a111475ed0b1b11201a2900d8acb398fef62edfef720196433",
+      "bytes": 22267,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/models.py": {
+      "sha256": "a279a9a77699a3bad78243cdac48cddffbc3bb9acf8a42d3ac801a9452aa51ba",
+      "bytes": 3022,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/run.py": {
+      "sha256": "5d50f879a6c53f3df6addc4091e529a80973eb479387f855b056a239546840b7",
+      "bytes": 5691,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/sandbox.py": {
+      "sha256": "9962688dcce3588823b6cab716c1026f5671b474c2172dad90f83b3d494d83d5",
+      "bytes": 12122,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/screenshot.py": {
+      "sha256": "26b75b20cd9f121f1dfaffaa4bcc035643007c1eaec7b786ced0b95f9bd3cb43",
+      "bytes": 2158,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/generative/stub_slm.py": {
+      "sha256": "549603546b35568f2e1d0ad811d8668b55ae90bcbb9ecc6755d6b1a8fbaf7bd8",
+      "bytes": 3087,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/harness_isolation.py": {
+      "sha256": "a90e60169f49aca7f612a6a55ea642868543bcb39d4765750fbce985b0281a01",
+      "bytes": 8232,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/__init__.py": {
+      "sha256": "815bebad3a5d36b6b6631f21b6ff463447c0d0b1323c3afffca004e5698557d7",
+      "bytes": 696,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/adapters.py": {
+      "sha256": "7e284d1206762d97e3f85a612a93aa93c4b9e6f0fb62193b18f06f09a71370be",
+      "bytes": 13279,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/base.py": {
+      "sha256": "8073a1f6f1fa3fd5c7919991c6a35e4557ac3d0613c025bf84e838566113774b",
+      "bytes": 10738,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/fake.py": {
+      "sha256": "bb642abc813accb7bab6f1b2a938108ca7ebcd0adc1ebc3acdccb62e42496dec",
+      "bytes": 598,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/models.py": {
+      "sha256": "c4e4d41316c7fa9be75ee722eb18a11cda7c5ed2f00a62f05dbc71d3cde10b2d",
+      "bytes": 2031,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/progress.py": {
+      "sha256": "5304ed6450b3a0e4efeb65b21f7c634e4c574aa20883f025033c437dae5e37b5",
+      "bytes": 10164,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/livegen/streaming.py": {
+      "sha256": "60b468a2e810db4a804d809075b6866bd30cb972d9d47467dbf2c4c0644fd652",
+      "bytes": 9390,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/modality.py": {
+      "sha256": "af408bdeeae9e2189b6153c4f09b06a83a6b87815eb57dd6d7e756910e6aecc7",
+      "bytes": 3932,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/models.py": {
+      "sha256": "d885eee5179f0dcdb5c818f1b95de2a04af82752d9491e9fe6884dfc741a9f4b",
+      "bytes": 9217,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/paper.py": {
+      "sha256": "a867da8d1443c9b003031a335fbbd33ad34faa4dfefe06327fd27ba561089a06",
+      "bytes": 15859,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/paper_template.tex": {
+      "sha256": "fe17da439d0ca09a8f4e8239e8bdc9e549fa55bab73875d616fd63074dcf8c43",
+      "bytes": 2033,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/paths.py": {
+      "sha256": "b23dad4524b4697bbf18c96dfffad78c6c70c833813d111dca2c194053811133",
+      "bytes": 681,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/preflight.py": {
+      "sha256": "fb684e0069af2a919910a603dc097073f99e43d8177905618a935a9bb61d04dd",
+      "bytes": 7218,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/__init__.py": {
+      "sha256": "0c6e287b8e984a4402dc6813dcf1fe6d5a91cb77c7790c88b6ff215dac7beafe",
+      "bytes": 755,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/arch.py": {
+      "sha256": "f7d918b602aecd77bb3b8d00e3f66fca9fc9cd54183aa92f6e4c59e03b898e57",
+      "bytes": 2473,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/containers.py": {
+      "sha256": "393ed7b257c69b4d53d07caad5944b17cc108e74db960d8fc6300dd57eedbda2",
+      "bytes": 4075,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/corpus.py": {
+      "sha256": "5ad6f2d9cd0f6d3605bfabeb506454b55899b915bc09dd3e93b99149325197b7",
+      "bytes": 1539,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/egress_proxy.py": {
+      "sha256": "02280823350445de64fdbf9cde812abc71f47b4cf18f29ebf402080a5034a4d4",
+      "bytes": 3055,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/judge.py": {
+      "sha256": "cc868767061fed02f80de3d0cf06635f8b8674f069d7aebfcd7a2a182257e504",
+      "bytes": 14038,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/launch.py": {
+      "sha256": "a4b05731de4649d0afe8b20aa85d013d36747d9169094f43d492efaa8bb530de",
+      "bytes": 5143,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/mock.py": {
+      "sha256": "2e586f5d49dc69f72fed9b4d5bafb31732cbcf9c09dc5a9ddad9cc961c5b162d",
+      "bytes": 4044,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/models.py": {
+      "sha256": "aabcb2ddeebf27372b4ed1eb319afef79adff6199e6ca999f50ee2c97c3addbc",
+      "bytes": 3628,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/probe.py": {
+      "sha256": "9a28ec8b52fd9a30218501039229833d9f6ce3044489f749eedd384ac72f24d7",
+      "bytes": 27307,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/run.py": {
+      "sha256": "5bc50066c1425854f28629b5cf29b85c61eb1873feaa8f8272c3b8ef13b8cb34",
+      "bytes": 13497,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/sandbox.py": {
+      "sha256": "cf20a9871f864f581a0785dba351c25ee8a4623baeeb4d4f5473e8deb6005c02",
+      "bytes": 22179,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/score.py": {
+      "sha256": "dbdb03b84e76fd112572d50c81fc1d8b0c14824e98ab2b22968c5c532fa7e472",
+      "bytes": 10995,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/synapse_build.py": {
+      "sha256": "384fbbb3c64b738593fcba365f674fc1c89e9cb721b8e09fd39d288e55abb57b",
+      "bytes": 30493,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/validate_vertexqe.py": {
+      "sha256": "aecfd2d84bad6b7715822d539d0961939202d904acb53025e5df6b98b98164c6",
+      "bytes": 6097,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/project/vertexqe.py": {
+      "sha256": "c1a7d1e00a0c5280019fe1c1fd20a7d86630a11976e9fecaa2c1bbca0a59cb33",
+      "bytes": 11930,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/__init__.py": {
+      "sha256": "e33c1a6daa0883ff6bd79fe75b86fc27f1816198bb380559cb0d22022f04af3b",
+      "bytes": 162,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/aggregate.py": {
+      "sha256": "c3b1d3672cf7ec2d8b2676113ee5bad0031cea6594515667b90f1c3350bbca82",
+      "bytes": 4964,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/corpus.py": {
+      "sha256": "82626b254d22b68cb503a7a0dbf796c5ad615912f62160373e2012f649ec12f5",
+      "bytes": 1233,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/generate.py": {
+      "sha256": "f55e6898217f10772bf02cfe82227266cbce01a451348e8ea4ccd1ae79e684cf",
+      "bytes": 1990,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/judge.py": {
+      "sha256": "f2c587d44151152f684715d8e70ee74cbd5378294eb7ddfc583b53183462b000",
+      "bytes": 4311,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/metrics.py": {
+      "sha256": "d92b1dc0e10a8b1303abee913487a4aefc1b0f020411e5c9bacd8eb2c334692f",
+      "bytes": 3030,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/models.py": {
+      "sha256": "33869ba2eac01f452be8fca2e9a50dafa84c823763142a634704acd4fcd97d8c",
+      "bytes": 2484,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/run.py": {
+      "sha256": "17024639b14b308af49408a944388b4a4a34909dd964be21af85e7c183e6b235",
+      "bytes": 5131,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/sast.py": {
+      "sha256": "5e90436ef4d27c377c32f5073de11ab772fb2ee92856feda027c929e191ba3c4",
+      "bytes": 2979,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality/score.py": {
+      "sha256": "38eb58cd700bdb60bbdc80c4d40a2f084ed0fd126c6650f6d6144c94550c7194",
+      "bytes": 10019,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/quality_gate.py": {
+      "sha256": "79ac2997091d1e8d90a08e050f6ed1d7c9be1b532925d8288f8c97896b209d09",
+      "bytes": 6404,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/redaction.py": {
+      "sha256": "252331983904315043c829444246acbb90ddcf8a2f582bd919dadb75f9dce50a",
+      "bytes": 6759,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/redteam.py": {
+      "sha256": "1092a976921fe751d6f9d07a3b91562ae60a5fddf5f2aaaab9d97322d83efb3e",
+      "bytes": 11745,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/__init__.py": {
+      "sha256": "d50d87256d19723e9088ebe5ee8f6a8f1f9b568e5eab83ad98b8e2dd449a0e16",
+      "bytes": 848,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/corpus.py": {
+      "sha256": "c927af23243c3c4112755910d36dfa6991f3d27fd7dbff6cca8b9ea6971a23b4",
+      "bytes": 7786,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/grade.py": {
+      "sha256": "bb02dfbfc3ea66e94ab4a0a174e3a2ede04174bd6b721f7a240735ed1c26faba",
+      "bytes": 3959,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/hard_tasks.py": {
+      "sha256": "61a101de06c32cf25950552f823b382767b155fb74e95278d94d715ee9a3dd00",
+      "bytes": 13480,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/judge.py": {
+      "sha256": "2097595e074c7fa1c766759048e384325db3094846c4f7bc5012ac285e104fb5",
+      "bytes": 2294,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/models.py": {
+      "sha256": "f42f07d8ade64a476c30cf0355041791c313138c73c67d94806d079f396f57fc",
+      "bytes": 3653,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/run.py": {
+      "sha256": "199825d2efab5dcbdea94446a1dcf299150df0aa08e34852415c152f1e7a1d2f",
+      "bytes": 10227,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo/score.py": {
+      "sha256": "c0c007ecf2d4e7b50e6dc040ad837cad261578f6eeec3a178e5308d19764371f",
+      "bytes": 7619,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/repo_scaffold.py": {
+      "sha256": "29d2daa53cf415102cb42b7b959cb0b1d05a44d7bff3ce5772d312a27df73107",
+      "bytes": 27608,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/report.py": {
+      "sha256": "5c5e3b467aa0aa9336fe72d0dff65e63394ac81a26be2988c45a6654f2903289",
+      "bytes": 30322,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/report_common.py": {
+      "sha256": "715edd6432043bdbf1cdaed3045e12e3137dc23ee2c910c80be8e22db86cc975",
+      "bytes": 27945,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/report_generative.py": {
+      "sha256": "fd7ad0b839615cce4954e2d0cfcceb90659acde7854265bf3cc7d4d8e017439e",
+      "bytes": 20123,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/report_project.py": {
+      "sha256": "f6c44abe51c5d924f120db9be6d02bcaf0e158c0a39e0c19add1ee4af7855afb",
+      "bytes": 14519,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/report_quality.py": {
+      "sha256": "fbee2e7ee93d48e8ef9b1787fb5a84dbc03c5d7ff139006294bc844d7c5fd0ba",
+      "bytes": 18035,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/report_repo.py": {
+      "sha256": "93cd194fb6d86c6beb5077393f5e1d90a24fa23f13c780cdb9c1458a53dc80a1",
+      "bytes": 13304,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/rescore.py": {
+      "sha256": "b6afc302648bf06b3cd28ad5abb3ccd46904d99bf27a7e85a11fc4d009fe1c5d",
+      "bytes": 8855,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/rescore_tracks.py": {
+      "sha256": "e0161ca15a23bfceccafb1173f26fcd787d29c3caa2ccc509b561a7ff45923c9",
+      "bytes": 17288,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/resilience.py": {
+      "sha256": "9e8cf3d5eabf8946c8aa254a9fc404616ba700f8bccc3c04318db8ab9bf42c9e",
+      "bytes": 6966,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/results_package.py": {
+      "sha256": "8a73198919b9cf0853a084161efb1140896cbc3725b6f615aaba1feaa15b4fb3",
+      "bytes": 15086,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/run.py": {
+      "sha256": "d97d037dd1d0f77319851f126b0784f2cf4aaed9086eff82cbbd80deccdf75ff",
+      "bytes": 23427,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/sandbox.py": {
+      "sha256": "e75e82f64495506f03ae50e29f5117e816823cb77ad028af30be4de3e47bcaca",
+      "bytes": 9002,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/scoring/__init__.py": {
+      "sha256": "cd5dfd847de299b653723da764ace8004f5f714a95872cc3cbced002434e0931",
+      "bytes": 308,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/scoring/aggregate.py": {
+      "sha256": "fa5197707432735f23f64d7b0e646dbb0c34a43bc1a26f5f19c6982ed28f4c6b",
+      "bytes": 7089,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/scoring/judge.py": {
+      "sha256": "c6dcb8af809271713098fa9a7ec5d7b786ee6520f0efd3ff90b5256ecfc97a76",
+      "bytes": 15046,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/scoring/l0.py": {
+      "sha256": "1e8fd8e5efa855b2e4a691a29d8766d988b8eabebd6760b5e19ddc16f56cbb78",
+      "bytes": 9213,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/scoring/l1.py": {
+      "sha256": "711ac9adb39bb574bd3fd5ec127f2cad626930c6f97ac848bb9f7b1fc41321b0",
+      "bytes": 551,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/scoring/stats.py": {
+      "sha256": "caf9e6ca7bad31af3868626807cfc7d283b34793bb98a54eb57e85ab91eeaeea",
+      "bytes": 3464,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/semantic_judge.py": {
+      "sha256": "5d050cfae3d02afedcb084f54ac84c48183872ee1f1f33d278b315d9b70a0c12",
+      "bytes": 3108,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/site.py": {
+      "sha256": "a048d8741a5d69cfb79819e7e8f5599944cbd9298b913b241cb0c03e77c51f09",
+      "bytes": 36249,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/site_visuals.py": {
+      "sha256": "3e21f57848a43b59e4fc3d8a084dbec31a3b58842740e62d480ecaf9376fe4c5",
+      "bytes": 25038,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/surfaces.py": {
+      "sha256": "a4e64ea40d7f2b06b94fa3a4334943b7029b7c4d66ba36beea724637b0868e50",
+      "bytes": 1738,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/synapse.py": {
+      "sha256": "5d51779bf3348e76f8d10d5e854422f23454001138862e47ea935c5c9ef82255",
+      "bytes": 4314,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/synapse_loop.py": {
+      "sha256": "2014ca20daacd74fcbf5d639fd9d8bb17bfbb7a1761d729c37d9008755b44257",
+      "bytes": 8407,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/synapse_ports/__init__.py": {
+      "sha256": "538cc121b67db62042cc1b2025b623e17b9ecd72faf7c0c6f588df4be9700afc",
+      "bytes": 1700,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/synapse_ports/action_executor.py": {
+      "sha256": "7433520f8f11505be5cace1ee75164c1760ad4f0e18c410648624deaf3c11ad9",
+      "bytes": 18983,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/synapse_ports/reviewer_judge.py": {
+      "sha256": "8c4e0654f06fe3642837bc3e3a4e6ef1d60dbd683f5a1b140e8437ab657f11da",
+      "bytes": 9622,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/synapse_ports/signal_source.py": {
+      "sha256": "8e9228ded40609fc007ca6f5a404114d023cee397ccbff7b53f21717bfa8135c",
+      "bytes": 5622,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/terminal.py": {
+      "sha256": "0f670d3a91c44731ee14071735785b2394038c2fa62fbc755ef372833a9fd0d4",
+      "bytes": 306,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/transforms.py": {
+      "sha256": "83b71dd4bc008d246f4920135cc6bb62c2bfe745d9c64e9a19765d948e12668e",
+      "bytes": 9022,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/__init__.py": {
+      "sha256": "574930549fac582344113528cd9dc8bd47bfa9ef9c06c360bb6d08f73b895c82",
+      "bytes": 7919,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/app.py": {
+      "sha256": "9b2e08c9b76a8de3691c8a7757517edefd468b924f6d5485bc54914d64985f67",
+      "bytes": 26480,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/app.tcss": {
+      "sha256": "98d72bf1249f5228c1902696d29857091d503198af0e2b85441b6dbfa5e54c32",
+      "bytes": 2273,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/bridge.py": {
+      "sha256": "bdeb7b024c59f5d9d4a281a337c171d74bbdb57f5e429932e443bdd676403656",
+      "bytes": 39524,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/console.py": {
+      "sha256": "1878a02f04c4b6c9f5f71c69cc75714bfde23ef5274c30f9a9100e0d1c67d09c",
+      "bytes": 1843,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/events.py": {
+      "sha256": "e343de95a76feed4732e5538a6052ebf4cc7fb1a7d8dd8fa5c3cb14dab451517",
+      "bytes": 3409,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/model.py": {
+      "sha256": "546840bf814797a31c95a86b127e0802d1e9e8ae8ce4c4a3dc79d828a1d52839",
+      "bytes": 6378,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/render.py": {
+      "sha256": "cbd24559e4282e4a8f1e40a7856085066f662479583859e3aba6d567905d5bc9",
+      "bytes": 3282,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/tui/runner.py": {
+      "sha256": "819c15bea0b5a120ddcc86a4c1d0b808d66b3bf09e2b36490ac6a1ae70a8c2fc",
+      "bytes": 19636,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/package-lock.json": {
+      "sha256": "e714011fae3237a86612db90e9eb7380b855a18550b90da1d0db2b77b453b116",
+      "bytes": 53139,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/package.json": {
+      "sha256": "addf49b670e00df62f4bcc375a1d8b4461e2087d8f38c96892e56ffc49ada314",
+      "bytes": 473,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/pyproject.toml": {
+      "sha256": "9d91837151a5a2444338dab935a46a8734ed449429a3609569c005c535ad3cc7",
+      "bytes": 2318,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/requirements-tui.txt": {
+      "sha256": "a32c0e00873f777aef95e7bf94a9825689ae6652299a57e8b30c5cadb732aa7e",
+      "bytes": 287,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/sandbox/Dockerfile": {
+      "sha256": "b87e5e277c842e26abba5b026791c5b6a0af898491a738cdd4c3485d9ac463ee",
+      "bytes": 2253,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/sandbox/network_guard.py": {
+      "sha256": "d59a79ecbca7f5f1788d9fcdcbd568bc6ecf85dfdb5aa22cedc43f967ba19798",
+      "bytes": 2780,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/schemas/README.md": {
+      "sha256": "e75df8ebd103e5385e34215d60923082afb14a1d289e04dab8a6597ce97fb10c",
+      "bytes": 1444,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/site/Dockerfile": {
+      "sha256": "9c65b41db723a592aeed46648da18f01a5c8ec37ee4501ec9174c900558c47e7",
+      "bytes": 177,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/site/default.conf": {
+      "sha256": "73ae08f3a081379718adcd60eb4d27f9a9758101716b8f8c91e33a1936c87c69",
+      "bytes": 948,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/site/results-package.json": {
+      "sha256": "41b3a182b6175848c14b219631c8c689c5c004797593d65ffcf004e9d0c0b9b4",
+      "bytes": 3338,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/SUITE.md": {
+      "sha256": "8ef5c347cd187dcac4ebd9fe4a5f5946f7987a2c19381b490e84373f30686d05",
+      "bytes": 1052,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/briefs.json": {
+      "sha256": "d3e65cebda06f124aafe73709649f5a3f3bf253349648e800fd5696c7bcd7d7e",
+      "bytes": 8850,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/app.py": {
+      "sha256": "871fc6d7f92c6f07956dc4c1ebe6b33b77d86aca857f3daa117e9398d16007fd",
+      "bytes": 717,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/e2e.json": {
+      "sha256": "027bbb89724186391394de48004ea117f4abbee0aa0ce81abc21887dbb91c1b9",
+      "bytes": 871,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/server/__init__.py": {
+      "sha256": "c9c2422238cab1688e2fd9310caf5f5b44d7b9608ac26abaa301c0bf96f62a8f",
+      "bytes": 166,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/server/handlers.py": {
+      "sha256": "37f022881c82a9031c15ccc245c860f6af419022f71138a3630a030e78c6c909",
+      "bytes": 2403,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/server/llm.py": {
+      "sha256": "9ac8a57342b6d3ab862f4fd2b8380c4cd8c2463480cc409e2823e87a35d41042",
+      "bytes": 1547,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/server/store.py": {
+      "sha256": "6815e469399fe3b5cf01df67d4b9b645fff410646de805788df2ce8a9cf118f2",
+      "bytes": 444,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/static/app.js": {
+      "sha256": "b5e17253994ca86b1a7aefb2e5f7ebd61606c29e6dcceb092ff853ec6946de0a",
+      "bytes": 1009,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/static/style.css": {
+      "sha256": "eb4018bbfba16da60c2d8f62f8c5c250adc29881b93b5edf55ffe0ee7a5447a0",
+      "bytes": 1325,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/templates/index.html": {
+      "sha256": "079b4d07ebe20fc8660177d550c357654e1293da74bf10b6701bb3b30bd28315",
+      "bytes": 641,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/chat-multi/tests/test_app.py": {
+      "sha256": "7166f9a9c10e596bd290a793a64bf3c94bec46a3a549e4ab0901a989078592b9",
+      "bytes": 1336,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/storefront/BRIEF.md": {
+      "sha256": "822e0a667d79469197db1a73fafc61e5edd05983caed56fb6f97261fcaaf8d71",
+      "bytes": 4214,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/storefront/acceptance.json": {
+      "sha256": "d9727be348654d15569430db85abbfa3cfec944752cf9f39963401c0e6c152b4",
+      "bytes": 6316,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/storefront/arch_corpus.json": {
+      "sha256": "2313a1e8cb4deb233cfca5b4568caab53d538ea8ad2f7ecd0bd1ebfd51b8d7ce",
+      "bytes": 3779,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/storefront/catalog.json": {
+      "sha256": "e1ef641706a19a4d229a056395a657222df66858de73f43c563306395e147034",
+      "bytes": 4291,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/todo-app/app.py": {
+      "sha256": "c4d23472de9f328a848c50b7a378dd51eba78a717692d814077b51b49c41a95f",
+      "bytes": 2296,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/fixtures/todo-app/e2e.json": {
+      "sha256": "8077adf785c0c7ba3067162842357f22a2498ec9befce24860997f58b98aac41",
+      "bytes": 628,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/generative/manifest.json": {
+      "sha256": "ba83953ef6059b17c985e39de95ba1797ed736ea1c914741ace73547305ae60a",
+      "bytes": 504,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/quality/SUITE.md": {
+      "sha256": "6c20b9ec20ef4ece66d683efced800c40cfd75c873c50328e5c8297b47472fd7",
+      "bytes": 1058,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/quality/manifest.json": {
+      "sha256": "96abb9e1c0b0adadb3dbe4fdec97eee783ce7d4474b5b48aeb9907bcc1eac561",
+      "bytes": 379,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/quality/tasks.json": {
+      "sha256": "0cc92b9952d45828448418a0c7f49891bd7d4a8123b61b5dc8a94b569781a31f",
+      "bytes": 26490,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/security/SUITE.md": {
+      "sha256": "0564aa8585d8c7a6fd3f5e63a14f2de7071aee62ae06d8174d429c35c95a42b6",
+      "bytes": 1098,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/security/cases/seeds.json": {
+      "sha256": "680a57bec147711968c333c7ed4be8b58dd3ef12e4fe13ded43dbd6739068b88",
+      "bytes": 1286,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/suites/security/manifest.json": {
+      "sha256": "a87eff54d39ecde16888f53e45510787f18a178f6fcbd06102b5d76b733be461",
+      "bytes": 695,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/conftest.py": {
+      "sha256": "5b5f890929de0a926d651a0d774eaf6b74dc673de2b926326f5c3695326fc548",
+      "bytes": 235,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_action_executor.py": {
+      "sha256": "f9f9c599e92b7492815befc056a69099acd482cc6f9afdfba142b3c60eb2aec2",
+      "bytes": 15238,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_adapters.py": {
+      "sha256": "c390ab4899cbcd770e595960278718ca609439935bc8f67e972249179af37854",
+      "bytes": 3485,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_agentic.py": {
+      "sha256": "f2cf791ad2a17504b63a2e06d7480b4b19e9812911ca83d63f3f7615844ad499",
+      "bytes": 1817,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_aggregate.py": {
+      "sha256": "f5c1009984af04e590aa3083154300382021b18b984aa294340a7a984f60d378",
+      "bytes": 893,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_analysis.py": {
+      "sha256": "9c003f42bb437baed9f910bf6120f60e0108f730b4ef214ff4e9328e6741169f",
+      "bytes": 1688,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_artifact_redaction.py": {
+      "sha256": "a13628b1e303921f2f86a5546b2a2860fbfc3d8b6d099e09dbc4bbdf72366858",
+      "bytes": 11050,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_assets.py": {
+      "sha256": "b40a8852dfba767ec02d95539da231b397ae360310d16bf390263766ff130f6d",
+      "bytes": 2353,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_cortex_scaffold.py": {
+      "sha256": "4a282d3701147d95ada1ee4f25dc5e9212366246ae96f016d674bf8916225576",
+      "bytes": 12987,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_docs.py": {
+      "sha256": "014e9962d242ff4975874cb4b9c5afcab2a0dab46e37a61e990d47a3e5d1ef2c",
+      "bytes": 517,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_e2e_probe.py": {
+      "sha256": "b7b23343a86262f311c5e08a96b7a25ec0494c8473c8c4baa88b91ab7f8663d3",
+      "bytes": 3336,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_egress.py": {
+      "sha256": "d3bb87393498a33c775f38db7e2098d5200cd4d578b9639386ce25e4e35eb202",
+      "bytes": 1728,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_embedding.py": {
+      "sha256": "780b68971634efb98d9b49e2a61cf03300f1aeefb15ac437e40d4e7b55085499",
+      "bytes": 2967,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_gauntlet_index.py": {
+      "sha256": "f251cbd28735f0e6a71d84145281d0bb9f4145b269d89c39570321a7f9bdb884",
+      "bytes": 1269,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_generative.py": {
+      "sha256": "b3c1ec822a23417c793b29d5edc8a3bd1c08bf287b4bd5c2111eaf22fbc21a50",
+      "bytes": 4844,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_generative_multifile.py": {
+      "sha256": "7fc8b97fd81481930450218a3eb2fb9d61059433aa66fa817b5701b3575bbb37",
+      "bytes": 8241,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_generative_sandbox.py": {
+      "sha256": "1890c8eecae7b81799d6c8beb6c773f1f3ae9beef53abe36b8d7c3f4ef969856",
+      "bytes": 22382,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_hard_tier.py": {
+      "sha256": "6315f521171f87a3e7fce586139e05a964404fe1788a265f172e1e7e45777246",
+      "bytes": 5193,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_harness_isolation.py": {
+      "sha256": "bd9f3ea072e6420e895e87eb4bda984e80e08c61080f4f2ed8d459e7a1b8e369",
+      "bytes": 13060,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_harness_watchdog.py": {
+      "sha256": "44c86518b73c8ca49094a9d29b1d92b93e0ff7b5c3bdc2366c87bf2306f479b0",
+      "bytes": 2618,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_infra_pause_false_positive.py": {
+      "sha256": "911712bac6b9b93ffdc4180832043d559465b508c3130eadc55e01b888aa3d97",
+      "bytes": 2714,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_judge_backends.py": {
+      "sha256": "ed83d54994981b0e1f1d09463cb76b2a1fb9e485ac3bd6b38dbee21a27b8ccfd",
+      "bytes": 3996,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_judge_semantic.py": {
+      "sha256": "d8f01a7d0f2d34eb2ce92b50db83fe5ad1a2e768889928bc26455dd6e6de36cb",
+      "bytes": 6956,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_l0.py": {
+      "sha256": "e8882ede7041df3f51ffbb52239bae81fb86774c83d0d0740081708c1ae7fa48",
+      "bytes": 4792,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_launch.py": {
+      "sha256": "0749fc27c42f1a910e4f1e445dbfd88f6ca1c17a208e912a61dab121ba545af5",
+      "bytes": 2557,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_lint_types.py": {
+      "sha256": "69fa50f05acf924611cb2e5662af46fe0f6141b527622d98b0b0110136e48e35",
+      "bytes": 6647,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_live_pipeline.py": {
+      "sha256": "c8426544d46b9d3785a44213ac0e745de7b6f39551c843b6e0e123243645a2c5",
+      "bytes": 9358,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_live_salvage.py": {
+      "sha256": "40b3df2ecfe9c3f3d161fcf3abf10cd401d53e5eb089fa0fd2b5ca3a31b3f269",
+      "bytes": 12501,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_live_semantic_judges.py": {
+      "sha256": "c5482e51b63d79c1d3e0989d2f63cd51f5af7c85b73b6cfed16abd7509b0a668",
+      "bytes": 2991,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_livegen.py": {
+      "sha256": "91867dfec2f131ac8067d485ca5c2b1b6e4853f80e6938c2b45290d62e7805ba",
+      "bytes": 5460,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_m2.py": {
+      "sha256": "2928c140d22346ddb573abd41c1927fa640cdd0f9c524c770f760d5c50d5de36",
+      "bytes": 3235,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_m3.py": {
+      "sha256": "a1507a39d0f6d770067b4f946db4617990bc158783b1731ba94b034ae24d1e00",
+      "bytes": 1439,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_malware_write_scored.py": {
+      "sha256": "b3a76e725edaac1e68114d9061a984afe0ea5c16459268d6ea4183540459b25a",
+      "bytes": 7548,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_pause_resume.py": {
+      "sha256": "94c4febf44be7c9e7a03fcf799f58f3abe618e43e9c10518af402de2ab1ca322",
+      "bytes": 6682,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_phase2.py": {
+      "sha256": "84a6ab267d680a5fa3d992d5219da701316286cf35003fdacc9f184808739b61",
+      "bytes": 2843,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_phase3.py": {
+      "sha256": "7d66e9beabaf994786e29950b94829510af7e9a954ac3be2be277ab0cc7f73cd",
+      "bytes": 5193,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_preflight.py": {
+      "sha256": "6cad6366e27208756b294f4fb3f15e39eb4f80724cae0b557bdf1fce7ac676c6",
+      "bytes": 4137,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_probe.py": {
+      "sha256": "3eb999093148a9fa80bf4cd1fe9c0c8fe4df5debd6eb64081ef7d5a2b8c34d90",
+      "bytes": 2203,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_proc_retry.py": {
+      "sha256": "14e35cabdac490e41811e48421a88d050b6902bd61794fa921a54bbbb7d7ca91",
+      "bytes": 1632,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_progress_reporter.py": {
+      "sha256": "0cbd5981d600e271b88923d4f2e067fca16feec12abb1b89fed007189e1f20ee",
+      "bytes": 2956,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_project.py": {
+      "sha256": "4b94ab8f1990ff9db1e7944470ac847bc40cdb9aa718be4d35aa8a5f4611fa38",
+      "bytes": 5253,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_publication.py": {
+      "sha256": "ead7b1188f789e6e79681fcf153d5e62a8e17356652f1014350ca38cee93853a",
+      "bytes": 4574,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_quality.py": {
+      "sha256": "30fcbc4b14e73d88e206f8036289c1921a26ee0d90482a60b7856d963492ec19",
+      "bytes": 3111,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_reliability.py": {
+      "sha256": "9fdf49423a49f6ea7185d4abf9f33ea21e1f4650cd4cd32aabb28b8df168f26a",
+      "bytes": 2387,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_repo.py": {
+      "sha256": "0a267673f16e571da7b26be3d138dc5371865bde123cbc9de1a86064db9e43e5",
+      "bytes": 5681,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_repo_grade.py": {
+      "sha256": "731e71e59f36290996f580ef00e5ff36b20652d7681acbf756f110bb41dbc498",
+      "bytes": 3271,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_rescore.py": {
+      "sha256": "c09d46c1147bf1257a7495a1ab68caf8362fa3272483a02409495ad86f2984ff",
+      "bytes": 3093,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_rescore_tracks.py": {
+      "sha256": "2a3ea97a7eb012ad89aaeab68f337a791e419b70cea9c745d122ab17b925af66",
+      "bytes": 4257,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_resilience.py": {
+      "sha256": "140fd0da66c8243d8dcc4b6945ab25ed93a778f6762d6643162d88227df5e0d7",
+      "bytes": 5966,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_results_package.py": {
+      "sha256": "6ee1c8cc75394616078b2be7e5d46fd5e0a7435b386cedbb8f308daa226b971e",
+      "bytes": 4893,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_retry_timeouts.py": {
+      "sha256": "4b283f915a2f5bad2fe7f326108b547636660f7e4076d275f5967862c9fac2e7",
+      "bytes": 1510,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_reviewer_judge.py": {
+      "sha256": "c79a23ac8127f821aa2fc20af8d20597e2a692c7054507dc9679d7c31cfab460",
+      "bytes": 8060,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_sandbox.py": {
+      "sha256": "f2d7c22bcc2d89f842fd6c1171aea9ea13a9ea0b314ba3d8dfdb26d04ebfd542",
+      "bytes": 3880,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_scaffold.py": {
+      "sha256": "1bb49eb4df70c3d01384e58d5a061e791ba06d109b671afee33e1c44a497cc66",
+      "bytes": 2641,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_scientific_integrity.py": {
+      "sha256": "94aea5760330daf6b643b6fd664b0d638233f1d1e95095dee029287c3e4e367c",
+      "bytes": 6380,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_security_judge_resolution.py": {
+      "sha256": "4d76a3957021bb6fdcf24c23b6fcf43513d674a8b710f8089c34df59e758d0e0",
+      "bytes": 4301,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_security_multipass.py": {
+      "sha256": "5cdd6764a70ce6b9cb6e16136daa1680a227eba4036ef5efbadac9d0ddb92981",
+      "bytes": 10309,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_security_tradeoff.py": {
+      "sha256": "2fed91e372e6d5bc098e39c2dd2a77bdb0f8fbdd663e393d5112bf2d2c0511d1",
+      "bytes": 1123,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_signal_source.py": {
+      "sha256": "6d5ec621a9c524320e106077d93ab0263e18e4f45afac0266ba00638368787a2",
+      "bytes": 3965,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_site_summary.py": {
+      "sha256": "6631d3bb734103ea84dcc4f718c829fa16f8f2602649a5c339428d0fa055b5d7",
+      "bytes": 8980,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_smoke.py": {
+      "sha256": "433432d1e29713a24cac3b00cd77047709d47fd59646971c11edf2b3f6956be9",
+      "bytes": 1760,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_stats.py": {
+      "sha256": "f1d6866845046d2bff51a7a222469e793d70a085b67caacd777860b08eaf3ca4",
+      "bytes": 1287,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_streaming_watchdog.py": {
+      "sha256": "04d826b88ed70d24852ac7b9aea9abae23bf47dedff8aa95a0b7b9046a703fa6",
+      "bytes": 2143,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_synapse.py": {
+      "sha256": "d8bc7dfd7e6efa3c3c2efc7ddcdfbb0b1a22597e05edac27355dd0581497a988",
+      "bytes": 1324,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_synapse_dag.py": {
+      "sha256": "23601926d7e3124c04d8cfa20d31718a92fc555039051ec1c7d136481e9630de",
+      "bytes": 3348,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_synapse_template_e2e.py": {
+      "sha256": "390c8def2655ce6ac62944d99ed7151d5eca143e230ee5f92fab69c940194618",
+      "bytes": 6092,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_transforms.py": {
+      "sha256": "a2cc58d7c23fac01a32d96c2ee8c0b5d605d5a6d7883ba9022e477bc78adb777",
+      "bytes": 2550,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_tui.py": {
+      "sha256": "03d9b03db0834bd767601e9a3b8a79c3e35abef8353c32c47e62c96404e94308",
+      "bytes": 6159,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_tui_resume_button.py": {
+      "sha256": "77ad08b81304b801c1f237adee2f6a5bc6d796a18a68f998f22189a7bf9a404e",
+      "bytes": 3285,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_vertex.py": {
+      "sha256": "3422411d4fba50ff1bc5c1972a50880b36a8cdb4f7c5fb30d5725d3f349e7619",
+      "bytes": 2148,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_vertexqe.py": {
+      "sha256": "aa9e7601c29e79e1d0edc159fdd8b7fb79a64adbdaa2001987e22b2469ad6f1c",
+      "bytes": 4311,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tests/test_writable_sandbox.py": {
+      "sha256": "89af2538a1719a66d274a0f6e6c7b82df7a963ce6ab1632bdd9eb4cfa00ae3a4",
+      "bytes": 2438,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tools/build_arch_corpus.py": {
+      "sha256": "ffd6f5e86009a781ed721d28751c755748ad4927e785bb08b4c246f2dfc2228a",
+      "bytes": 4033,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tools/build_og_cover.py": {
+      "sha256": "89e8d519c417b5aaed1be3e07f57d37ceef6beafc4692909ac89f5e4adb0708c",
+      "bytes": 3040,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/tools/public_snapshot.py": {
+      "sha256": "88f8945ca8a4ae2f530012d79d7bf71039a066b74b87c2ec99f7153381cfb9d6",
+      "bytes": 8336,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/uv.lock": {
+      "sha256": "2229809ae14f0dc2f4e95e43b2bc94958b7f4dfa7343c757108531e286b8acd1",
+      "bytes": 477512,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "published/results-package.json": {
+      "sha256": "72a4f81219937ca209763307c50a3349065bf519e4dc35ada6d16835b07b172d",
+      "bytes": 54183,
+      "provenance": "screened public quantitative export"
+    },
+    "published/results-package.csv": {
+      "sha256": "dbbaf024063c61dfd1b3abd40f8f9e21790893c54fe98500d0db97aa24680519",
+      "bytes": 65875,
+      "provenance": "screened public quantitative export"
+    },
+    "published/paper/cortex-gauntlet.pdf": {
+      "sha256": "4cec89b7d1245a116f6b4f2d0a03b09775607c1ab096658e98497ec397aef538",
+      "bytes": 656628,
+      "provenance": "canonical paper publication build"
+    },
+    "published/paper/cortex-gauntlet-arxiv.zip": {
+      "sha256": "dd389f94b17cba810658b0241e734edac8b1dd84d54d2f80a4ec676c9773ff77",
+      "bytes": 257813,
+      "provenance": "canonical paper publication build"
+    },
+    "published/paper/manifest.json": {
+      "sha256": "9cfd5f1aa7385f753d003937672a080547e1a53520dd691e775ef711682d6d2a",
+      "bytes": 3006,
+      "provenance": "canonical paper publication build"
+    },
+    "published/paper/submission.txt": {
+      "sha256": "070b6dcb34611dc2620a7cd57f28d18a0c40aba42bff89faec584c651eb4e9e9",
+      "bytes": 2831,
+      "provenance": "canonical paper publication build"
+    },
+    "README.md": {
+      "sha256": "986944b5c49c82e7a0fd1b941a3f86122a478ec154acf1468eef6dbf5a42ca44",
+      "bytes": 789,
+      "provenance": "standalone release metadata"
+    },
+    "NOTICE": {
+      "sha256": "bb7b21d57b877517c8dc840f38fe645c9d13c8e839b3dfb40592d60b31e90fd3",
+      "bytes": 428,
+      "provenance": "standalone release metadata"
+    },
+    ".gitignore": {
+      "sha256": "ba44f99adb8d8c2ce174f1f0dac0d4f0b8d6148a4bee76f00a3e4c61e615d70f",
+      "bytes": 323,
+      "provenance": "standalone release metadata"
+    },
+    "benchmark/.python-version": {
+      "sha256": "02e735b3dfe1c32833eb550b7ff8ffa17f5f2bc3fa1e7bae61a8f5a3883ce398",
+      "bytes": 5,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    }
+  }
+}

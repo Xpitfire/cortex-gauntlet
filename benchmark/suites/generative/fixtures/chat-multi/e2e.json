@@ -1,0 +1,13 @@
+{
+  "start": ["{python}", "app.py", "{port}"],
+  "ready_path": "/",
+  "checks": [
+    {"id": "chat-ui", "kind": "ui", "path": "/", "selector": "#messages", "text": ""},
+    {"id": "composer", "kind": "ui", "path": "/", "selector": "#composer, #input", "text": ""},
+    {"id": "stylesheet", "kind": "ui", "path": "/", "selector": "link[rel=stylesheet]", "text": ""},
+    {"id": "static-css", "kind": "rest", "method": "GET", "path": "/static/style.css", "status": 200, "contains": "{"},
+    {"id": "static-js", "kind": "rest", "method": "GET", "path": "/static/app.js", "status": 200, "contains": "fetch"},
+    {"id": "send-message", "kind": "chat", "path": "/api/chat", "message": "Reply with the single word: pong", "expect": "pong", "timeout": 90},
+    {"id": "history", "kind": "rest", "method": "GET", "path": "/api/history", "status": 200, "contains": "role"}
+  ]
+}

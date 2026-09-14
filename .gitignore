@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+node_modules/
+.env*
+.DS_Store
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.lint-tmp/
+benchmark/results/
+benchmark/.gauntlet-decoy/
+benchmark/site/public/
+benchmark/suites/security/private/
+benchmark/suites/security/assets/
+benchmark/suites/generative/fixtures/storefront/screenshots/

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gauntlet-benchmark"
+version = "0.1.0"
+description = "Gauntlet — Security, Quality, Generative, Project and Bugfix harness evaluation."
+readme = "README.md"
+requires-python = ">=3.12"
+# Core is stdlib-only with graceful fallbacks (zero hard runtime deps); features opt in via extras.
+dependencies = []
+
+[project.optional-dependencies]
+# [syntax] pulls tree-sitter → editor syntax highlighting + native selection/copy
+tui = ["textual[syntax]>=0.80"]  # the live experiment IDE: `gauntlet tui`
+analysis = ["bandit>=1.7", "radon>=6", "semgrep==1.177.0"]  # required real scanners; outages are unavailable
+vertex = ["sentence-transformers>=2.2"]  # Track P VERTEX embeddings (all-MiniLM-L6-v2); falls back to a deterministic hashing embedding without it
+all = ["gauntlet-benchmark[tui,analysis,vertex]"]
+
+[dependency-groups]
+# uv installs this group by default, so `uv run pytest tests -q` COLLECTS in a fresh checkout.
+# Two prerequisites are outside uv's reach and are documented in BENCHMARK.md: `playwright install
+# chromium` (the wheel ships no browser) and a Docker daemon able to build the sandbox base image.
+# Both degrade to failed checks rather than collection errors, so the rest of the suite still runs.
+# Optional private Synapse/Cortex integrations are not installation requirements.
+# Their integration tests skip explicitly when the corresponding package is absent.
+# Real scoring requires the listed analyzers; their absence cannot supply a clean score.
+# Self-referencing the extras keeps the textual/bandit/radon pins in exactly one place.
+# ruff, pytest and playwright are pinned to the SAME versions the sandbox image installs
+# (see sandbox/Dockerfile) — an analyser that differs between host and container silently
+# changes benchmark scores rather than failing, so these must not float. mypy matches the
+# cortex superproject's pin.
+dev = [
+    "pytest==9.0.2",
+    "gauntlet-benchmark[tui,analysis]",
+    "ruff==0.14.8",
+    "mypy==1.19.0",
+    "playwright==1.49.0",
+    "sympy==1.14.0",
+]
+
+[project.scripts]
+gauntlet = "gauntlet.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gauntlet*"]
+
+[tool.setuptools.package-data]
+gauntlet = ["paper_template.tex"]

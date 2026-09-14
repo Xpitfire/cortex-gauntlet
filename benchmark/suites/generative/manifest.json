@@ -1,0 +1,6 @@
+{
+  "suite": "generative",
+  "track": "generative",
+  "description": "M5 Track G: one-shot full-app briefs in TS/JS/Python. Each brief is a long list of features (the long horizon). Harnesses build the app; a composite scorer gates on build, then scores per-feature e2e completeness, visual fidelity, plan/trajectory quality, honesty, and guardrail adherence. The cortex_wrapped harness uses Synapse milestones + ValidationRuntime to build end-to-end without dropping work.",
+  "briefs": "briefs.json"
+}

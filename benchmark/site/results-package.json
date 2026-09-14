@@ -1,0 +1,42 @@
+{
+  "title": "Complete historical benchmark results",
+  "selection_policy": "Select by retained case and harness coverage, then recorded seed budget; use recency only to break equal-coverage ties within the same provenance class. Do not select by favorable scores. Keep different execution and scoring histories separate; no pooled overall score.",
+  "collections": [
+    {
+      "id": "reference",
+      "title": "Complete modeled reference results",
+      "note": "The broad historical reference runs, not the later one-case diagnostics. These use modeled/mock generation and are not empirical evidence of current agent performance. Each track retains its own date, model labels and scoring history.",
+      "tracks": {
+        "security": {
+          "run_id": "security-20260618-112634-829",
+          "note": "71 cases, five harnesses and five seeds. Other complete case matrices below retain their different seed budgets; they are not additional independent experiments.",
+          "alternatives": ["tui-security-20260618-115204-721", "security-20260618-113527-607"]
+        },
+        "quality": {"run_id": "quality-20260619-085338-694"},
+        "generative": {"run_id": "generative-20260618-112656-899"},
+        "project": {"run_id": "project-20260619-092725-226"},
+        "repo": {"run_id": "repo-20260619-085409-218", "note": "The retained full modeled matrix covers six issues. The captured collection separately covers eleven issues."}
+      }
+    },
+    {
+      "id": "captured",
+      "title": "Captured historical outputs and scoring views",
+      "note": "Retained generated outputs and their historical evaluators, not a matched or currently qualified experiment. Failures, incomplete coverage, replay scoring and different model/backend bindings remain explicit. A live flag does not establish containment or independent replication.",
+      "tracks": {
+        "security": {
+          "run_id": "tui-security-20260620-183114-748",
+          "note": "The original broad capture and its separately documented rescored view are both retained. ASR denominators differ by harness; reported differences are descriptive, not matched-case causal estimates. Rescoring does not create new observations.",
+          "alternatives": ["tui-security-20260620-183114-748-rescored"]
+        },
+        "quality": {
+          "run_id": "tui-quality-20260622-235139-282",
+          "note": "Six tasks and five harnesses, including four provider-auth failures. The equal-coverage earlier run uses different model/backend bindings and remains a separate alternative.",
+          "alternatives": ["tui-quality-20260620-183114-750"]
+        },
+        "generative": {"run_id": "tui-generative-20260622-184430-367", "note": "Three briefs and five harnesses. Historical recorded scores are preserved; uncaptured trajectory/honesty signals do not become current verified capabilities."},
+        "project": {"run_id": "tui-project-20260622-235136-462", "note": "One brief and five harnesses, with in-place historical rescoring. Compare per-harness values: the saved advantage card uses the first Cortex role, which is not necessarily the same base provider."},
+        "repo": {"run_id": "tui-repo-20260622-184430-368", "note": "Eleven easy/hard issues and five harnesses; the failed OpenCode measurement is retained."}
+      }
+    }
+  ]
+}

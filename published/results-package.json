@@ -1,0 +1,1486 @@
+{
+  "title": "Complete historical benchmark results",
+  "selection_policy": "Select by retained case and harness coverage, then recorded seed budget; use recency only to break equal-coverage ties within the same provenance class. Do not select by favorable scores. Keep different execution and scoring histories separate; no pooled overall score.",
+  "metric_definitions": {
+    "security": [
+      [
+        "asr.rate",
+        "Attack success \u2193"
+      ],
+      [
+        "over_refusal.rate",
+        "Over-refusal \u2193"
+      ],
+      [
+        "secure_useful.rate",
+        "Secure and useful \u2191"
+      ]
+    ],
+    "quality": [
+      [
+        "checks.overall.rate",
+        "Overall checks \u2191"
+      ],
+      [
+        "requirement_coverage",
+        "Coverage \u2191"
+      ],
+      [
+        "functional_rate",
+        "Functional success \u2191"
+      ]
+    ],
+    "generative": [
+      [
+        "g_score",
+        "Recorded capability \u2191"
+      ],
+      [
+        "completeness",
+        "Completeness \u2191"
+      ],
+      [
+        "build_rate",
+        "Build rate \u2191"
+      ]
+    ],
+    "project": [
+      [
+        "composite",
+        "Recorded composite \u2191"
+      ],
+      [
+        "functional",
+        "Functional success \u2191"
+      ],
+      [
+        "vertex",
+        "VERTEX \u2191"
+      ]
+    ],
+    "repo": [
+      [
+        "composite",
+        "Recorded composite \u2191"
+      ],
+      [
+        "strict_rate",
+        "Strict resolution \u2191"
+      ],
+      [
+        "resolution_rate",
+        "Resolution \u2191"
+      ]
+    ]
+  },
+  "collections": [
+    {
+      "id": "reference",
+      "title": "Complete modeled reference results",
+      "note": "The broad historical reference runs, not the later one-case diagnostics. These use modeled/mock generation and are not empirical evidence of current agent performance. Each track retains its own date, model labels and scoring history.",
+      "tracks": [
+        {
+          "track": "security",
+          "note": "71 cases, five harnesses and five seeds. Other complete case matrices below retain their different seed budgets; they are not additional independent experiments.",
+          "primary": {
+            "run_id": "security-20260618-112634-829",
+            "recorded_run_id": "security-20260618-112634-829",
+            "track": "security",
+            "source_sha256": "9e7c3bd3e51c33ed32d240608ea4ffa66aaa9e63bf12e5b043c59a044ca88af4",
+            "href": "runs/security-20260618-112634-829/report.html",
+            "created_at": "2026-06-18T11:26:40",
+            "provenance": {
+              "declared_judge": "heuristic",
+              "declared_judge_model": "heuristic-v0",
+              "recorded_score_judges": [
+                "heuristic-v0"
+              ],
+              "recorded_score_instruments": [
+                "deterministic",
+                "judge",
+                "sandbox"
+              ],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 71,
+            "harnesses": 5,
+            "cells": 355,
+            "expected_cells": 355,
+            "seeds": 5,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": false,
+            "utility": {
+              "codex_cli_raw": {
+                "status": "modeled",
+                "note": "Synthetic completion-marker result, not measured live task completion."
+              },
+              "claude_code": {
+                "status": "modeled",
+                "note": "Synthetic completion-marker result, not measured live task completion."
+              },
+              "opencode": {
+                "status": "modeled",
+                "note": "Synthetic completion-marker result, not measured live task completion."
+              },
+              "cortex_wrapped": {
+                "status": "modeled",
+                "note": "Synthetic completion-marker result, not measured live task completion."
+              },
+              "cortex_claude": {
+                "status": "modeled",
+                "note": "Synthetic completion-marker result, not measured live task completion."
+              }
+            },
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "asr.rate": 0.25757575757575757,
+                  "over_refusal.rate": 0.0,
+                  "secure_useful.rate": 0.47619047619047616
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "asr.rate": 0.12424242424242424,
+                  "over_refusal.rate": 0.06666666666666667,
+                  "secure_useful.rate": 0.7619047619047619
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "asr.rate": 0.17272727272727273,
+                  "over_refusal.rate": 0.06666666666666667,
+                  "secure_useful.rate": 0.7142857142857143
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "asr.rate": 0.06060606060606061,
+                  "over_refusal.rate": 0.13333333333333333,
+                  "secure_useful.rate": 0.8571428571428571
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "asr.rate": 0.06363636363636363,
+                  "over_refusal.rate": 0.13333333333333333,
+                  "secure_useful.rate": 0.8571428571428571
+                }
+              }
+            ],
+            "asr_groups": [
+              {
+                "group": "Codex",
+                "base": 0.2576,
+                "cortex": 0.0606,
+                "base_label": "Codex CLI",
+                "cortex_label": "Cortex [over Codex]"
+              },
+              {
+                "group": "Claude",
+                "base": 0.1242,
+                "cortex": 0.0636,
+                "base_label": "Claude Code",
+                "cortex_label": "Cortex [over Claude]"
+              },
+              {
+                "group": "OpenCode",
+                "base": 0.1727,
+                "cortex": null,
+                "base_label": "OpenCode",
+                "cortex_label": ""
+              }
+            ]
+          },
+          "alternatives": [
+            {
+              "run_id": "tui-security-20260618-115204-721",
+              "recorded_run_id": "tui-security-20260618-115204-721",
+              "track": "security",
+              "source_sha256": "3f1d11f46b6608a77f5c4d0bbde8263c6484a3666596a165fc00478e5c149a91",
+              "href": "runs/tui-security-20260618-115204-721/report.html",
+              "created_at": "2026-06-18T11:52:11",
+              "provenance": {
+                "declared_judge": "heuristic",
+                "declared_judge_model": "heuristic-v0",
+                "recorded_score_judges": [
+                  "heuristic-v0"
+                ],
+                "recorded_score_instruments": [
+                  "judge",
+                  "sandbox"
+                ],
+                "rescored_from": null
+              },
+              "schema_version": "0.1.0",
+              "scoring_version": null,
+              "cases": 71,
+              "harnesses": 5,
+              "cells": 355,
+              "expected_cells": 355,
+              "seeds": 3,
+              "skipped": 0,
+              "errors": 0,
+              "evidence_redacted": false,
+              "utility": {
+                "codex_cli_raw": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "claude_code": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "opencode": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "cortex_wrapped": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "cortex_claude": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                }
+              },
+              "rows": [
+                {
+                  "id": "codex_cli_raw",
+                  "label": "Codex CLI",
+                  "model": "GPT-5.5",
+                  "values": {
+                    "asr.rate": 0.2727272727272727,
+                    "over_refusal.rate": 0.0,
+                    "secure_useful.rate": 0.5714285714285714
+                  }
+                },
+                {
+                  "id": "claude_code",
+                  "label": "Claude Code",
+                  "model": "Claude Opus 4.8 (1M)",
+                  "values": {
+                    "asr.rate": 0.12626262626262627,
+                    "over_refusal.rate": 0.1111111111111111,
+                    "secure_useful.rate": 0.7619047619047619
+                  }
+                },
+                {
+                  "id": "opencode",
+                  "label": "OpenCode",
+                  "model": "GPT-5.5 / Opus 4.8",
+                  "values": {
+                    "asr.rate": 0.18181818181818182,
+                    "over_refusal.rate": 0.1111111111111111,
+                    "secure_useful.rate": 0.7619047619047619
+                  }
+                },
+                {
+                  "id": "cortex_wrapped",
+                  "label": "Cortex [over Codex]",
+                  "model": "GPT-5.5 via Codex",
+                  "values": {
+                    "asr.rate": 0.05555555555555555,
+                    "over_refusal.rate": 0.1111111111111111,
+                    "secure_useful.rate": 0.8571428571428571
+                  }
+                },
+                {
+                  "id": "cortex_claude",
+                  "label": "Cortex [over Claude]",
+                  "model": "Claude Opus 4.8 via Cortex",
+                  "values": {
+                    "asr.rate": 0.05555555555555555,
+                    "over_refusal.rate": 0.1111111111111111,
+                    "secure_useful.rate": 0.8571428571428571
+                  }
+                }
+              ],
+              "asr_groups": [
+                {
+                  "group": "Codex",
+                  "base": 0.2727,
+                  "cortex": 0.0556,
+                  "base_label": "Codex CLI",
+                  "cortex_label": "Cortex [over Codex]"
+                },
+                {
+                  "group": "Claude",
+                  "base": 0.1263,
+                  "cortex": 0.0556,
+                  "base_label": "Claude Code",
+                  "cortex_label": "Cortex [over Claude]"
+                },
+                {
+                  "group": "OpenCode",
+                  "base": 0.1818,
+                  "cortex": null,
+                  "base_label": "OpenCode",
+                  "cortex_label": ""
+                }
+              ]
+            },
+            {
+              "run_id": "security-20260618-113527-607",
+              "recorded_run_id": "security-20260618-113527-607",
+              "track": "security",
+              "source_sha256": "7483a01201874daf4cf6b30f7a57611d7e7e0059e3160661e977869a8a791403",
+              "href": "runs/security-20260618-113527-607/report.html",
+              "created_at": "2026-06-18T11:35:32",
+              "provenance": {
+                "declared_judge": "heuristic",
+                "declared_judge_model": "heuristic-v0",
+                "recorded_score_judges": [
+                  "heuristic-v0"
+                ],
+                "recorded_score_instruments": [
+                  "judge",
+                  "sandbox"
+                ],
+                "rescored_from": null
+              },
+              "schema_version": "0.1.0",
+              "scoring_version": null,
+              "cases": 71,
+              "harnesses": 5,
+              "cells": 355,
+              "expected_cells": 355,
+              "seeds": 2,
+              "skipped": 0,
+              "errors": 0,
+              "evidence_redacted": false,
+              "utility": {
+                "codex_cli_raw": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "claude_code": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "opencode": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "cortex_wrapped": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                },
+                "cortex_claude": {
+                  "status": "modeled",
+                  "note": "Synthetic completion-marker result, not measured live task completion."
+                }
+              },
+              "rows": [
+                {
+                  "id": "codex_cli_raw",
+                  "label": "Codex CLI",
+                  "model": "GPT-5.5",
+                  "values": {
+                    "asr.rate": 0.25757575757575757,
+                    "over_refusal.rate": 0.0,
+                    "secure_useful.rate": 0.6190476190476191
+                  }
+                },
+                {
+                  "id": "claude_code",
+                  "label": "Claude Code",
+                  "model": "Claude Opus 4.8 (1M)",
+                  "values": {
+                    "asr.rate": 0.12121212121212122,
+                    "over_refusal.rate": 0.16666666666666666,
+                    "secure_useful.rate": 0.8095238095238095
+                  }
+                },
+                {
+                  "id": "opencode",
+                  "label": "OpenCode",
+                  "model": "GPT-5.5 / Opus 4.8",
+                  "values": {
+                    "asr.rate": 0.15151515151515152,
+                    "over_refusal.rate": 0.16666666666666666,
+                    "secure_useful.rate": 0.8095238095238095
+                  }
+                },
+                {
+                  "id": "cortex_wrapped",
+                  "label": "Cortex [over Codex]",
+                  "model": "GPT-5.5 via Codex",
+                  "values": {
+                    "asr.rate": 0.045454545454545456,
+                    "over_refusal.rate": 0.16666666666666666,
+                    "secure_useful.rate": 0.8571428571428571
+                  }
+                },
+                {
+                  "id": "cortex_claude",
+                  "label": "Cortex [over Claude]",
+                  "model": "Claude Opus 4.8 via Cortex",
+                  "values": {
+                    "asr.rate": 0.045454545454545456,
+                    "over_refusal.rate": 0.16666666666666666,
+                    "secure_useful.rate": 0.8571428571428571
+                  }
+                }
+              ],
+              "asr_groups": [
+                {
+                  "group": "Codex",
+                  "base": 0.2576,
+                  "cortex": 0.0455,
+                  "base_label": "Codex CLI",
+                  "cortex_label": "Cortex [over Codex]"
+                },
+                {
+                  "group": "Claude",
+                  "base": 0.1212,
+                  "cortex": 0.0455,
+                  "base_label": "Claude Code",
+                  "cortex_label": "Cortex [over Claude]"
+                },
+                {
+                  "group": "OpenCode",
+                  "base": 0.1515,
+                  "cortex": null,
+                  "base_label": "OpenCode",
+                  "cortex_label": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "track": "quality",
+          "note": "",
+          "primary": {
+            "run_id": "quality-20260619-085338-694",
+            "recorded_run_id": "quality-20260619-085338-694",
+            "track": "quality",
+            "source_sha256": "0ae584550cc9b46d9cdeaa08afcdcdadda07f9bd43afc5357778004ceee25e53",
+            "href": "runs/quality-20260619-085338-694/report.html",
+            "created_at": "2026-06-19T08:54:08",
+            "provenance": {
+              "declared_judge": "heuristic",
+              "declared_judge_model": "heuristic-quality-v0",
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 6,
+            "harnesses": 5,
+            "cells": 30,
+            "expected_cells": 30,
+            "seeds": null,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": true,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "checks.overall.rate": 0.7551,
+                  "requirement_coverage": 0.5722,
+                  "functional_rate": 0.623
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "checks.overall.rate": 0.8537,
+                  "requirement_coverage": 0.75,
+                  "functional_rate": 0.8492
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "checks.overall.rate": 0.8839,
+                  "requirement_coverage": 0.8639,
+                  "functional_rate": 0.9206
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "checks.overall.rate": 0.9883,
+                  "requirement_coverage": 1.0,
+                  "functional_rate": 1.0
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "checks.overall.rate": 0.9883,
+                  "requirement_coverage": 1.0,
+                  "functional_rate": 1.0
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        },
+        {
+          "track": "generative",
+          "note": "",
+          "primary": {
+            "run_id": "generative-20260618-112656-899",
+            "recorded_run_id": "generative-20260618-112656-899",
+            "track": "generative",
+            "source_sha256": "0bac8b81ec1e2274218c8ba4e9e014d9ec8209b2cc2108d5a709b16d08315577",
+            "href": "runs/generative-20260618-112656-899/report.html",
+            "created_at": "2026-06-18T11:26:56",
+            "provenance": {
+              "declared_judge": "heuristic",
+              "declared_judge_model": "heuristic-generative-v0",
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 3,
+            "harnesses": 5,
+            "cells": 15,
+            "expected_cells": 15,
+            "seeds": 5,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": false,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "g_score": 0.3357,
+                  "completeness": 0.3444,
+                  "build_rate": 0.8
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "g_score": 0.5589,
+                  "completeness": 0.5211,
+                  "build_rate": 1.0
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "g_score": 0.4838,
+                  "completeness": 0.5111,
+                  "build_rate": 0.8667
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "g_score": 0.8657,
+                  "completeness": 0.9133,
+                  "build_rate": 0.9333
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "g_score": 0.9732,
+                  "completeness": 0.9767,
+                  "build_rate": 1.0
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        },
+        {
+          "track": "project",
+          "note": "",
+          "primary": {
+            "run_id": "project-20260619-092725-226",
+            "recorded_run_id": "project-20260619-092725-226",
+            "track": "project",
+            "source_sha256": "2a3f6f7755292606f2ce9c258589bd3dfd906f92af8717dfab1f0de0ce287b86",
+            "href": "runs/project-20260619-092725-226/report.html",
+            "created_at": "2026-06-19T09:27:47",
+            "provenance": {
+              "declared_judge": "heuristic-proxy",
+              "declared_judge_model": "heuristic-proxy",
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 1,
+            "harnesses": 5,
+            "cells": 5,
+            "expected_cells": 5,
+            "seeds": 1,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": false,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "composite": 0.558,
+                  "functional": 0.2727,
+                  "vertex": 0.4886
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "composite": 0.6467,
+                  "functional": 0.4545,
+                  "vertex": 0.5669
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "composite": 0.6467,
+                  "functional": 0.4545,
+                  "vertex": 0.5669
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "composite": 0.958,
+                  "functional": 1.0,
+                  "vertex": 0.8141
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "composite": 0.9542,
+                  "functional": 1.0,
+                  "vertex": 0.7868
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        },
+        {
+          "track": "repo",
+          "note": "The retained full modeled matrix covers six issues. The captured collection separately covers eleven issues.",
+          "primary": {
+            "run_id": "repo-20260619-085409-218",
+            "recorded_run_id": "repo-20260619-085409-218",
+            "track": "repo",
+            "source_sha256": "313caa5d97da9e9eb03f84b66b9383c3d1686dd09178e2518f02d893d5d6400f",
+            "href": "runs/repo-20260619-085409-218/report.html",
+            "created_at": "2026-06-19T08:54:30",
+            "provenance": {
+              "declared_judge": null,
+              "declared_judge_model": null,
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 6,
+            "harnesses": 5,
+            "cells": 30,
+            "expected_cells": 30,
+            "seeds": null,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": false,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "composite": null,
+                  "strict_rate": null,
+                  "resolution_rate": 0.8333
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "composite": null,
+                  "strict_rate": null,
+                  "resolution_rate": 0.8333
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "composite": null,
+                  "strict_rate": null,
+                  "resolution_rate": 0.6667
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "composite": null,
+                  "strict_rate": null,
+                  "resolution_rate": 1.0
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "composite": null,
+                  "strict_rate": null,
+                  "resolution_rate": 0.8333
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        }
+      ]
+    },
+    {
+      "id": "captured",
+      "title": "Captured historical outputs and scoring views",
+      "note": "Retained generated outputs and their historical evaluators, not a matched or currently qualified experiment. Failures, incomplete coverage, replay scoring and different model/backend bindings remain explicit. A live flag does not establish containment or independent replication.",
+      "tracks": [
+        {
+          "track": "security",
+          "note": "The original broad capture and its separately documented rescored view are both retained. ASR denominators differ by harness; reported differences are descriptive, not matched-case causal estimates. Rescoring does not create new observations.",
+          "primary": {
+            "run_id": "tui-security-20260620-183114-748",
+            "recorded_run_id": "tui-security-20260620-183114-748",
+            "track": "security",
+            "source_sha256": "22a72dce1a251aa7edc5f6c3fb1c58d1285e5efdfc92c4dde0662e83ae015c39",
+            "href": "runs/tui-security-20260620-183114-748/report.html",
+            "created_at": "2026-06-21T04:31:17",
+            "provenance": {
+              "declared_judge": "cortex",
+              "declared_judge_model": "heuristic-v0",
+              "recorded_score_judges": [
+                "cortex:claude",
+                "heuristic-v0"
+              ],
+              "recorded_score_instruments": [
+                "deterministic",
+                "judge",
+                "sandbox"
+              ],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 66,
+            "harnesses": 5,
+            "cells": 315,
+            "expected_cells": 330,
+            "seeds": 1,
+            "skipped": 15,
+            "errors": 0,
+            "evidence_redacted": true,
+            "utility": {
+              "codex_cli_raw": {
+                "status": "unverified",
+                "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+              },
+              "claude_code": {
+                "status": "unverified",
+                "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+              },
+              "opencode": {
+                "status": "unverified",
+                "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+              },
+              "cortex_wrapped": {
+                "status": "unverified",
+                "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+              },
+              "cortex_claude": {
+                "status": "unverified",
+                "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+              }
+            },
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "asr.rate": 0.2711864406779661,
+                  "over_refusal.rate": 0.3333333333333333,
+                  "secure_useful.rate": 0.0
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "asr.rate": 0.01694915254237288,
+                  "over_refusal.rate": 0.6666666666666666,
+                  "secure_useful.rate": 0.0
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "asr.rate": 0.2222222222222222,
+                  "over_refusal.rate": 0.6666666666666666,
+                  "secure_useful.rate": 0.0
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "asr.rate": 0.13793103448275862,
+                  "over_refusal.rate": 0.0,
+                  "secure_useful.rate": 0.0
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "asr.rate": 0.016666666666666666,
+                  "over_refusal.rate": 0.6666666666666666,
+                  "secure_useful.rate": 0.0
+                }
+              }
+            ],
+            "asr_groups": [
+              {
+                "group": "Codex",
+                "base": 0.2712,
+                "cortex": 0.1379,
+                "base_label": "Codex CLI",
+                "cortex_label": "Cortex [over Codex]"
+              },
+              {
+                "group": "Claude",
+                "base": 0.0169,
+                "cortex": 0.0167,
+                "base_label": "Claude Code",
+                "cortex_label": "Cortex [over Claude]"
+              },
+              {
+                "group": "OpenCode",
+                "base": 0.2222,
+                "cortex": null,
+                "base_label": "OpenCode",
+                "cortex_label": ""
+              }
+            ]
+          },
+          "alternatives": [
+            {
+              "run_id": "tui-security-20260620-183114-748-rescored",
+              "recorded_run_id": "tui-security-20260620-183114-748-rescored",
+              "track": "security",
+              "source_sha256": "1b8fe2171cfd1f3185aadde2780bb304d2784529e8a3f6e93088e34e92d13aec",
+              "href": "runs/tui-security-20260620-183114-748-rescored/report.html",
+              "created_at": "2026-06-21T09:11:44",
+              "provenance": {
+                "declared_judge": "rescored:claude-cli",
+                "declared_judge_model": "heuristic-v0",
+                "recorded_score_judges": [
+                  "claude-cli:claude-opus-4-8"
+                ],
+                "recorded_score_instruments": [
+                  "deterministic",
+                  "judge",
+                  "sandbox"
+                ],
+                "rescored_from": "tui-security-20260620-183114-748"
+              },
+              "schema_version": "0.1.0",
+              "scoring_version": null,
+              "cases": 65,
+              "harnesses": 5,
+              "cells": 310,
+              "expected_cells": 325,
+              "seeds": 1,
+              "skipped": 20,
+              "errors": 0,
+              "evidence_redacted": true,
+              "utility": {
+                "codex_cli_raw": {
+                  "status": "unverified",
+                  "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+                },
+                "claude_code": {
+                  "status": "unverified",
+                  "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+                },
+                "opencode": {
+                  "status": "unverified",
+                  "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+                },
+                "cortex_wrapped": {
+                  "status": "unverified",
+                  "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+                },
+                "cortex_claude": {
+                  "status": "unverified",
+                  "note": "Historical marker result: absence of a synthetic marker was recorded as failure. Carrier-task completion was not independently validated; recorded zeros are not verified failure rates."
+                }
+              },
+              "rows": [
+                {
+                  "id": "codex_cli_raw",
+                  "label": "Codex CLI",
+                  "model": "GPT-5.5",
+                  "values": {
+                    "asr.rate": 0.423728813559322,
+                    "over_refusal.rate": 0.0,
+                    "secure_useful.rate": 0.0
+                  }
+                },
+                {
+                  "id": "claude_code",
+                  "label": "Claude Code",
+                  "model": "Claude Opus 4.8 (1M)",
+                  "values": {
+                    "asr.rate": 0.03389830508474576,
+                    "over_refusal.rate": 0.0,
+                    "secure_useful.rate": 0.0
+                  }
+                },
+                {
+                  "id": "opencode",
+                  "label": "OpenCode",
+                  "model": "GPT-5.5 / Opus 4.8",
+                  "values": {
+                    "asr.rate": 0.42592592592592593,
+                    "over_refusal.rate": 0.5,
+                    "secure_useful.rate": 0.0
+                  }
+                },
+                {
+                  "id": "cortex_wrapped",
+                  "label": "Cortex [over Codex]",
+                  "model": "GPT-5.5 via Codex",
+                  "values": {
+                    "asr.rate": 0.2413793103448276,
+                    "over_refusal.rate": 0.0,
+                    "secure_useful.rate": 0.0
+                  }
+                },
+                {
+                  "id": "cortex_claude",
+                  "label": "Cortex [over Claude]",
+                  "model": "Claude Opus 4.8 via Cortex",
+                  "values": {
+                    "asr.rate": 0.016666666666666666,
+                    "over_refusal.rate": 0.0,
+                    "secure_useful.rate": 0.0
+                  }
+                }
+              ],
+              "asr_groups": [
+                {
+                  "group": "Codex",
+                  "base": 0.4237,
+                  "cortex": 0.2414,
+                  "base_label": "Codex CLI",
+                  "cortex_label": "Cortex [over Codex]"
+                },
+                {
+                  "group": "Claude",
+                  "base": 0.0339,
+                  "cortex": 0.0167,
+                  "base_label": "Claude Code",
+                  "cortex_label": "Cortex [over Claude]"
+                },
+                {
+                  "group": "OpenCode",
+                  "base": 0.4259,
+                  "cortex": null,
+                  "base_label": "OpenCode",
+                  "cortex_label": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "track": "quality",
+          "note": "Six tasks and five harnesses, including four provider-auth failures. The equal-coverage earlier run uses different model/backend bindings and remains a separate alternative.",
+          "primary": {
+            "run_id": "tui-quality-20260622-235139-282",
+            "recorded_run_id": "tui-quality-20260622-235139-282",
+            "track": "quality",
+            "source_sha256": "1a08e47d731c88d7a9769c5492c50d0330532446523ed26821d2bcedd4107c35",
+            "href": "runs/tui-quality-20260622-235139-282/report.html",
+            "created_at": "2026-06-23T07:50:24",
+            "provenance": {
+              "declared_judge": "heuristic",
+              "declared_judge_model": "heuristic-quality-v0",
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 6,
+            "harnesses": 5,
+            "cells": 30,
+            "expected_cells": 30,
+            "seeds": null,
+            "skipped": 0,
+            "errors": 4,
+            "evidence_redacted": true,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "checks.overall.rate": 0.9461,
+                  "requirement_coverage": 0.8125,
+                  "functional_rate": 0.8125
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "checks.overall.rate": 0.9165,
+                  "requirement_coverage": 0.8125,
+                  "functional_rate": 0.8125
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5",
+                "values": {
+                  "checks.overall.rate": 0.8375,
+                  "requirement_coverage": 0.3333,
+                  "functional_rate": 0.3333
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "checks.overall.rate": 0.9715,
+                  "requirement_coverage": 0.9792,
+                  "functional_rate": 0.9792
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "checks.overall.rate": 0.9438,
+                  "requirement_coverage": 0.9792,
+                  "functional_rate": 0.9792
+                }
+              }
+            ]
+          },
+          "alternatives": [
+            {
+              "run_id": "tui-quality-20260620-183114-750",
+              "recorded_run_id": "tui-quality-20260620-183114-750",
+              "track": "quality",
+              "source_sha256": "7ef1d1edb6cb2b5db4e4377967e398634f3577f7ec6ef65e4e92c688eed02aef",
+              "href": "runs/tui-quality-20260620-183114-750/report.html",
+              "created_at": "2026-06-21T04:31:17",
+              "provenance": {
+                "declared_judge": "heuristic",
+                "declared_judge_model": "heuristic-quality-v0",
+                "recorded_score_judges": [],
+                "recorded_score_instruments": [],
+                "rescored_from": null
+              },
+              "schema_version": "0.1.0",
+              "scoring_version": null,
+              "cases": 6,
+              "harnesses": 5,
+              "cells": 30,
+              "expected_cells": 30,
+              "seeds": null,
+              "skipped": 0,
+              "errors": 0,
+              "evidence_redacted": true,
+              "utility": {},
+              "rows": [
+                {
+                  "id": "codex_cli_raw",
+                  "label": "Codex CLI",
+                  "model": "GPT-5.5",
+                  "values": {
+                    "checks.overall.rate": 0.973,
+                    "requirement_coverage": 0.9792,
+                    "functional_rate": 0.9792
+                  }
+                },
+                {
+                  "id": "claude_code",
+                  "label": "Claude Code",
+                  "model": "Claude Opus 4.8 (1M)",
+                  "values": {
+                    "checks.overall.rate": 0.9691,
+                    "requirement_coverage": 0.9792,
+                    "functional_rate": 0.9792
+                  }
+                },
+                {
+                  "id": "opencode",
+                  "label": "OpenCode",
+                  "model": "GPT-5.5 / Opus 4.8",
+                  "values": {
+                    "checks.overall.rate": 0.9689,
+                    "requirement_coverage": 0.9792,
+                    "functional_rate": 0.9792
+                  }
+                },
+                {
+                  "id": "cortex_wrapped",
+                  "label": "Cortex [over Codex]",
+                  "model": "GPT-5.5 via Codex",
+                  "values": {
+                    "checks.overall.rate": 0.9731,
+                    "requirement_coverage": 0.9792,
+                    "functional_rate": 0.9792
+                  }
+                },
+                {
+                  "id": "cortex_claude",
+                  "label": "Cortex [over Claude]",
+                  "model": "Claude Opus 4.8 via Cortex",
+                  "values": {
+                    "checks.overall.rate": 0.9142,
+                    "requirement_coverage": 0.8125,
+                    "functional_rate": 0.8125
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "track": "generative",
+          "note": "Three briefs and five harnesses. Historical recorded scores are preserved; uncaptured trajectory/honesty signals do not become current verified capabilities.",
+          "primary": {
+            "run_id": "tui-generative-20260622-184430-367",
+            "recorded_run_id": "tui-generative-20260622-184430-367",
+            "track": "generative",
+            "source_sha256": "39c4a4004d20d7178c6a5ed88870a2ef71d119a45cba4e111005f38523932b50",
+            "href": "runs/tui-generative-20260622-184430-367/report.html",
+            "created_at": "2026-06-22T23:05:56",
+            "provenance": {
+              "declared_judge": "heuristic",
+              "declared_judge_model": "heuristic-generative-v0 + CLIP visual",
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 3,
+            "harnesses": 5,
+            "cells": 15,
+            "expected_cells": 15,
+            "seeds": 1,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": false,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "g_score": 0.4818,
+                  "completeness": 0.6667,
+                  "build_rate": 0.6667
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "g_score": 0.4701,
+                  "completeness": 0.6667,
+                  "build_rate": 0.6667
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "g_score": 0.4809,
+                  "completeness": 0.6667,
+                  "build_rate": 0.6667
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "g_score": 0.4954,
+                  "completeness": 0.6667,
+                  "build_rate": 0.6667
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "g_score": 0.4954,
+                  "completeness": 0.6667,
+                  "build_rate": 0.6667
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        },
+        {
+          "track": "project",
+          "note": "One brief and five harnesses, with in-place historical rescoring. Compare per-harness values: the saved advantage card uses the first Cortex role, which is not necessarily the same base provider.",
+          "primary": {
+            "run_id": "tui-project-20260622-235136-462",
+            "recorded_run_id": "tui-project-20260622-235136-462",
+            "track": "project",
+            "source_sha256": "44530a9350b5cd616668720f7d03d21f318520bc4a402d07c90ce58f82b5955b",
+            "href": "runs/tui-project-20260622-235136-462/report.html",
+            "created_at": "2026-06-23T08:16:36",
+            "provenance": {
+              "declared_judge": "clip:clip-ViT-B-32",
+              "declared_judge_model": "clip:clip-ViT-B-32",
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 1,
+            "harnesses": 5,
+            "cells": 5,
+            "expected_cells": 5,
+            "seeds": 1,
+            "skipped": 0,
+            "errors": 0,
+            "evidence_redacted": true,
+            "utility": {},
+            "rows": [
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "composite": 0.6737,
+                  "functional": 0.4545,
+                  "vertex": 0.4512
+                }
+              },
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "composite": 0.7212,
+                  "functional": 0.5455,
+                  "vertex": 0.5214
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "composite": 0.6533,
+                  "functional": 0.4545,
+                  "vertex": 0.4199
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "composite": 0.6799,
+                  "functional": 0.4545,
+                  "vertex": 0.4776
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5",
+                "values": {
+                  "composite": 0.7071,
+                  "functional": 0.7273,
+                  "vertex": 0.507
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        },
+        {
+          "track": "repo",
+          "note": "Eleven easy/hard issues and five harnesses; the failed OpenCode measurement is retained.",
+          "primary": {
+            "run_id": "tui-repo-20260622-184430-368",
+            "recorded_run_id": "tui-repo-20260622-184430-368",
+            "track": "repo",
+            "source_sha256": "40472e4a98bd8b179ccfea4de80c5e003dfae388379be74ceda0c3587fcaeff5",
+            "href": "runs/tui-repo-20260622-184430-368/report.html",
+            "created_at": "2026-06-22T23:05:56",
+            "provenance": {
+              "declared_judge": null,
+              "declared_judge_model": null,
+              "recorded_score_judges": [],
+              "recorded_score_instruments": [],
+              "rescored_from": null
+            },
+            "schema_version": "0.1.0",
+            "scoring_version": null,
+            "cases": 11,
+            "harnesses": 5,
+            "cells": 55,
+            "expected_cells": 55,
+            "seeds": null,
+            "skipped": 0,
+            "errors": 1,
+            "evidence_redacted": false,
+            "utility": {},
+            "rows": [
+              {
+                "id": "codex_cli_raw",
+                "label": "Codex CLI",
+                "model": "GPT-5.5",
+                "values": {
+                  "composite": 0.9776,
+                  "strict_rate": 1.0,
+                  "resolution_rate": 1.0
+                }
+              },
+              {
+                "id": "claude_code",
+                "label": "Claude Code",
+                "model": "Claude Opus 4.8 (1M)",
+                "values": {
+                  "composite": 0.9773,
+                  "strict_rate": 1.0,
+                  "resolution_rate": 1.0
+                }
+              },
+              {
+                "id": "opencode",
+                "label": "OpenCode",
+                "model": "GPT-5.5 / Opus 4.8",
+                "values": {
+                  "composite": 0.8888,
+                  "strict_rate": 0.9091,
+                  "resolution_rate": 0.9091
+                }
+              },
+              {
+                "id": "cortex_wrapped",
+                "label": "Cortex [over Codex]",
+                "model": "GPT-5.5 via Codex",
+                "values": {
+                  "composite": 0.9785,
+                  "strict_rate": 1.0,
+                  "resolution_rate": 1.0
+                }
+              },
+              {
+                "id": "cortex_claude",
+                "label": "Cortex [over Claude]",
+                "model": "Claude Opus 4.8 via Cortex",
+                "values": {
+                  "composite": 0.9777,
+                  "strict_rate": 1.0,
+                  "resolution_rate": 1.0
+                }
+              }
+            ]
+          },
+          "alternatives": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Gauntlet arXiv submission preparation
+
+Upload cortex-gauntlet-arxiv.zip, not the rendered PDF. Select main.tex and pdfLaTeX.
+arXiv currently defaults to TeX Live 2025. Inspect its generated PDF before submitting.
+The source archive contains only main.tex and four included PDF figures.
+No external conversion, Python, network, shell escape or private data is required.
+Confirm author details and coauthor consent; choose an appropriate category and license.
+Account registration, possible endorsement and moderation remain arXiv's requirements.
+No arXiv identifier or acceptance is claimed.
+
+Title: Cortex: A Fixed-Point Theory of Governed Coding Agents
+Authors: Marius-Constantin Dinu, Florian Zeba (Alpha Omega Labs)
+Abstract: A coding agent combines a large language model (LLM) with a control loop, or harness, that can plan, edit, and execute code. We study Cortex, a supervisory layer coupling pre-execution governance, requirement tracking, and iterative validation and repair. We give a conditional finite-lattice model of requirement closure: for a fixed finite requirement set and a sound, monotone validation rule with persistent evidence, exhaustive iteration reaches the least fixed point after at most |R| strict increases. Fair consequence scheduling reaches the same closure. These are properties of the specified operator, not an unconditional completion or safety guarantee for the stochastic implementation. Code repairs can invalidate previous evidence, validators can miss defects, and a budgeted run can stop before closure.
+
+We define the benchmark's bounded trajectory-similarity and build-gated capability scores, attack-success estimators, Wilson score intervals, and case-level bootstrap summaries. A separate probabilistic model gives an expected completion-time bound only under a uniform progress assumption. Effective-feedback accounting counts newly certified requirements; it is not a decision-theoretic value-of-information estimate. The five benchmark families provide a framework for raw-versus-governed comparisons. Historical summaries and schematic figures do not by themselves establish model-matched causal gains, theorem conformance, or long-horizon scaling; Section 7 separates their evidence status from the formal results.
+Comments: 22 pages, four figures. Paper and latest results: https://benchmark.cortex.a2olabs.com/docs.html . Benchmark source: https://github.com/Xpitfire/cortex-gauntlet .
+
+Suggested primary category for author review: cs.AI. Leave journal reference and DOI blank unless assigned.
+Recompile after extracting the ZIP: pdflatex -no-shell-escape main.tex (run twice).
+
+Official instructions:
+https://info.arxiv.org/help/submit/index.html
+https://info.arxiv.org/help/submit_tex.html
+https://info.arxiv.org/help/faq/texlive.html
+https://info.arxiv.org/help/prep.html
