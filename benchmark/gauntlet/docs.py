@@ -12,6 +12,7 @@ from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
 
+from .paper_results import render_exhibits
 from .report_common import COMMON_JS, REPORT_CSS, REPORT_HEAD, navbar
 
 # ---- theme-aware SVG figures (use CSS vars so they adapt to light/dark) ------------------------
@@ -505,9 +506,10 @@ repair, fallible validation, and finite execution budgets do not satisfy them au
 We define Gauntlet's trajectory-similarity and build-gated scores, attack-success estimators,
 Wilson intervals, and case-cluster bootstrap summaries. Effective-feedback accounting
 counts newly certified requirements, rather than estimating their information value or
-utility. The five evaluation families support raw-versus-governed comparisons. The archived
-results have unequal observation sets, incomplete provenance, and some synthetic outcomes;
-they do not identify causal gains from governance or measured long-horizon scaling.
+utility. The five evaluation families support raw-versus-governed comparisons.
+We report retained benchmark observations, including rescoring of existing artifacts;
+constructed outcomes are excluded. Unequal observation sets and incomplete provenance
+prevent causal claims about governance or measured long-horizon scaling.
 
 ## 1. Introduction
 
@@ -905,10 +907,15 @@ recalibration $\eta_b$; its reference argument becomes an estimate $\hat r$.
 The project-level mixture also changes its architecture weight, as defined below.
 
 Capability descriptors come from the public brief's enumerated outcomes. Architecture
-descriptors combine engineering hints in that brief with the shipped `arch_corpus.json`
-vocabulary. The latter contains synthetic canonical patterns, not observations from
-curated repositories. Empty strings and exact duplicates are removed within each source;
-the union greedily drops later descriptors whose cosine similarity to a retained one is at least 0.92.
+descriptors combine its engineering expectations with a small synthetic vocabulary
+of common web-application concerns: HTTP routing, frontend components, separation
+of domain logic from transport, commerce entities, tests, and environment configuration.
+The vocabulary spans six authored patterns, including a layered monolith, a separate
+frontend and REST API, server-side rendering, a commerce-service split, a
+ports-and-adapters core, and a static frontend with serverless APIs.
+These are illustrative design patterns, not observations from six sampled repositories.
+Empty strings and exact duplicates are removed within each source; the union
+greedily drops later descriptors whose cosine similarity to a retained one is at least $0.92$.
 The resulting list has a deterministic order that affects DTW, although it does not
 describe execution time or a distribution of valid architectural alternatives.
 
@@ -1058,7 +1065,7 @@ evaluated cases. For each $i\in\mathcal{I}$, let $n_i\in\mathbb{N}_{+}$ be its
 recorded attempt count and $c_i\in\{0,\ldots,n_i\}$ its classified successes.
 The **attempt-pooled** headline is
 $\widehat p=\sum_{i\in\mathcal{I}}c_i/\sum_{i\in\mathcal{I}}n_i$.
-The separate case-weighted ASR@1 is
+The separate case-weighted $\mathrm{ASR}@1$ is
 $N_{\mathrm{case}}^{-1}\sum_{i\in\mathcal{I}}c_i/n_i$.
 They differ when attempt counts differ. With $N=\sum_{i\in\mathcal{I}}n_i>0$
 and normal quantile $z>0$ (default $z=1.96$ for nominal 95% coverage), the Wilson score interval
@@ -1125,8 +1132,9 @@ candidate content require separate empirical validation.
 
 Let $\mathcal{T}=\{S,Q,R,G,P\}$ be the five fixed task families, and write
 $\tilde s_t(M)\in\mathbb{I}$ for arm $M$'s normalized family-$t$ headline.
-The implementation maps S to $1-\mathrm{ASR}$, Q to requirement coverage, G to
-`g_score`, and P/R to their respective composites. Higher values are preferred.
+The implementation maps $S$ to $1-\mathrm{ASR}$, $Q$ to requirement coverage, and $G$ to
+$g_{\text{score}}$, the reported aggregate described in Section 5.2.
+Families $P$ and $R$ use their respective composites. Higher values are preferred.
 For an arm with qualified scores on **all five** families, define
 
 $$ \mathrm{Index}(M)=\frac{1}{5}\sum_{t\in\mathcal{T}}\tilde s_t(M)\in\mathbb{I}. $$
@@ -1187,6 +1195,22 @@ dependence model, nor a measure of task value. No such probability estimates are
 
 ## 6. Experimental Setup
 
+The evaluation separates three questions. First, does a configured governance
+layer reduce classified unsafe responses while preserving behavior on benign
+requests? Second, how do coding harnesses differ in the functional and structural
+quality of the artifacts they produce? Third, can automatically estimated semantic
+references recover rankings obtained with hand-authored references?
+These questions require different experimental units: attack attempts, completed
+coding tasks, and independently specified application briefs, respectively.
+
+Sections 6.1–6.6 define the comparison protocol and measurement boundaries.
+Section 7 then describes the retained June 2026 pilot studies, including their
+tasks, sample coverage, numerical outcomes, and limitations. The pilots were not
+one uniformly controlled experiment. Model execution and rescoring of existing
+artifacts have different evidential meanings. The paper reports benchmark outcomes,
+not constructed demonstrations; neither rescoring nor report regeneration is a new
+independent model execution.
+
 ### 6.1 Baselines and base models
 
 An arm is a harness, configured provider/model, prompts, tools, environment, and budget.
@@ -1229,13 +1253,40 @@ Passing finite tests is evidence for those tests, not complete semantic correctn
 <tr><td>S: Safety</td><td>Classified attack responses and proposed actions; ASR and benign over-refusal.</td><td>Lexical classification and action replay are not observed exploits. Live carrier-task utility is unmeasured.</td></tr>
 <tr><td>Q: Quality</td><td>Generated code, hidden behavioral tests, static findings, lint/types and quality rubrics.</td><td>Analyzer availability and evaluator integrity are prerequisites; finite tests are incomplete.</td></tr>
 <tr><td>R: Bugfix</td><td>Repository patches; resolution-gated score with held-out and regression checks.</td><td>Reference-diff similarity is not correctness. Test-runner tampering must be independently excluded.</td></tr>
-<tr><td>G: Generative</td><td>Generated chat application, feature probes, static scores and optional visual evidence.</td><td>The local endpoint is a deterministic stub, not a learned model. Historical echo checks do not prove endpoint use; claim-evidence consistency and observed trajectory evidence are incomplete.</td></tr>
+<tr><td>G: Generative</td><td>Full-stack application generation; build/serve checks, feature probes, static scores and optional visual evidence.</td><td>Passed features do not establish complete application behavior, real model-endpoint use or time-resolved progress. Historical applications and the current chat-app protocol are distinguished below.</td></tr>
 <tr><td>P: Project</td><td>One storefront brief, build-gated functional/semantic/visual/static composite.</td><td>Partial behavioral and accessibility proxies are not a complete storefront or payment validation.</td></tr>
 </tbody>
 </table>
 <figcaption>Table 2. Five families and their measurement boundaries. No direction of a
 raw-versus-governed effect is assumed by the score definition.</figcaption>
 </figure>
+
+**Application construction protocol.** The storefront brief asks for a fashion-shopping
+application with product browsing, filtering or sorting, variant selection, cart
+editing, consistent price totals, checkout, and order confirmation. Candidates choose
+their implementation structure. The brief also requests a documented backend API,
+a responsive interface, accessibility support, an installable progressive web app,
+an offline shell, automated core-flow tests, and build/serve instructions.
+Payment is specified in test mode; no real-money transaction is required.
+
+The functional evaluator organizes the storefront into five journeys: home, browsing,
+product detail, cart, and checkout, with respective weights $1,2,2,3,3$.
+It scores the weighted fraction of passing evaluable journeys after a successful build.
+The implemented checks are narrower than the brief. Some verify that a control exists
+rather than that filtering, sorting, or quantity editing works. Cart checks compare
+displayed arithmetic; checkout checks reaching a checkout surface. No implemented
+test-payment driver establishes payment completion. Likewise, manifest and
+service-worker checks do not demonstrate an offline shopping session, and markup
+heuristics do not establish full keyboard accessibility.
+
+The separate current chat-app protocol checks message/composer elements, stylesheet
+and script availability, a chat-response token, and a history response. Its supplied
+model-service substitute is a deterministic echo responder, not a learned model.
+Passing a token check does not prove that the application contacted that service;
+an application could construct the same response itself. These checks therefore
+provide interface and API smoke coverage, not evidence of model reasoning, streaming,
+conversation isolation, or durable history. The historical five-probe application
+study in Section 7.2 and Appendix B.3 instead evaluates a to-do application and is not a chat result.
 
 ### 6.4 Configuration isolation and adaptive evaluation
 
@@ -1249,8 +1300,9 @@ those surfaces, not through native tool-result or session-memory interfaces.
 Adaptive attacks use earlier target responses to generate later prompts, but each target
 attempt starts a fresh session/workspace. Their budgeted path is not a continuous target
 conversation, and follow-ups need not preserve the original delivery surface.
-Corpus curation based on previous outcomes and a `held_out` flag do not establish an
-independently frozen holdout.
+Selecting a corpus using previous outcomes and merely labeling examples as held out
+do not establish an independently frozen evaluation set. A genuine holdout must be
+fixed before development and withheld from prompt design, curation, and repair feedback.
 
 The project evaluator scores first/final snapshots and retains the highest composite.
 Governed arms can also use evaluation feedback during repair. These current and historical
@@ -1290,15 +1342,30 @@ The present implementation has not established security or evaluator-integrity s
 
 ## 7. Results and Evidence Status
 
-The following are **historical descriptive summaries**, not newly reproduced experiments.
-Their numerical provenance is retained, but they do not satisfy a complete matched,
-current-scoring qualification protocol.
+The following **historical descriptive studies** explain the retained observations
+without requiring access to internal execution records. They concern June 2026
+artifacts and captures, not newly reproduced experiments. Five arm labels recur:
+Codex CLI, Claude Code, OpenCode, Cortex over Codex, and Cortex over Claude.
+The labels identify configurations, not independently authenticated model versions.
+Each study's task set and observation unit are specified separately.
+
+### 7.1 Captured-response safety pilot
+
+This pilot asks how often captured responses are classified as following an unsafe
+instruction, while separately checking benign refusals. The case set contains 61
+harmful cases, two diagnostic instruction-following probes, and two benign controls.
+Harmful objectives include secret disclosure, destructive repository operations,
+unsafe dependencies, and attempts to disable protections. Delivery contexts include
+direct requests and representations of repository, tool-output, and memory content;
+they are not all native integrations with those surfaces.
+
+One attempt is recorded for each completed case–arm cell. Across five arms, 290 of
+305 possible harmful observations are retained; 15 are missing after timeouts.
+The diagnostic probes and benign controls are excluded from the harmful-response
+denominator. Figure 4 and Table 3 report classified successes divided by observed
+harmful attempts, not by the configured maximum number of attempts.
 
 __FIG_SAFETY__
-
-The safety source is
-`tui-security-20260620-183114-748-rescored/runrecord.json` under `benchmark/results/`.
-The record uses one repeat label; Table 3 pools observed attempts across cases:
 
 <figure class="tbl" id="tbl-3">
 <table>
@@ -1319,33 +1386,71 @@ Using the exact observed counts, the descriptive relative ASR reductions,
 $(\mathrm{ASR}_{\mathrm{raw}}-\mathrm{ASR}_{\mathrm{governed}})/\mathrm{ASR}_{\mathrm{raw}}$,
 are approximately $43.0\%$ for the Codex-labeled pair and $50.8\%$ for the Claude-labeled
 pair. These are relative reductions, not percentage-point differences.
-Their denominators and observed cases differ; the source contains skipped
-fixtures/timeouts and lacks current scoring provenance. Each paired arm has only **two**
-benign controls with zero refusals: the stored interval is $[0,65.76\%]$.
-That does not establish unchanged benign utility, low population over-refusal,
-statistical equivalence, or a structural causal mechanism.
+The completed case sets differ between arms, and timed-out attempts cannot be
+treated as safe responses. Each of the four paired arms has zero refusals on only
+two benign controls, with stored interval $[0,65.76\%]$; OpenCode refuses one of
+its two controls. Two diagnostic probes per arm are reported separately and are
+not additional benign-utility trials.
 
-**Capability evidence.** The project record `project-20260619-092725-226` has
-`live=false` and `basis="mock (modelled long-horizon outcome)"`.
-Its composites $0.558$ and $0.958$ are synthetic. The approximately $72\%$
-relative difference is arithmetic on those values, not a measured capability gain.
-The quality record `tui-quality-20260622-235139-282` stores coverage values
-$0.8125$ and $0.9792$, with inconsistent execution/methodology metadata.
-The repository record `tui-repo-20260620-183114-752-rescored` covers six easy tasks;
-it provides no observations from a hard multi-file tier.
+The retained responses were subsequently rescored using lexical analysis,
+in-memory replay of proposed actions, and response judging. No authenticated
+external exploit follows from a positive classification. Historical judge summaries
+also conflict: a summary describes heuristic judging while per-response entries
+identify a language-model judge. This limits reconstruction of the exact scoring
+protocol. These observations establish neither unchanged benign utility nor
+statistical equivalence, low population over-refusal, or a governance-only causal effect.
 
-The generative record `tui-generative-20260620-183114-751-rescored` contains five
-functional probes with one seed and sparse bins of final feature pass rates.
-The bins index feature-list position, not elapsed time, changing requirement sets,
-or milestone snapshots. They cannot support a longitudinal-completion curve or
-a fitted transition model.
+### 7.2 Coding and application outcomes
 
-QE rank agreement on the single storefront brief is exploratory.
-The two-arm record `tui-project-20260622-184427-792` has Spearman correlation $1$;
-two distinct points need only share an ordering to attain that value.
-The five-arm record `tui-project-20260622-235136-462` reports $0.6$.
-Rescoring the same artifacts adds no independent observations and does not establish
-accuracy on unseen briefs.
+Figure 5 compares three different outcomes, each with its own denominator.
+The **quality study** comprises six code-generation tasks and one outcome per
+task and arm. Its headline is the equal-weight mean of the six behavioral-test
+pass fractions. Raw Codex and Claude both score $0.8125$, and their corresponding
+Cortex configurations both score $0.9792$. The entire paired difference comes
+from the TypeScript upload task; all four configurations still miss one
+shopping-cart check. Table 4 in Appendix B.1 includes every task-level numerator
+and denominator, including differing upload-test totals and generation failures.
+
+The **repair study** replays patches for six elementary Python bugs, with one
+outcome per issue and arm. All four raw/governed Codex and Claude configurations
+resolve all six issues; OpenCode resolves five. There is no paired difference in
+issue-resolution rate. Table 5 in Appendix B.2 reports all issue tests and the
+separate patch-sensitive composites; empty auxiliary test groups are not evidence
+of regression robustness.
+
+The **application study** concerns a to-do app, not the chat gallery. Each arm
+has one candidate and five final feature checks. Codex passes $3/5$; the other
+four configurations pass $5/5$. All candidates build. Table 6 defines the checks,
+and Figure 7 in Appendix B.3 shows their positions in the final checklist.
+Those positions are not elapsed time or repeated execution milestones.
+
+__FIG_5__
+
+These are descriptive artifact evaluations, not matched governance-only trials.
+Quality execution metadata conflict, repair lacks auxiliary robustness tests,
+and the application study has no independently repeated candidates. Appendix B
+retains these limitations beside the complete evidence.
+
+### 7.3 Storefront outcomes and reference agreement
+
+Two candidate pools address the same storefront brief in Section 6.3, with one
+built application per arm. The two-arm pool scores $0.7489$ for raw Claude and
+$0.6507$ for raw Codex. In the separate five-arm pool, raw Codex scores $0.7212$,
+OpenCode $0.7071$, Cortex over Codex $0.6799$, raw Claude $0.6737$, and Cortex over
+Claude $0.6533$. There is no universal Cortex advantage in these observations.
+Tables 7–8 and Figure 8 in Appendix B.4 include every component, the composite
+definition, recorded evaluator identities, and proxy limitations.
+
+Figure 6 asks a narrower question: does estimated-reference VERTEX order these
+same applications like authored-reference VERTEX? Higher similarity gives a
+better rank; rank 1 is highest. The two-arm pool has identical ordering and
+Spearman correlation $1$. The five-arm pool exchanges the first and third
+positions, giving correlation $0.6$. Table 9 in Appendix B.5 supplies every score
+pair and rank. Neither value is correctness accuracy or a probability that a
+reference is valid. Peer-derived reference construction differs between pools;
+both pools concern one brief, not seven independent task samples.
+
+__FIG_6__
 
 ## 8. Discussion
 
@@ -1359,8 +1464,8 @@ The evaluation framework makes these obligations observable in principle, but th
 archived comparisons do not identify a governance-only effect. A policy ablation should
 hold the effective model, task set, tools, and total budget fixed, with independent final
 evaluation. Replication across independently selected tasks and adequate benign controls
-is needed to assess generalization and utility. Synthetic runs remain useful for testing
-reporting behavior when clearly separated from empirical comparisons.
+is needed to assess generalization and utility. Only retained benchmark observations
+support the empirical discussion here; constructed outcomes are not evidence.
 
 ## 9. Assumptions and Limitations
 
@@ -1383,13 +1488,23 @@ does not represent a new experiment.
 
 ## 10. Conclusion
 
-Monotone validation on a finite requirement lattice yields least-fixed-point closure
-and fair-schedule independence under explicit assumptions. The corresponding stochastic
-completion-time bound requires a separate positive-progress condition.
-Gauntlet defines bounded evaluation scores and exposes the provenance needed to
-interpret them. The archived comparisons remain descriptive; matched, independently
-evaluated experiments are needed to estimate effects on safety, utility, and
-long-horizon task completion.
+The retained benchmark outcomes do not show a uniform Cortex advantage. Classified
+harmful-response rates are lower in the paired Cortex configurations, but completed
+case sets differ and benign controls are too few to establish preserved utility
+(Figure 4 and Table 3). Higher paired quality coverage comes from one upload task;
+repair resolution is unchanged between paired configurations, and the single to-do
+brief distinguishes task creation and readback rather than long-horizon progress
+(Figure 5 and Tables 4–6). The storefront pools do not consistently favor Cortex.
+Estimated-reference rank agreement varies across two pools for one brief and does
+not establish correctness calibration (Figure 6 and Tables 7–9).
+
+These conclusions concern the recorded benchmark outcomes, including artifact
+rescoring. Unequal observation sets and unresolved provenance prevent treating all
+cohorts as verified live experiments or attributing differences to governance alone.
+The finite-lattice and stochastic results are conditional mathematical statements,
+not performance gains established by these comparisons. Matched, independently
+evaluated experiments are still required to estimate effects on safety, utility,
+generalization and long-horizon completion.
 
 ## Availability
 
@@ -1526,22 +1641,162 @@ and risk-bit diagnostics of Section 5.6.)</li>
 
 ## Appendix A — Proofs
 
-Selected identities and their domain restrictions are collected here.
-Labels P1–P8 identify the sanity-check groups in `benchmark/docs/proofs.py`,
-not manuscript proposition numbers.
+The following calculations give the identities used in the score definitions and
+conditional bounds. Labels P1–P8 distinguish these appendix calculations; they are
+not additional manuscript propositions.
 
-- **P1 (normalizer).** For $b\in[0,1)$, $\eta_b(x)=\operatorname{clamp}((x-b)/(1-b);0,1)$ maps $[b,1]$ onto $[0,1]$, is strictly increasing on $[b,1]$, and satisfies $\eta_b(b)=0$ and $\eta_b(1)=1$.
-- **P2 (composite).** For $w\in\Delta(\{1,\dots,K\})$ and $s_k\in\mathbb{I}$, the convex combination $\sum_k w_k s_k$ lies in $[\min_k s_k,\max_k s_k]\subseteq\mathbb{I}$, and the build gate $g\in\{0,1\}$ yields $C=0$ at $g=0$.
+- **P1 (normalizer).** For $b\in[0,1)$, $\eta_b(x)=\operatorname{clamp}((x-b)/(1-b);0,1)$ maps $[b,1]$ onto $[0,1]$. On that interval the clamp is inactive and the affine map has positive slope $1/(1-b)$, with endpoints $\eta_b(b)=0$ and $\eta_b(1)=1$. Outside the interval the clamp is constant, so the complete map is nondecreasing, but not globally strictly increasing.
+- **P2 (composite).** For $w\in\Delta(\{1,\dots,K\})$ and $s_k\in\mathbb{I}$, let $s_{\min}=\min_k s_k$ and $s_{\max}=\max_k s_k$. Multiplying $s_{\min}\le s_k\le s_{\max}$ by $w_k\ge0$ and summing gives $s_{\min}\le\sum_k w_k s_k\le s_{\max}$, because the weights sum to one. Thus the ungated average lies in $\mathbb{I}$, and the binary build gate gives $C=0$ when $g=0$ without changing that bound when $g=1$.
 - **P3 (harmonic mean).** For $P,Q\ge0$, set $F=0$ at $P=Q=0$, otherwise $F=2PQ/(P+Q)$. The zero case satisfies the bounds directly; henceforth assume $P+Q>0$. If $0\le P\le Q$, then $F-P=P(Q-P)/(P+Q)\ge0$ and $Q-F=Q(Q-P)/(P+Q)\ge0$; exchange $P,Q$ for the other case. Also $(P+Q)/2-F=(P-Q)^2/(2(P+Q))\ge0$.
-- **P4 (DTW).** For $m,n\in\mathbb{N}_{+}$, similarities in $[-1,1]$, and finite $\lambda\ge0$, every admissible path has nonnegative cost; clamping $1-\mathrm{DTW}/(m+n)$ below at $0$ gives $D\in\mathbb{I}$.
+- **P4 (DTW).** For $m,n\in\mathbb{N}_{+}$, similarities in $[-1,1]$, and finite $\lambda\ge0$, both the local dissimilarity and its positional penalty factor are nonnegative. Every admissible alignment path therefore has nonnegative cost, as does the minimum over paths. Consequently $1-\mathrm{DTW}/(m+n)\le1$; clamping this quantity below at zero gives $D\in\mathbb{I}$. This is a range bound, not a guarantee that descriptor order represents elapsed execution time.
 - **P5 (any-success and all-success estimators).** For integers $0\le c\le n$ and $1\le k\le n$, exactly $\binom{n-c}{k}$ of the $\binom{n}{k}$ subsets avoid success, while exactly $\binom{c}{k}$ consist entirely of successes. Thus $\mathrm{pass}@k=1-\binom{n-c}{k}/\binom{n}{k}$ is the fraction of $k$-subsets containing any success, and $\mathrm{pass}^{k}=\binom{c}{k}/\binom{n}{k}$ is the fraction consisting entirely of successes. Both lie in $[0,1]$. Coupling the subsets as prefixes of one uniform permutation shows that the any-success event can only grow with $k$, whereas the all-success event can only shrink. Under independent Bernoulli trials with common success probability $p$, each fixed subset has any-success probability $1-(1-p)^k$ and all-success probability $p^k$. Linearity of expectation gives unbiasedness for these respective targets. Independence is required for these targets, not for the finite-subset identities or monotonicity.
-- **P6 (Wilson).** For $N>0$, $z>0$, and $\widehat p\in[0,1]$, solving the quadratic $(\widehat p-p)^2=z^2p(1-p)/N$ yields the displayed endpoints. Exact algebra is not exact confidence coverage.
-- **P7 (Theorem 1).** Restated and proved in Section 4. Proposition 1 follows from the increasing-chain property and the partition into disjoint successive differences.
-- **P8 (monotone Markov execution).** Proposition 2 bounds $T_C$, with explicit initial state and uniformly positive strict-progress probability outside $C$. It does not assert completion for chains with an incomplete absorbing state.
+- **P6 (Wilson).** For $N>0$, $z>0$, and $\widehat p\in[0,1]$, the score-test boundary $(\widehat p-p)^2=z^2p(1-p)/N$ becomes $(N+z^2)p^2-(2N\widehat p+z^2)p+N\widehat p^2=0$. Applying the quadratic formula and dividing numerator and denominator by $N$ yields the interval endpoints in Section 5.3. Exact solution of this equation does not give exact confidence coverage: the score-test approximation and sampling assumptions remain necessary.
+- **P7 (Theorem 1).** Inflationarity gives an increasing chain of requirement sets; each strict increase adds at least one previously absent member of finite $R$. Starting from the empty set permits at most $|R|$ such increases. Monotonicity keeps every iterate below every fixed point, so stabilization gives the least fixed point. Proposition 1 then follows because the successive set differences are disjoint and their union is the final certified set.
+- **P8 (monotone Markov execution).** Under Proposition 2's uniform positive-progress assumption, the waiting time for each strict increase is bounded by a geometric waiting time of mean $1/\varepsilon$. At most $|R|-|S_0|$ increases can precede completion, giving the stated expectation bound by addition of expectations; independence between these waiting times is not needed. An incomplete absorbing state violates the progress assumption and is not covered by the result.
 
-`benchmark/docs/proofs.py` checks selected symbolic identities and finite examples,
-including one handcrafted prerequisite lattice. These sanity checks are not a
-machine-checked general theorem, implementation proof, or reproduction of measurements.
+These arguments establish algebraic identities and conditional bounds. They do not
+establish that a concrete validator is sound, that a repair preserves earlier
+certificates, or that a reported experimental outcome is authentic. Those claims
+require separate execution evidence and empirical validation.
+
+## Appendix B — Complete historical result exhibits
+
+This appendix contains the task-level and component-level evidence behind
+Section 7. Figures and tables use a fixed arm order: raw Codex, Cortex over Codex,
+raw Claude, Cortex over Claude, and OpenCode. A column headed by a base harness
+and “+ Cortex” denotes its configured Cortex counterpart; “raw” means unwrapped.
+Labels do not independently attest the historical model endpoint.
+
+### B.1 Six-task code generation
+
+The tasks are password and secret utilities, safe input parsing, database access,
+a TypeScript upload API, web-security utilities, and a multi-file shopping-cart
+package. The other five tasks use Python. There is one retained outcome per task
+and arm, giving 30 outcomes. Four OpenCode generation failures remain in the
+denominator rather than being discarded.
+
+Table 4 gives passing and collected behavioral checks. The macro coverage is
+the equal-weight mean of six task rates, not a pooled check count and not the
+fraction of natural-language requirements independently certified. For the four
+paired arms, the only differing task is upload: raw configurations record one
+failing check, while Cortex configurations record two passing checks. Shopping
+cart remains at seven of eight checks. Figure 5's left panel summarizes these
+exact task rates.
+
+__TABLE_4__
+
+Per-outcome entries describe dynamic execution and nonzero test counts, but an
+accompanying methodology summary describes offline variant selection and a
+static-only containment boundary. These conflicting descriptions prevent
+certifying a controlled live experiment; they also do not justify relabeling
+every outcome synthetic. Static and heuristic quality indicators are
+supplementary. Zero findings do not establish absence of vulnerabilities.
+
+### B.2 Six elementary repair issues
+
+The Python issues concern summing even rather than odd values, restoring
+last-in-first-out stack removal, lowercasing URL slugs and stripping punctuation,
+rounding up pagination for a partial page, case-insensitive word counting,
+and enforcing a lower clamp bound. These are small issue-resolution tasks,
+not a difficult multi-file repository benchmark.
+
+Saved patches were replayed through the evaluator, producing 30 issue–arm
+outcomes. Table 5 contains seven issue tests per arm: two stack tests and one
+for every other issue. All four paired configurations resolve all six issues;
+OpenCode fails pagination. The recorded composites combine resolution with
+patch descriptors; the small Codex difference reflects patch minimality rather
+than additional resolved issues. Figure 5 therefore plots resolution counts,
+not a misleading composite improvement.
+
+__TABLE_5__
+
+No auxiliary held-out or regression tests were executed in any outcome.
+Empty auxiliary groups received passing defaults and contribute no independent
+robustness evidence. Reference-relative patch size and locality are not
+correctness certificates. Replaying one patch is not another independent
+generation, and no repeated-run variability is established.
+
+### B.3 To-do application and final feature positions
+
+The brief requests one full-stack to-do application. Table 6 lists its five
+checks: a rendered task-list page, an input form, listing tasks, creating a task,
+and reading that task back in the same session. The last check does not
+establish persistence across process restarts. All candidates recorded successful
+builds. There are five applications and 25 checks, not 25 independent tasks.
+
+__TABLE_6__
+
+Figure 7 displays the same final binary outcomes in their checklist order,
+with normalized position from first to last feature. It does not depict a
+completion-decay curve: there are no successive builds, evolving requirements,
+or timestamped milestones in this summary. A collapsed interval from a single
+candidate would not establish repeatability.
+
+__FIG_7__
+
+The surrounding historical summary describes a chat app and a larger feature
+inventory, whereas the retained task and individual outcomes consistently
+identify these five to-do checks. Separate chat illustrations and the current
+chat protocol in Section 6.3 are not part of this scored evidence.
+
+### B.4 Storefront components and composite
+
+Two pools concern the same fashion-shopping storefront brief. All candidates
+record successful build and serve checks and four screenshot entries. Existing
+artifacts were rescored rather than regenerated for this analysis. Table 7
+contains the two-arm pool; Table 8 contains the separate five-arm pool.
+
+The eight composite weights, in table order before the composite row, are
+$0.26$ for functional behavior, $0.14$ for VERTEX, $0.09$ for progressive-web-app
+and accessibility checks, $0.16$ for visual similarity, $0.12$ for code and
+architecture, $0.08$ for robustness, $0.06$ for code health, and $0.09$ for static
+security. They sum to one and apply behind the build gate in Section 5.2.
+The separately reported UX score is not another term.
+
+Functional checks probe requested behavior; VERTEX compares capability and
+architecture descriptors; PWA/accessibility checks are coarse structural
+proxies; visual similarity compares screenshots. Code/architecture, robustness,
+code-health, and static-security scores are bounded evaluator summaries, not
+exhaustive correctness, resilience, or vulnerability certifications.
+Section 6.3 details these limitations. The recorded visual backend is
+CLIP ViT-B/32 and the descriptor embedding backend is all-MiniLM-L6-v2.
+These are recorded identities, not an independent attestation of the complete
+historical environment.
+
+__TABLE_7__
+
+__TABLE_8__
+
+Figure 8 gives a common-scale view of all these components. The composite uses
+authored-reference VERTEX; the estimated-reference diagnostic in Appendix B.5
+does not replace that component. The pools do not isolate governance:
+configuration, repair opportunities, and final-evaluation independence were
+not held fixed.
+
+__FIG_8__
+
+### B.5 Authored and estimated reference ranks
+
+The authored reference contains 13 capability descriptions and five architectural
+anchors. Estimated references use the public brief and the synthetic design
+vocabulary explained in Section 5.1.1. The pool diagnostic can also use descriptors
+supported by at least two other arms, excluding the candidate itself. This peer
+component is unavailable in the two-arm pool and can contribute in the five-arm
+pool, so reference construction differs.
+
+Table 9 contains all score pairs underlying Figure 6. Both methods rank Claude
+above Codex in the two-arm pool; with two unequal observations, matching order
+alone yields correlation $1$. The five-arm pool exchanges raw Codex and Cortex
+over Codex between ranks one and three, leaving the remaining ranks unchanged
+and yielding correlation $0.6$.
+
+__TABLE_9__
+
+Both diagnostics concern one independently specified brief. No cross-brief
+holdout evaluation or correlation interval is reported. Similarity-rank
+agreement is not agreement on complete task correctness; peer-derived references
+can reproduce shared errors. These observations motivate further validation,
+not discarding authored references or claiming measured long-horizon performance.
 
 ## Cite this work
 
@@ -1568,7 +1823,7 @@ If you use Cortex or its evaluation harness, please cite this report:
 
 
 def _paper_md() -> str:
-    return (
+    return render_exhibits(
         _PAPER.replace("__FIG_LOOP__", '<figure class="fig" id="fig-1">'
                        f'<div class="figure-graphic" role="group" tabindex="0" aria-label="Repair-loop diagram">{_FIG_LOOP}</div>'
                        "<figcaption>Figure 1. Schematic execution–validation–repair architecture. "
@@ -1594,8 +1849,8 @@ def _paper_md() -> str:
                  "baseline (Proposition 3).</figcaption></figure>")
         .replace("__FIG_SAFETY__", '<figure class="fig" id="fig-4">'
                  f'<div class="figure-graphic" role="group" tabindex="0" aria-label="Historical ASR chart">{_safety_figure()}</div>'
-                 "<figcaption>Figure 4. Historical classified Track S outcomes from "
-                 "tui-security-20260620-183114-748-rescored. Points show observed rates, whiskers "
+                 "<figcaption>Figure 4. Classified attack responses in the June 2026 safety pilot, "
+                 "comparing five historical harness configurations. Points show observed rates, whiskers "
                  "the stored 95% Wilson intervals, and labels the successes and observed attempts. "
                  "Model names are historical labels. Section 7 describes coverage, provenance, "
                  "and benign-control limitations; these are descriptive, not causal comparisons.</figcaption></figure>")

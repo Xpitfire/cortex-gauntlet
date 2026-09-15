@@ -157,17 +157,22 @@ def _prepare(work: Path) -> tuple[dict, dict]:
     body = "## Abstract\n" + source.split("## Abstract\n", 1)[1]
     replacements: dict[str, list[dict]] = {}
     table_count = 0
+    figure_count = 0
     figures = work / "figures"
     figures.mkdir()
     light = re.search(r":root\{(.*?)\}", REPORT_CSS, re.DOTALL)[1]
     palette = dict(re.findall(r"(--[\w-]+):([^;}]+)", light))
 
     def figure(match: re.Match) -> str:
-        nonlocal table_count
+        nonlocal table_count, figure_count
         identifier, content = match[1], match[2]
         caption = re.search(r"<figcaption>(.*?)</figcaption>", content, re.DOTALL)[1]
         token = "PAPERBLOCK" + identifier.replace("-", "").upper()
         if identifier.startswith("fig-"):
+            figure_count += 1
+            label = re.match(r"^Figure (\d+)\.\s*", caption)
+            if label is None or int(label[1]) != figure_count or identifier != f"fig-{figure_count}":
+                raise ValueError(f"Figure numbering and anchors must follow document order: {identifier}")
             svg = re.search(r"<svg\b.*?</svg>", content, re.DOTALL)[0]
             svg = re.sub(r"var\((--[\w-]+)\)", lambda m: palette[m[1]].strip(), svg)
             svg_path = work / f"{identifier}.svg"
@@ -175,8 +180,7 @@ def _prepare(work: Path) -> tuple[dict, dict]:
             relative = f"figures/{identifier}.pdf"
             _run(["rsvg-convert", "--format=pdf", "--output", str(work / relative), str(svg_path)])
             # Native Figure captions are numbered by LaTeX; preserve the canonical text after its label.
-            caption = re.sub(r"^Figure \d+\.\s*", "", caption)
-            caption_blocks = _fragment(caption)
+            caption_blocks = _fragment(caption[label.end():])
             image = {"t": "Image", "c": [["", [], [["width", "100%"]]], [], [relative, ""]]}
             replacements[token] = [{"t": "Figure", "c": [
                 [identifier, [], []], [None, caption_blocks], [{"t": "Plain", "c": [image]}]]}]
@@ -188,7 +192,10 @@ def _prepare(work: Path) -> tuple[dict, dict]:
             table = _fragment(re.search(r"<table>.*?</table>", content, re.DOTALL)[0])[0]
             table["c"][0][0] = identifier
             table["c"][1] = [None, _fragment(caption[label.end():])]
-            replacements[token] = [table]
+            # These compact exhibits fit on one page; keep captions, rows and
+            # the closing rule together instead of emitting an orphaned repeat head.
+            replacements[token] = [_raw(r"\begin{minipage}{\linewidth}"), table,
+                                   _raw(r"\end{minipage}\par\medskip")]
         return "\n\n" + token + "\n\n"
 
     body = re.sub(r'<figure class="(?:fig|tbl)" id="((?:fig|tbl)-\d+)">(.*?)</figure>',
@@ -230,6 +237,8 @@ def _prepare(work: Path) -> tuple[dict, dict]:
             elif block["t"] == "Div":
                 block["c"][1] = expand(block["c"][1])
                 result.append(block)
+            elif block["t"] == "Header" and block["c"][1][0].startswith("appendix-"):
+                result.extend([_raw(r"\clearpage"), block])
             else:
                 result.append(block)
         return result
@@ -240,7 +249,12 @@ def _prepare(work: Path) -> tuple[dict, dict]:
             raise ValueError(f"Unhandled substantive HTML in paper export: {node['c'][1][:120]}")
         if node["t"] == "Table":
             columns = node["c"][2]
-            widths = {2: [0.32, 0.68], 3: [0.16, 0.38, 0.46], 4: [0.34, 0.20, 0.23, 0.23]}[len(columns)]
+            widths = {
+                2: [0.32, 0.68], 3: [0.16, 0.38, 0.46], 4: [0.34, 0.20, 0.23, 0.23],
+                5: [0.16, 0.28, 0.20, 0.20, 0.16], 6: [0.30, 0.14, 0.14, 0.14, 0.14, 0.14],
+            }[len(columns)]
+            if node["c"][0][0] == "tbl-7":
+                widths = [0.40, 0.30, 0.30]
             for column, width in zip(columns, widths, strict=True):
                 column[1] = {"t": "ColWidth", "c": width}
     expected_math = Counter(
@@ -258,7 +272,7 @@ def _prepare(work: Path) -> tuple[dict, dict]:
     counts["display_math"] = sum(n["t"] == "Math" and n["c"][0]["t"] == "DisplayMath"
                                  for n in _nodes(document))
     counts["references"] = len(entries)
-    if (counts["Figure"], counts["Table"], counts["BlockQuote"]) != (4, 3, 6):
+    if (counts["Figure"], counts["Table"], counts["BlockQuote"]) != (8, 9, 6):
         raise ValueError(f"Paper structure changed; review export coverage: {counts}")
     metadata["content_inventory"] = counts
     return document, metadata
@@ -344,7 +358,7 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
             "Gauntlet arXiv submission preparation\n\n"
             "Upload cortex-gauntlet-arxiv.zip, not the rendered PDF. Select main.tex and pdfLaTeX.\n"
             "arXiv currently defaults to TeX Live 2025. Inspect its generated PDF before submitting.\n"
-            "The source archive contains main.tex, the official ICLR 2027 style files and four PDF figures.\n"
+            f"The source archive contains main.tex, the official ICLR 2027 style files and {metadata['content_inventory']['Figure']} PDF figures.\n"
             "The bibliography is embedded; the document is a named preprint, not an ICLR submission.\n"
             "No external conversion, Python, network, shell escape or private data is required.\n"
             "Confirm author details and coauthor consent; choose an appropriate category and license.\n"
@@ -352,7 +366,8 @@ def build_paper(out_dir: Path, *, publication_date: date | None = None) -> dict:
             "No arXiv identifier or acceptance is claimed.\n\n"
             f"Title: {metadata['title']}\nAuthors: {', '.join(metadata['authors'])} ({metadata['affiliation']})\n"
             f"Abstract: {metadata['abstract']}\n"
-            f"Comments: {metadata['pages']} pages, four figures. Paper and latest results: {PAPER_URL} . "
+            f"Comments: {metadata['pages']} pages, {metadata['content_inventory']['Figure']} figures, "
+            f"{metadata['content_inventory']['Table']} tables. Paper and latest results: {PAPER_URL} . "
             f"Benchmark source: {REPOSITORY_URL} .\n\n"
             "Suggested primary category for author review: cs.AI. Leave journal reference and DOI blank unless assigned.\n"
             "Recompile after extracting the ZIP: pdflatex -no-shell-escape main.tex (run twice).\n\n"

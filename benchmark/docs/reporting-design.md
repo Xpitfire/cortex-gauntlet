@@ -171,7 +171,7 @@ cd benchmark
 
 The build requires Pandoc, `rsvg-convert`, pdfLaTeX and `pdfinfo`. Uploading the resulting
 source ZIP does not require those converters: it contains `main.tex`, both official
-ICLR style files and four included PDF figures, with an embedded bibliography.
+ICLR style files and eight included PDF figures, with an embedded bibliography.
 `submission.txt` links the official
 arXiv source/metadata rules. arXiv currently defaults to TeX Live 2025; inspect its own
 generated PDF before author submission. A local TeX Live 2026 build is not an arXiv
@@ -191,10 +191,29 @@ or publication-URL changes invalidate existing download metadata.
 Footnote destinations use `PAPER_URL`, `CORTEX_URL` and `REPOSITORY_URL`.
 Formal web blockquotes become flush-left, numbered `amsthm` theorem/proposition
 environments, with native proofs and paragraph-ending QED symbols. Export rejects
-nonconsecutive statement or table numbers and mismatched anchors. Tables use native
+nonconsecutive statement, figure or table numbers and mismatched anchors. Tables use native
 numbered captions; prose references and canonical anchors follow reading order in both formats.
 SVG subscripts use positioned ordinary glyphs rather than font-dependent Unicode
 subscript letters.
+Mathematical quantities and estimator labels are authored in math spans, including
+`$g_{\text{score}}$` and `$\mathrm{ASR}@1$`; family symbols use the same notation
+as their set definition. The manuscript is self-contained: experiment descriptions
+state the task, comparison arms, procedure, sample coverage, numerical outcomes
+and limitations rather than pointing to internal run IDs, local files or raw
+metadata fields. Operational provenance remains in companion release artifacts.
+Expression-multiset parity preserves authored math but cannot detect a quantity
+mistakenly authored as code, so publication review also inspects remaining code
+spans and the rendered PDF.
+The main Results section introduces the safety, coding-outcome and reference-rank
+comparisons. Appendix B contains complete quality, repair, to-do, storefront and
+reference-ranking evidence. Synthetic result illustrations are excluded from every
+paper format; empirical conclusions are grounded only in retained benchmark outcomes.
+`gauntlet/paper_results.py` shares frozen, reconciled numeric values between the tables
+and deterministic theme-aware SVGs. Publication never reads private results at runtime.
+The current paper contains eight vector figures and nine tables; the source ZIP embeds
+every figure as PDF. Compact tables remain unbroken, figures prefer their local context,
+and each appendix begins on a fresh page. Inspect every final PDF page at print size:
+successful compilation alone does not detect orphaned table headers or poor float placement.
 
 The public repository has independent history and contains benchmark source, authored
 public fixtures, the paper and quantitative exports. Private Security scenarios are

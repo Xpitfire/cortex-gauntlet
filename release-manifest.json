@@ -2,7 +2,7 @@
   "repository": "https://github.com/Xpitfire/cortex-gauntlet",
   "source_project": "Cortex / Alpha Omega Labs",
   "license": "Apache-2.0",
-  "paper_date": "2026-09-14",
+  "paper_date": "2026-09-15",
   "files": {
     "LICENSE": {
       "sha256": "390b42ac13507bea7cd4f077c2c61b1fc8c85177483aab00c1d4342093c0cf4c",
@@ -30,8 +30,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/acceptance-tests.md": {
-      "sha256": "bb8d78e7ff92170dff08a43d1790898581f9f31bb5ddc10856f838f470b79f48",
-      "bytes": 14021,
+      "sha256": "c8fb06c8272eaf926998291326703c7036fcaf933301147b4129259ba8a601a0",
+      "bytes": 14812,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/agent-harness/architecture.md": {
@@ -115,8 +115,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/docs/reporting-design.md": {
-      "sha256": "38f9cc4d0594bdd21e8d79132b8cc4c0864858a6ea258e4fc044f020fc4c47cf",
-      "bytes": 15516,
+      "sha256": "59b038d9e3593fc7ad5361b26bf3ee265116927d945a6e0bf191c1e952f4bb1d",
+      "bytes": 17061,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/docs/reuse-map.md": {
@@ -290,8 +290,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/docs.py": {
-      "sha256": "fe6b85ade5eaf4f19c36f5b2e50be3ba5004c6ba741848add4c1c2e97b421c2e",
-      "bytes": 128362,
+      "sha256": "d1071a79e29992b567edf273396019827362b11e65dad6e7d2a875c1a8907f0d",
+      "bytes": 144862,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/enums.py": {
@@ -430,13 +430,18 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/paper.py": {
-      "sha256": "f973e5230ca49483f4d37816193280d60c8c79cc6649e76ba0f173e20cb4de08",
-      "bytes": 19708,
+      "sha256": "6f8892f0027b95dcf1a7ca28424a4791fb8ad86122a943e090c9707c651d8e7e",
+      "bytes": 20764,
+      "provenance": "upstream Apache-2.0 benchmark source"
+    },
+    "benchmark/gauntlet/paper_results.py": {
+      "sha256": "88761715031af62728bb10a7a19dda5f409e217a1e27fc1e7657287589481188",
+      "bytes": 17165,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/paper_template.tex": {
-      "sha256": "d06f842c66d53289346bab5301dccf5f93c8d66672860f1c86399de8ccd965d4",
-      "bytes": 1873,
+      "sha256": "de3c0e26285cb7bdca61623562f7d4fa2755be624d3b62025aa24ccfd9841200",
+      "bytes": 1953,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/gauntlet/paths.py": {
@@ -1215,8 +1220,8 @@
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_publication.py": {
-      "sha256": "39cf4bbe80e62c5e96b9b15ab3a20f2543064d1727049e5f159b685a06f8cf5b",
-      "bytes": 8254,
+      "sha256": "330f22e209634f69a01aa152d7ed618cb1b24f65d8d557a786e1f5584856e3ef",
+      "bytes": 9089,
       "provenance": "upstream Apache-2.0 benchmark source"
     },
     "benchmark/tests/test_quality.py": {
@@ -1400,23 +1405,23 @@
       "provenance": "screened public quantitative export"
     },
     "published/paper/cortex-gauntlet.pdf": {
-      "sha256": "decedd9ea733b31be48e817bbcbd1c3bf5d1b116cf67df0312353bbc8a032cb8",
-      "bytes": 571293,
+      "sha256": "d05f6144099b0409fbbb37eba4dd5cab001c13201480947bf29d678382466e1d",
+      "bytes": 784811,
       "provenance": "canonical paper publication build"
     },
     "published/paper/cortex-gauntlet-arxiv.zip": {
-      "sha256": "165958ed83aad8ff3c88c7e9c5f0b229d8eb71db3727ec6631fa8880f3197bcc",
-      "bytes": 270891,
+      "sha256": "62f279943e917f5512ba363ae6f152a2f8c9664015c57c9f4696a766914e8641",
+      "bytes": 479803,
       "provenance": "canonical paper publication build"
     },
     "published/paper/manifest.json": {
-      "sha256": "47a7bd506b65b0f6321d72a65db4ecc188869dce564ed5339ec15f362e5a52fc",
-      "bytes": 2920,
+      "sha256": "7e64f38c20b02d6b086e4f9a476f5e21a50f8d60afe351be43e35883dca8bc64",
+      "bytes": 3349,
       "provenance": "canonical paper publication build"
     },
     "published/paper/submission.txt": {
-      "sha256": "9e07585881d29e7b1d1f629cc7b5fbc4d715d56b73fa352b13d87022ee97c9a4",
-      "bytes": 2727,
+      "sha256": "115897559dba5c07f272be7f1391751d84ae797f26984a888b39878be8fe6bff",
+      "bytes": 2788,
       "provenance": "canonical paper publication build"
     },
     "README.md": {

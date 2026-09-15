@@ -2,7 +2,7 @@ Gauntlet arXiv submission preparation
 
 Upload cortex-gauntlet-arxiv.zip, not the rendered PDF. Select main.tex and pdfLaTeX.
 arXiv currently defaults to TeX Live 2025. Inspect its generated PDF before submitting.
-The source archive contains main.tex, the official ICLR 2027 style files and four PDF figures.
+The source archive contains main.tex, the official ICLR 2027 style files and 8 PDF figures.
 The bibliography is embedded; the document is a named preprint, not an ICLR submission.
 No external conversion, Python, network, shell escape or private data is required.
 Confirm author details and coauthor consent; choose an appropriate category and license.
@@ -13,8 +13,8 @@ Title: Cortex: A Fixed-Point Theory of Governed Coding Agents
 Authors: Marius-Constantin Dinu, Florian Zeba (Alpha Omega Labs)
 Abstract: A coding agent combines a large language model (LLM) with a harness that plans, edits, and executes code. We study Cortex, a supervisory layer for pre-execution governance, requirement tracking, and iterative validation and repair. We formalize requirement closure on a finite lattice. For a fixed requirement set and a sound, monotone validation rule with persistent evidence, exhaustive iteration reaches the least fixed point with no more strict increases than there are requirements. Fair consequence scheduling reaches the same closure. A separate stochastic model bounds expected completion time under a uniform positive-progress assumption. These results depend on their stated assumptions; artifact repair, fallible validation, and finite execution budgets do not satisfy them automatically.
 
-We define Gauntlet's trajectory-similarity and build-gated scores, attack-success estimators, Wilson intervals, and case-cluster bootstrap summaries. Effective-feedback accounting counts newly certified requirements, rather than estimating their information value or utility. The five evaluation families support raw-versus-governed comparisons. The archived results have unequal observation sets, incomplete provenance, and some synthetic outcomes; they do not identify causal gains from governance or measured long-horizon scaling.
-Comments: 19 pages, four figures. Paper and latest results: https://benchmark.cortex.a2olabs.com . Benchmark source: https://github.com/Xpitfire/cortex-gauntlet .
+We define Gauntlet's trajectory-similarity and build-gated scores, attack-success estimators, Wilson intervals, and case-cluster bootstrap summaries. Effective-feedback accounting counts newly certified requirements, rather than estimating their information value or utility. The five evaluation families support raw-versus-governed comparisons. We report retained benchmark observations, including rescoring of existing artifacts; constructed outcomes are excluded. Unequal observation sets and incomplete provenance prevent causal claims about governance or measured long-horizon scaling.
+Comments: 27 pages, 8 figures, 9 tables. Paper and latest results: https://benchmark.cortex.a2olabs.com . Benchmark source: https://github.com/Xpitfire/cortex-gauntlet .
 
 Suggested primary category for author review: cs.AI. Leave journal reference and DOI blank unless assigned.
 Recompile after extracting the ZIP: pdflatex -no-shell-escape main.tex (run twice).

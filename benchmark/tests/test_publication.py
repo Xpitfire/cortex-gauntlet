@@ -121,6 +121,28 @@ Plain abstract.
         paper._prepare(tmp_path)
 
 
+@pytest.mark.parametrize(("caption", "anchor"), [("Figure 2.", "fig-1"), ("Figure 1.", "fig-2")])
+def test_paper_export_rejects_inconsistent_figure_numbering(tmp_path, monkeypatch, caption, anchor):
+    source = f"""# Paper
+<span class="author">Author</span>
+<div class="affil">Lab</div>
+
+## Abstract
+Plain abstract.
+
+## Results
+<figure class="fig" id="{anchor}">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"></svg>
+<figcaption>{caption} Observed outcomes.</figcaption>
+</figure>
+"""
+    monkeypatch.setattr(paper, "_paper_md", lambda: source)
+    monkeypatch.setattr(paper, "_inline_text", lambda text: text)
+    monkeypatch.setattr(paper, "_run", lambda *a, **kw: pytest.fail("Unexpected native converter"))
+    with pytest.raises(ValueError, match="^Figure numbering and anchors"):
+        paper._prepare(tmp_path)
+
+
 @pytest.mark.parametrize(("number", "anchor"), [(2, "prop-2"), (1, "prop-1b")])
 def test_paper_export_rejects_inconsistent_statement_numbering(monkeypatch, number, anchor):
     document = {"blocks": [{"t": "BlockQuote", "c": [{"t": "Para", "c": [
